@@ -99,5 +99,31 @@ namespace DAL
         /// <param name="lastUsageDate">last usate date</param>
         /// <param name="expirationDate">expiration date</param>
         void RefreshToken(string token, DateTime lastUsageDate, DateTime expirationDate);
+        /// <summary>
+        ///  Transport Id
+        /// </summary>
+        /// <param name="transportId"></param>
+        /// <returns>Options list</returns>
+        List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId);
+
+        /// <summary>
+        /// Add address
+        /// </summary>
+        /// <param name="adr">address to add</param>
+        void InsertAddress(AddressModel adr);
+
+        /// <summary>
+        /// Add transfer good request
+        /// </summary>
+        /// <param name="reqGoodTransferItem">Transfer good request</param>
+        void InsertReqGoodTransfer(db_ReqGoodTransfer reqGoodTransferItem);
+
+        /// <summary>
+        /// Add transfer good request Option
+        /// </summary>
+        /// <param name="reqGoodTransferItem">Transfer good request option</param>
+        void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem);
+        
+
     }
 }

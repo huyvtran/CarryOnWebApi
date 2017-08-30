@@ -213,6 +213,9 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="f_DeleteFromAddresses_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromAddresses_ByKeyFields">
+          <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="f_DeleteFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromCO_TOKEN_ByKeyFields">
           <Parameter Name="TOKEN" Type="varchar" Mode="In" />
         </Function>
@@ -221,6 +224,27 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
         </Function>
         <Function Name="f_DeleteFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromReqGoodTransfer_ByKeyFields">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_DeleteFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromTransportOptions_ByKeyFields">
+          <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="OptKey" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromAddresses_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromAddresses_ByKeyFields">
+          <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromAddresses_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromAddresses_BySomeEqualFields">
+          <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="County" Type="varchar" Mode="In" />
+          <Parameter Name="Country" Type="varchar" Mode="In" />
+          <Parameter Name="District" Type="varchar" Mode="In" />
+          <Parameter Name="HouseName" Type="varchar" Mode="In" />
+          <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+          <Parameter Name="HouseNumber" Type="varchar" Mode="In" />
+          <Parameter Name="PostCode" Type="varchar" Mode="In" />
+          <Parameter Name="Street1" Type="varchar" Mode="In" />
+          <Parameter Name="Street2" Type="varchar" Mode="In" />
+          <Parameter Name="Town" Type="varchar" Mode="In" />
         </Function>
         <Function Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO_TOKEN_ByKeyFields">
           <Parameter Name="TOKEN" Type="varchar" Mode="In" />
@@ -265,6 +289,29 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
           <Parameter Name="RequestState" Type="int" Mode="In" />
         </Function>
+        <Function Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportOptions_ByKeyFields">
+          <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="OptKey" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportOptions_BySomeEqualFields">
+          <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="OptKey" Type="nchar" Mode="In" />
+          <Parameter Name="OptValue" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f_InsertIntoAddresses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoAddresses">
+          <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="County" Type="varchar" Mode="In" />
+          <Parameter Name="Country" Type="varchar" Mode="In" />
+          <Parameter Name="District" Type="varchar" Mode="In" />
+          <Parameter Name="HouseName" Type="varchar" Mode="In" />
+          <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+          <Parameter Name="HouseNumber" Type="varchar" Mode="In" />
+          <Parameter Name="PostCode" Type="varchar" Mode="In" />
+          <Parameter Name="Street1" Type="varchar" Mode="In" />
+          <Parameter Name="Street2" Type="varchar" Mode="In" />
+          <Parameter Name="Town" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="f_InsertIntoCO_TOKEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoCO_TOKEN">
           <Parameter Name="TOKEN" Type="varchar" Mode="In" />
           <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
@@ -299,6 +346,25 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
           <Parameter Name="RequestState" Type="int" Mode="In" />
         </Function>
+        <Function Name="f_InsertIntoTransportOptions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoTransportOptions">
+          <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="OptKey" Type="nchar" Mode="In" />
+          <Parameter Name="OptValue" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f_UpdateAllFieldsFromAddresses_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromAddresses_ByKeyFields">
+          <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="County" Type="varchar" Mode="In" />
+          <Parameter Name="Country" Type="varchar" Mode="In" />
+          <Parameter Name="District" Type="varchar" Mode="In" />
+          <Parameter Name="HouseName" Type="varchar" Mode="In" />
+          <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+          <Parameter Name="HouseNumber" Type="varchar" Mode="In" />
+          <Parameter Name="PostCode" Type="varchar" Mode="In" />
+          <Parameter Name="Street1" Type="varchar" Mode="In" />
+          <Parameter Name="Street2" Type="varchar" Mode="In" />
+          <Parameter Name="Town" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromCO_TOKEN_ByKeyFields">
           <Parameter Name="TOKEN" Type="varchar" Mode="In" />
           <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
@@ -332,6 +398,11 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Parameter Name="DateTransportType" Type="int" Mode="In" />
           <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
           <Parameter Name="RequestState" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f_UpdateAllFieldsFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromTransportOptions_ByKeyFields">
+          <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="OptKey" Type="nchar" Mode="In" />
+          <Parameter Name="OptValue" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TOKEN" Type="varchar" Mode="In" />
@@ -611,10 +682,10 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Parameter Name="TOKEN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DeleteToken">
-            <Parameter Name="TOKEN" Mode="In" Type="String" />
+          <Parameter Name="TOKEN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" ReturnType="Collection(CarryOnModel.f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result)">
-            <Parameter Name="TOKEN" Mode="In" Type="String" />
+          <Parameter Name="TOKEN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_CO_TOKEN)">
             <Parameter Name="TOKEN" Mode="In" Type="String" />
@@ -636,6 +707,77 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
             <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
             <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
             <Parameter Name="USERNAME" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_DeleteFromAddresses_ByKeyFields">
+          <Parameter Name="AddressID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_DeleteFromTransportOptions_ByKeyFields">
+            <Parameter Name="TransportId" Mode="In" Type="Guid" />
+            <Parameter Name="OptKey" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromAddresses_ByKeyFields" ReturnType="Collection(CarryOnModel.db_Address)">
+          <Parameter Name="AddressID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromAddresses_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_Address)">
+            <Parameter Name="AddressID" Mode="In" Type="Guid" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="County" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="HouseName" Mode="In" Type="String" />
+            <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="HouseNumber" Mode="In" Type="String" />
+            <Parameter Name="PostCode" Mode="In" Type="String" />
+            <Parameter Name="Street1" Mode="In" Type="String" />
+            <Parameter Name="Street2" Mode="In" Type="String" />
+            <Parameter Name="Town" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+            <Parameter Name="TransportId" Mode="In" Type="Guid" />
+            <Parameter Name="OptKey" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+            <Parameter Name="TransportId" Mode="In" Type="Guid" />
+            <Parameter Name="OptKey" Mode="In" Type="String" />
+            <Parameter Name="OptValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_InsertIntoAddresses">
+            <Parameter Name="AddressID" Mode="In" Type="Guid" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="County" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="HouseName" Mode="In" Type="String" />
+            <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="HouseNumber" Mode="In" Type="String" />
+            <Parameter Name="PostCode" Mode="In" Type="String" />
+            <Parameter Name="Street1" Mode="In" Type="String" />
+            <Parameter Name="Street2" Mode="In" Type="String" />
+            <Parameter Name="Town" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_InsertIntoTransportOptions">
+            <Parameter Name="TransportId" Mode="In" Type="Guid" />
+            <Parameter Name="OptKey" Mode="In" Type="String" />
+            <Parameter Name="OptValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_UpdateAllFieldsFromAddresses_ByKeyFields">
+            <Parameter Name="AddressID" Mode="In" Type="Guid" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="County" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="HouseName" Mode="In" Type="String" />
+            <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="HouseNumber" Mode="In" Type="String" />
+            <Parameter Name="PostCode" Mode="In" Type="String" />
+            <Parameter Name="Street1" Mode="In" Type="String" />
+            <Parameter Name="Street2" Mode="In" Type="String" />
+            <Parameter Name="Town" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_UpdateAllFieldsFromTransportOptions_ByKeyFields">
+            <Parameter Name="TransportId" Mode="In" Type="Guid" />
+            <Parameter Name="OptKey" Mode="In" Type="String" />
+            <Parameter Name="OptValue" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <Association Name="FK_ReqGoodTransfer_Addresses">
@@ -1013,6 +1155,63 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
           <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
           <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromAddresses_ByKeyFields_Result">
+          <Property Type="Guid" Name="AddressID" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromAddresses_BySomeEqualFields_Result">
+          <Property Type="Guid" Name="AddressID" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromTransportOptions_ByKeyFields_Result">
+          <Property Type="Guid" Name="TransportId" Nullable="false" />
+          <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="OptValue" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result">
+          <Property Type="Guid" Name="TransportId" Nullable="false" />
+          <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="OptValue" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="db_ReqGoodTransportOptions">
+          <Property Type="Guid" Name="TransportId" Nullable="false" />
+          <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="OptValue" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="db_Address">
+          <Property Type="Guid" Name="AddressID" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1398,6 +1597,66 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f_InsertIntoCO_TOKEN" FunctionName="CarryOnModel.Store.f_InsertIntoCO_TOKEN" />
           <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_DeleteFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromAddresses_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_DeleteFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromTransportOptions_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_ByKeyFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_BySomeEqualFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_ByKeyFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+                <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+                <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+                <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_BySomeEqualFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+                <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+                <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+                <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_InsertIntoAddresses" FunctionName="CarryOnModel.Store.f_InsertIntoAddresses" />
+          <FunctionImportMapping FunctionImportName="f_InsertIntoTransportOptions" FunctionName="CarryOnModel.Store.f_InsertIntoTransportOptions" />
+          <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromAddresses_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromTransportOptions_ByKeyFields" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

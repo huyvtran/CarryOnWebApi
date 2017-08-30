@@ -11,16 +11,37 @@ namespace Services.Mapper
     public static class ReqGoodTransferMapper
     {
         private static AutoMapper.IMapper reqGoodTransfer_DbToModel;
+        private static AutoMapper.IMapper reqGoodTransfer_ModelToDb;
+        private static AutoMapper.IMapper reqGoodTransferOption_DbToModel;
 
         static ReqGoodTransferMapper()
         {
-            var config = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<db_ReqGoodTransferWithAddresses, ReqGoodTransferModel>());
-            reqGoodTransfer_DbToModel = config.CreateMapper();
+            /* reqGoodTransfer_DbToModel */
+            var config_reqGoodTransfer_DbToModel = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<db_ReqGoodTransferWithAddresses, ReqGoodTransferModel>());
+            reqGoodTransfer_DbToModel = config_reqGoodTransfer_DbToModel.CreateMapper();
+            /* reqGoodTransfer_ModelToDb */
+            var config_reqGoodTransfer_ModelToDb = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<ReqGoodTransferModel, db_ReqGoodTransfer>());
+            reqGoodTransfer_ModelToDb = config_reqGoodTransfer_ModelToDb.CreateMapper();
+
+            /* reqGoodTransferOption_DbToModel */
+            var config_reqGoodTransferOption_DbToModel = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<db_ReqGoodTransferWithAddresses, ReqGoodTransferModel>());
+            reqGoodTransferOption_DbToModel = config_reqGoodTransferOption_DbToModel.CreateMapper();
         }
 
         public static ReqGoodTransferModel ReqGoodTransfer_DbToModel(db_ReqGoodTransferWithAddresses db_rqtItem)
         {            
             return reqGoodTransfer_DbToModel.Map<ReqGoodTransferModel>(db_rqtItem);
         }
+
+        public static db_ReqGoodTransfer ReqGoodTransfer_ModelToDb(ReqGoodTransferModel db_rqtItem)
+        {
+            return reqGoodTransfer_ModelToDb.Map<db_ReqGoodTransfer>(db_rqtItem);
+        }
+
+        public static ReqGoodTransportOptions ReqGoodTransferOption_DbToModel(db_ReqGoodTransportOptions db_optionItem)
+        {
+            return reqGoodTransferOption_DbToModel.Map<ReqGoodTransportOptions>(db_optionItem);
+        }
+        
     }
 }

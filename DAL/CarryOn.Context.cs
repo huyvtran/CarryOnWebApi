@@ -512,5 +512,259 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields", tOKENParameter, dATA_CREAZIONEParameter, dATA_ULTIMO_UTILIZZOParameter, dATA_SCADENZAParameter, uSERNAMEParameter);
         }
+    
+        public virtual int f_DeleteFromAddresses_ByKeyFields(Nullable<System.Guid> addressID)
+        {
+            var addressIDParameter = addressID.HasValue ?
+                new ObjectParameter("AddressID", addressID) :
+                new ObjectParameter("AddressID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_DeleteFromAddresses_ByKeyFields", addressIDParameter);
+        }
+    
+        public virtual int f_DeleteFromTransportOptions_ByKeyFields(Nullable<System.Guid> transportId, string optKey)
+        {
+            var transportIdParameter = transportId.HasValue ?
+                new ObjectParameter("TransportId", transportId) :
+                new ObjectParameter("TransportId", typeof(System.Guid));
+    
+            var optKeyParameter = optKey != null ?
+                new ObjectParameter("OptKey", optKey) :
+                new ObjectParameter("OptKey", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_DeleteFromTransportOptions_ByKeyFields", transportIdParameter, optKeyParameter);
+        }
+    
+        public virtual ObjectResult<db_Address> f_GetAllFieldsFromAddresses_ByKeyFields(Nullable<System.Guid> addressID)
+        {
+            var addressIDParameter = addressID.HasValue ?
+                new ObjectParameter("AddressID", addressID) :
+                new ObjectParameter("AddressID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_Address>("f_GetAllFieldsFromAddresses_ByKeyFields", addressIDParameter);
+        }
+    
+        public virtual ObjectResult<db_Address> f_GetAllFieldsFromAddresses_BySomeEqualFields(Nullable<System.Guid> addressID, Nullable<int> type, string county, string country, string district, string houseName, Nullable<System.DateTime> creationDate, string houseNumber, string postCode, string street1, string street2, string town)
+        {
+            var addressIDParameter = addressID.HasValue ?
+                new ObjectParameter("AddressID", addressID) :
+                new ObjectParameter("AddressID", typeof(System.Guid));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(int));
+    
+            var countyParameter = county != null ?
+                new ObjectParameter("County", county) :
+                new ObjectParameter("County", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var districtParameter = district != null ?
+                new ObjectParameter("District", district) :
+                new ObjectParameter("District", typeof(string));
+    
+            var houseNameParameter = houseName != null ?
+                new ObjectParameter("HouseName", houseName) :
+                new ObjectParameter("HouseName", typeof(string));
+    
+            var creationDateParameter = creationDate.HasValue ?
+                new ObjectParameter("CreationDate", creationDate) :
+                new ObjectParameter("CreationDate", typeof(System.DateTime));
+    
+            var houseNumberParameter = houseNumber != null ?
+                new ObjectParameter("HouseNumber", houseNumber) :
+                new ObjectParameter("HouseNumber", typeof(string));
+    
+            var postCodeParameter = postCode != null ?
+                new ObjectParameter("PostCode", postCode) :
+                new ObjectParameter("PostCode", typeof(string));
+    
+            var street1Parameter = street1 != null ?
+                new ObjectParameter("Street1", street1) :
+                new ObjectParameter("Street1", typeof(string));
+    
+            var street2Parameter = street2 != null ?
+                new ObjectParameter("Street2", street2) :
+                new ObjectParameter("Street2", typeof(string));
+    
+            var townParameter = town != null ?
+                new ObjectParameter("Town", town) :
+                new ObjectParameter("Town", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_Address>("f_GetAllFieldsFromAddresses_BySomeEqualFields", addressIDParameter, typeParameter, countyParameter, countryParameter, districtParameter, houseNameParameter, creationDateParameter, houseNumberParameter, postCodeParameter, street1Parameter, street2Parameter, townParameter);
+        }
+    
+        public virtual ObjectResult<db_ReqGoodTransportOptions> f_GetAllFieldsFromTransportOptions_ByKeyFields(Nullable<System.Guid> transportId, string optKey)
+        {
+            var transportIdParameter = transportId.HasValue ?
+                new ObjectParameter("TransportId", transportId) :
+                new ObjectParameter("TransportId", typeof(System.Guid));
+    
+            var optKeyParameter = optKey != null ?
+                new ObjectParameter("OptKey", optKey) :
+                new ObjectParameter("OptKey", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransportOptions>("f_GetAllFieldsFromTransportOptions_ByKeyFields", transportIdParameter, optKeyParameter);
+        }
+    
+        public virtual ObjectResult<db_ReqGoodTransportOptions> f_GetAllFieldsFromTransportOptions_BySomeEqualFields(Nullable<System.Guid> transportId, string optKey, string optValue)
+        {
+            var transportIdParameter = transportId.HasValue ?
+                new ObjectParameter("TransportId", transportId) :
+                new ObjectParameter("TransportId", typeof(System.Guid));
+    
+            var optKeyParameter = optKey != null ?
+                new ObjectParameter("OptKey", optKey) :
+                new ObjectParameter("OptKey", typeof(string));
+    
+            var optValueParameter = optValue != null ?
+                new ObjectParameter("OptValue", optValue) :
+                new ObjectParameter("OptValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransportOptions>("f_GetAllFieldsFromTransportOptions_BySomeEqualFields", transportIdParameter, optKeyParameter, optValueParameter);
+        }
+    
+        public virtual int f_InsertIntoAddresses(Nullable<System.Guid> addressID, Nullable<int> type, string county, string country, string district, string houseName, Nullable<System.DateTime> creationDate, string houseNumber, string postCode, string street1, string street2, string town)
+        {
+            var addressIDParameter = addressID.HasValue ?
+                new ObjectParameter("AddressID", addressID) :
+                new ObjectParameter("AddressID", typeof(System.Guid));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(int));
+    
+            var countyParameter = county != null ?
+                new ObjectParameter("County", county) :
+                new ObjectParameter("County", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var districtParameter = district != null ?
+                new ObjectParameter("District", district) :
+                new ObjectParameter("District", typeof(string));
+    
+            var houseNameParameter = houseName != null ?
+                new ObjectParameter("HouseName", houseName) :
+                new ObjectParameter("HouseName", typeof(string));
+    
+            var creationDateParameter = creationDate.HasValue ?
+                new ObjectParameter("CreationDate", creationDate) :
+                new ObjectParameter("CreationDate", typeof(System.DateTime));
+    
+            var houseNumberParameter = houseNumber != null ?
+                new ObjectParameter("HouseNumber", houseNumber) :
+                new ObjectParameter("HouseNumber", typeof(string));
+    
+            var postCodeParameter = postCode != null ?
+                new ObjectParameter("PostCode", postCode) :
+                new ObjectParameter("PostCode", typeof(string));
+    
+            var street1Parameter = street1 != null ?
+                new ObjectParameter("Street1", street1) :
+                new ObjectParameter("Street1", typeof(string));
+    
+            var street2Parameter = street2 != null ?
+                new ObjectParameter("Street2", street2) :
+                new ObjectParameter("Street2", typeof(string));
+    
+            var townParameter = town != null ?
+                new ObjectParameter("Town", town) :
+                new ObjectParameter("Town", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoAddresses", addressIDParameter, typeParameter, countyParameter, countryParameter, districtParameter, houseNameParameter, creationDateParameter, houseNumberParameter, postCodeParameter, street1Parameter, street2Parameter, townParameter);
+        }
+    
+        public virtual int f_InsertIntoTransportOptions(Nullable<System.Guid> transportId, string optKey, string optValue)
+        {
+            var transportIdParameter = transportId.HasValue ?
+                new ObjectParameter("TransportId", transportId) :
+                new ObjectParameter("TransportId", typeof(System.Guid));
+    
+            var optKeyParameter = optKey != null ?
+                new ObjectParameter("OptKey", optKey) :
+                new ObjectParameter("OptKey", typeof(string));
+    
+            var optValueParameter = optValue != null ?
+                new ObjectParameter("OptValue", optValue) :
+                new ObjectParameter("OptValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoTransportOptions", transportIdParameter, optKeyParameter, optValueParameter);
+        }
+    
+        public virtual int f_UpdateAllFieldsFromAddresses_ByKeyFields(Nullable<System.Guid> addressID, Nullable<int> type, string county, string country, string district, string houseName, Nullable<System.DateTime> creationDate, string houseNumber, string postCode, string street1, string street2, string town)
+        {
+            var addressIDParameter = addressID.HasValue ?
+                new ObjectParameter("AddressID", addressID) :
+                new ObjectParameter("AddressID", typeof(System.Guid));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(int));
+    
+            var countyParameter = county != null ?
+                new ObjectParameter("County", county) :
+                new ObjectParameter("County", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var districtParameter = district != null ?
+                new ObjectParameter("District", district) :
+                new ObjectParameter("District", typeof(string));
+    
+            var houseNameParameter = houseName != null ?
+                new ObjectParameter("HouseName", houseName) :
+                new ObjectParameter("HouseName", typeof(string));
+    
+            var creationDateParameter = creationDate.HasValue ?
+                new ObjectParameter("CreationDate", creationDate) :
+                new ObjectParameter("CreationDate", typeof(System.DateTime));
+    
+            var houseNumberParameter = houseNumber != null ?
+                new ObjectParameter("HouseNumber", houseNumber) :
+                new ObjectParameter("HouseNumber", typeof(string));
+    
+            var postCodeParameter = postCode != null ?
+                new ObjectParameter("PostCode", postCode) :
+                new ObjectParameter("PostCode", typeof(string));
+    
+            var street1Parameter = street1 != null ?
+                new ObjectParameter("Street1", street1) :
+                new ObjectParameter("Street1", typeof(string));
+    
+            var street2Parameter = street2 != null ?
+                new ObjectParameter("Street2", street2) :
+                new ObjectParameter("Street2", typeof(string));
+    
+            var townParameter = town != null ?
+                new ObjectParameter("Town", town) :
+                new ObjectParameter("Town", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromAddresses_ByKeyFields", addressIDParameter, typeParameter, countyParameter, countryParameter, districtParameter, houseNameParameter, creationDateParameter, houseNumberParameter, postCodeParameter, street1Parameter, street2Parameter, townParameter);
+        }
+    
+        public virtual int f_UpdateAllFieldsFromTransportOptions_ByKeyFields(Nullable<System.Guid> transportId, string optKey, string optValue)
+        {
+            var transportIdParameter = transportId.HasValue ?
+                new ObjectParameter("TransportId", transportId) :
+                new ObjectParameter("TransportId", typeof(System.Guid));
+    
+            var optKeyParameter = optKey != null ?
+                new ObjectParameter("OptKey", optKey) :
+                new ObjectParameter("OptKey", typeof(string));
+    
+            var optValueParameter = optValue != null ?
+                new ObjectParameter("OptValue", optValue) :
+                new ObjectParameter("OptValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromTransportOptions_ByKeyFields", transportIdParameter, optKeyParameter, optValueParameter);
+        }
     }
 }

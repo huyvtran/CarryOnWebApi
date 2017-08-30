@@ -379,5 +379,65 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="f_InsertIntoCO_TOKEN" FunctionName="CarryOnModel.Store.f_InsertIntoCO_TOKEN" />
     <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_DeleteFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromAddresses_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_DeleteFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromTransportOptions_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Street1" ColumnName="Street1" />
+          <ScalarProperty Name="Street2" ColumnName="Street2" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Street1" ColumnName="Street1" />
+          <ScalarProperty Name="Street2" ColumnName="Street2" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+          <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+          <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+          <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+          <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+          <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+          <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_InsertIntoAddresses" FunctionName="CarryOnModel.Store.f_InsertIntoAddresses" />
+    <FunctionImportMapping FunctionImportName="f_InsertIntoTransportOptions" FunctionName="CarryOnModel.Store.f_InsertIntoTransportOptions" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromAddresses_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromTransportOptions_ByKeyFields" />
   </EntityContainerMapping>
 </Mapping>

@@ -374,19 +374,6 @@ namespace Services
                 var userDB = dbManager.GetUserByUsername(user.UTEN);
                 dbManager.UpdateUser(userDB);
 
-
-                //userDB.NOME = user.Name;
-                //userDB.LANG = user.Language;
-                //userDB.EMAI = user.Email;
-                //userDB.TELE = user.Phone;
-                //userDB.FAXN = user.Fax;
-                //userDB.UFFI = user.Office;
-                //userDB.RIF1 = user.Note;
-                //userDB.RIF2 = user.VectorCode;
-                //userDB.RIF3 = user.DriverCode;
-
-                //dbManager.UpdateUser(userDB);
-
                 /* Get updated user from db */
                 var updatedUserDB = dbManager.GetUserByUsername(user.UTEN);
                 var updatedUser = UserMapper.UserMapper_DbToModel(updatedUserDB);

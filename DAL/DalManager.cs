@@ -29,7 +29,7 @@ namespace DAL
 
         public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
         {
-            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest, dateTransportFixed, dateTransportType, dateTransportInfo, requestState).ToList();            
+            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest, dateTransportFixed, dateTransportType, dateTransportInfo, requestState).ToList();
         }
 
         public db_VW_USER_TOKEN GetUserByToken(string token)
@@ -73,7 +73,7 @@ namespace DAL
         /// <param name="role">role of user in company</param>
         public void InsertUser(db_CO01UT user)
         {
-            entities.f_InsertIntoCO01UT(new Guid(), user.UTEN, user.TIPU, user.PASS, 
+            entities.f_InsertIntoCO01UT(new Guid(), user.UTEN, user.TIPU, user.PASS,
                 user.PWGG, user.PWSC, user.NOME, user.LANG, user.EMAI,
                 user.TELE, user.FAXN, user.UFFI, user.RIF1, user.RIF2, user.TELE2, null);
         }
@@ -139,5 +139,49 @@ namespace DAL
         {
             entities.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields(token, null, lastUsageDate, expirationDate, null);
         }
+
+        #region Transport Options
+
+        public List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId)
+        {
+            return entities.f_GetAllFieldsFromTransportOptions_BySomeEqualFields(transportId, null, null).ToList();
+        }
+
+        public void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
+        {
+            entities.f_InsertIntoTransportOptions(reqGoodTransferOptionItem.TransportId, reqGoodTransferOptionItem.OptKey, reqGoodTransferOptionItem.OptValue);
+        }
+
+        #endregion
+
+        #region Addresses
+
+        public void InsertAddress(AddressModel adr)
+        {
+            entities.f_InsertIntoAddresses(adr.AddressID,
+                adr.Type,
+                adr.County,
+                adr.Country,
+                adr.District,
+                adr.HouseName,
+                adr.CreationDate,
+                adr.HouseNumber,
+                adr.PostCode,
+                adr.Street1,
+                adr.Street2,
+                adr.Town);
+        }
+
+        #endregion
+
+        #region Transfer Good
+
+        public void InsertReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        {
+            entities.f_InsertIntoReqGoodTransfer(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
+                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState);
+        }
+
+        #endregion
     }
 }

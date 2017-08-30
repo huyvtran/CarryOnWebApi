@@ -54,5 +54,6 @@ namespace Entities
         public string UserTELE { get; set; }
         public string UserTEL2 { get; set; }
         public string UserLang { get; set; }
+        public List<ReqGoodTransportOptions> ReqGoodTransportOpt { get; set; }
     }
 }

@@ -193,6 +193,77 @@
       <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
       <Parameter Name="USERNAME" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="f_DeleteFromAddresses_ByKeyFields">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_DeleteFromTransportOptions_ByKeyFields">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromAddresses_ByKeyFields" ReturnType="Collection(CarryOnModel.db_Address)">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromAddresses_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_Address)">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoAddresses">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoTransportOptions">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromAddresses_ByKeyFields">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromTransportOptions_ByKeyFields">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_ReqGoodTransfer_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -569,5 +640,62 @@
     <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
     <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
     <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromAddresses_ByKeyFields_Result">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromAddresses_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromTransportOptions_ByKeyFields_Result">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_ReqGoodTransportOptions">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_Address">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
   </ComplexType>
 </Schema>

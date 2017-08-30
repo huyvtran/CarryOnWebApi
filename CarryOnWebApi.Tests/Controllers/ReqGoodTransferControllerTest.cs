@@ -20,6 +20,8 @@ namespace CarryOnWebApi.Tests.Controllers
 
         IReqGoodTransferService reqGoodTransferService;
         IDalManager dbManager;
+        private ILogService logger;
+        private IConfigurationProvider configuration;
 
         #endregion
 
@@ -29,7 +31,9 @@ namespace CarryOnWebApi.Tests.Controllers
         public void TestInitialize()
         {
             dbManager = new DalManager();
-            reqGoodTransferService = new ReqGoodTransferService(dbManager);
+            this.configuration = new Configuration();
+            this.logger = new Log4NetLogService(configuration);
+            reqGoodTransferService = new ReqGoodTransferService(dbManager, logger);
         }
 
         #endregion

@@ -82,6 +82,9 @@
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="DalManager.cs" />
+    <Compile Include="db_Address.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="db_CO01UT.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
@@ -94,7 +97,16 @@
     <Compile Include="db_ReqGoodTransferWithAddresses.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="db_ReqGoodTransportOptions.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="db_VW_USER_TOKEN.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromAddresses_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromAddresses_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="f_GetAllFieldsFromCO01UT_ByKeyFields_Result.cs">
@@ -113,6 +125,12 @@
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromTransportOptions_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="IDalManager.cs" />

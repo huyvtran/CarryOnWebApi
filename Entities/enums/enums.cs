@@ -42,7 +42,8 @@ namespace Entities.enums
         UNBLE_TO_UPDATE_ROW_STATE,
         LOGIN_INVALID_MODEL,
         LOGIN_USER_PSWD_WRONG,
-        DEVICE_OFFLINE
+        DEVICE_OFFLINE,
+        ADDRESS_ADD_ERROR
     };
 
     public enum ActionEnum
