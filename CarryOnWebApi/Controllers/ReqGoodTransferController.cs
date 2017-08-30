@@ -38,19 +38,54 @@ namespace CarryOnWebApi.Controllers
             return resultModel;
         }
 
-        // POST: api/ReqGoodTransfer
-        public void Post([FromBody]string value)
+        [AuthorizeByToken]
+        [HttpPost]
+
+        public ResultModel<List<ReqGoodTransferModel>> GetFiltered(FilterParams filterparams)
         {
+            var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
+
+            /* TO BE DEVELOPED */
+            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(null);
+
+            /* Return data */
+            resultModel.OperationResult = true;
+            return resultModel;
+        }
+
+        // POST: api/ReqGoodTransfer
+        [AuthorizeByToken]
+        [HttpPost]
+        public BaseResultModel Post(ReqGoodTransferModel rqtModel)
+        {
+            var user = RouteData.Values["user"] as UserModel;
+            var resultModel = _reqGoodTransferService.InsertReqGoodTransfer(rqtModel, user);
+
+            /* Return data */
+            return resultModel;
         }
 
         // PUT: api/ReqGoodTransfer/5
-        public void Put(int id, [FromBody]string value)
+        [AuthorizeByToken]
+        [HttpPut]
+        public BaseResultModel Put(ReqGoodTransferModel rqtModel)
         {
+            var user = RouteData.Values["user"] as UserModel;
+            var resultModel = _reqGoodTransferService.UpdateReqGoodTransfer(rqtModel, user);
+
+            /* Return data */
+            return resultModel;
         }
 
         // DELETE: api/ReqGoodTransfer/5
-        public void Delete(int id)
+        [AuthorizeByToken]
+        [HttpDelete]
+        public BaseResultModel Delete(Guid rgtId)
         {
+            var user = RouteData.Values["user"] as UserModel;
+            var resultModel = _reqGoodTransferService.DeleteReqGoodTransfer(rgtId);
+
+            return resultModel;
         }
     }
 }

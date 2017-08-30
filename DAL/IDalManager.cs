@@ -113,17 +113,54 @@ namespace DAL
         void InsertAddress(AddressModel adr);
 
         /// <summary>
+        /// Add address
+        /// </summary>
+        /// <param name="adr">address to add</param>
+        void UpdateAddress(AddressModel adr);
+
+        /// <summary>
+        /// Delete address
+        /// </summary>
+        /// <param name="adr">address to add</param>
+        void DeleteAddress(Guid adrId);
+
+        /// <summary>
         /// Add transfer good request
         /// </summary>
         /// <param name="reqGoodTransferItem">Transfer good request</param>
         void InsertReqGoodTransfer(db_ReqGoodTransfer reqGoodTransferItem);
 
         /// <summary>
+        /// Update transfer good request
+        /// </summary>
+        /// <param name="reqGoodTransferItem">Transfer good request</param>
+        void UpdateReqGoodTransfer(db_ReqGoodTransfer reqGoodTransferItem);
+
+        /// <summary>
+        /// Delete transfer good request
+        /// </summary>
+        /// <param name="id">Item id</param>
+        void DeleteReqGoodTransfer(Guid rgtId);
+
+        /// <summary>
         /// Add transfer good request Option
         /// </summary>
         /// <param name="reqGoodTransferItem">Transfer good request option</param>
         void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem);
-        
+
+        /// <summary>
+        /// Update transfer good request Option
+        /// </summary>
+        /// <param name="reqGoodTransferItem">Transfer good request option</param>
+        void UpdateReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem);
+
+        /// <summary>
+        /// Delete transfer good request Option
+        /// </summary>
+        /// <param name="reqGoodTransferItem">Transfer good request option</param>
+        void DeleteReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem);
+
+
 
     }
 }

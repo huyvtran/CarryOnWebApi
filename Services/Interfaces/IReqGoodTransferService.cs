@@ -10,5 +10,11 @@ namespace Services.Interfaces
     public interface IReqGoodTransferService
     {
         List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId);
+
+        BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user); 
+        BaseResultModel UpdateReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user);
+        BaseResultModel DeleteReqGoodTransfer(Guid rgtId);
+
+        
     }
 }

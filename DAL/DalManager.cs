@@ -21,16 +21,7 @@ namespace DAL
             bool instanceExists = System.Data.Entity.SqlServer.SqlProviderServices.Instance != null;
         }
 
-        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeyFields(Guid? reqId)
-        {
-            //return entities.GetAllReqGoodTransfer_ByKeyFields(reqId).ToList();
-            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(reqId, null, null, null, null, null, null).ToList();
-        }
-
-        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
-        {
-            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest, dateTransportFixed, dateTransportType, dateTransportInfo, requestState).ToList();
-        }
+        #region User
 
         public db_VW_USER_TOKEN GetUserByToken(string token)
         {
@@ -83,12 +74,7 @@ namespace DAL
             entities.f_UpdateAllFieldsFromCO01UT_ByKeyFields(user.ID, user.UTEN, user.TIPU, user.PASS, user.PWGG, user.PWSC,
                 user.NOME, user.LANG, user.EMAI, user.TELE, user.FAXN, user.UFFI, user.RIF1, user.RIF2, user.TELE2, user.ADR_ID);
         }
-
-        public void DeleteToken(string token)
-        {
-            entities.DeleteToken(token);
-        }
-
+        
         /// <summary>
         /// Update user password
         /// </summary>
@@ -99,12 +85,7 @@ namespace DAL
             entities.f_UpdateAllFieldsFromCO01UT_ByKeyFields(null, username, null, password, null, null,
                 null, null, null, null, null, null, null, null, null, null);
         }
-
-        public List<db_CO_TOKEN> GetTokenByUsername(string username)
-        {
-            return entities.f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields(null, null, null, null, username).ToList();
-        }
-
+        
         public db_CO01UT GetUserByEmail(string email)
         {
             var user = entities.f_GetAllFieldsFromCO01UT_BySomeEqualFields(null, null, null, null,
@@ -130,6 +111,10 @@ namespace DAL
                 null, null, email, null, null, null, null, null, null, null);
         }
 
+        #endregion
+
+        #region Token
+
         public void InsertToken(string token, DateTime insertDate, DateTime expirationDate, string username)
         {
             entities.f_InsertIntoCO_TOKEN(token, insertDate, insertDate, expirationDate, username);
@@ -140,16 +125,14 @@ namespace DAL
             entities.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields(token, null, lastUsageDate, expirationDate, null);
         }
 
-        #region Transport Options
-
-        public List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId)
+        public List<db_CO_TOKEN> GetTokenByUsername(string username)
         {
-            return entities.f_GetAllFieldsFromTransportOptions_BySomeEqualFields(transportId, null, null).ToList();
+            return entities.f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields(null, null, null, null, username).ToList();
         }
 
-        public void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
+        public void DeleteToken(string token)
         {
-            entities.f_InsertIntoTransportOptions(reqGoodTransferOptionItem.TransportId, reqGoodTransferOptionItem.OptKey, reqGoodTransferOptionItem.OptValue);
+            entities.DeleteToken(token);
         }
 
         #endregion
@@ -172,14 +155,81 @@ namespace DAL
                 adr.Town);
         }
 
+        public void UpdateAddress(AddressModel adr)
+        {
+            entities.f_UpdateAllFieldsFromAddresses_ByKeyFields(adr.AddressID,
+                adr.Type,
+                adr.County,
+                adr.Country,
+                adr.District,
+                adr.HouseName,
+                adr.CreationDate,
+                adr.HouseNumber,
+                adr.PostCode,
+                adr.Street1,
+                adr.Street2,
+                adr.Town);
+        }
+
+        public void DeleteAddress(Guid adrId)
+        {
+            entities.f_DeleteFromAddresses_ByKeyFields(adrId);
+        }
+
         #endregion
 
         #region Transfer Good
+
+        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeyFields(Guid? reqId)
+        {
+            //return entities.GetAllReqGoodTransfer_ByKeyFields(reqId).ToList();
+            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(reqId, null, null, null, null, null, null).ToList();
+        }
+
+        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
+        {
+            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest, dateTransportFixed, dateTransportType, dateTransportInfo, requestState).ToList();
+        }
 
         public void InsertReqGoodTransfer(db_ReqGoodTransfer rgtItem)
         {
             entities.f_InsertIntoReqGoodTransfer(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
                 rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState);
+        }
+
+        public void UpdateReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        {
+            entities.f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
+                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState);
+        }
+
+        public void DeleteReqGoodTransfer(Guid rgtId)
+        {
+            entities.f_DeleteFromReqGoodTransfer_ByKeyFields(rgtId);
+        }
+
+        #endregion
+
+        #region Transport Options
+
+        public List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId)
+        {
+            return entities.f_GetAllFieldsFromTransportOptions_BySomeEqualFields(transportId, null, null).ToList();
+        }
+
+        public void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
+        {
+            entities.f_InsertIntoTransportOptions(reqGoodTransferOptionItem.TransportId, reqGoodTransferOptionItem.OptKey, reqGoodTransferOptionItem.OptValue);
+        }
+
+        public void UpdateReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
+        {
+            entities.f_UpdateAllFieldsFromTransportOptions_ByKeyFields(reqGoodTransferOptionItem.TransportId, reqGoodTransferOptionItem.OptKey, reqGoodTransferOptionItem.OptValue);
+        }
+
+        public void DeleteReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
+        {
+            entities.f_DeleteFromTransportOptions_ByKeyFields(reqGoodTransferOptionItem.TransportId, reqGoodTransferOptionItem.OptKey);
         }
 
         #endregion
