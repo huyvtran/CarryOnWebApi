@@ -1,0 +1,1424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarryOnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="County" Type="varchar" MaxLength="15" />
+          <Property Name="Country" Type="varchar" MaxLength="20" />
+          <Property Name="District" Type="varchar" MaxLength="25" />
+          <Property Name="HouseName" Type="varchar" MaxLength="100" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="HouseNumber" Type="varchar" MaxLength="5" />
+          <Property Name="PostCode" Type="varchar" MaxLength="9" />
+          <Property Name="Street1" Type="varchar" MaxLength="100" />
+          <Property Name="Street2" Type="varchar" MaxLength="100" />
+          <Property Name="Town" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="CO_TOKEN">
+          <Key>
+            <PropertyRef Name="TOKEN" />
+          </Key>
+          <Property Name="TOKEN" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DATA_CREAZIONE" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="DATA_SCADENZA" Type="datetime2" Precision="3" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CO01UT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TIPU" Type="varchar" MaxLength="1" />
+          <Property Name="PASS" Type="varchar" MaxLength="20" />
+          <Property Name="PWGG" Type="smallint" />
+          <Property Name="PWSC" Type="datetime2" Precision="3" />
+          <Property Name="NOME" Type="varchar" MaxLength="100" />
+          <Property Name="LANG" Type="varchar" MaxLength="3" />
+          <Property Name="EMAI" Type="varchar" MaxLength="255" />
+          <Property Name="TELE" Type="varchar" MaxLength="50" />
+          <Property Name="FAXN" Type="varchar" MaxLength="50" />
+          <Property Name="UFFI" Type="varchar" MaxLength="100" />
+          <Property Name="RIF1" Type="varchar" MaxLength="100" />
+          <Property Name="RIF2" Type="varchar" MaxLength="100" />
+          <Property Name="TELE2" Type="varchar" MaxLength="100" />
+          <Property Name="ADR_ID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ReqGoodTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AddressFrom" Type="uniqueidentifier" />
+          <Property Name="AddreessDest" Type="uniqueidentifier" />
+          <Property Name="DateTransportFixed" Type="datetime" />
+          <Property Name="DateTransportType" Type="int" Nullable="false" />
+          <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequestState" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TransportOptions">
+          <Key>
+            <PropertyRef Name="TransportId" />
+            <PropertyRef Name="OptKey" />
+          </Key>
+          <Property Name="TransportId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OptKey" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="OptValue" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarryOn.dbo.CO_VW_USER_TOKEN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CO_VW_USER_TOKEN">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UTEN" />
+            <PropertyRef Name="TOKEN" />
+            <PropertyRef Name="DATA_CREAZIONE" />
+            <PropertyRef Name="DATA_ULTIMO_UTILIZZO" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TIPU" Type="varchar" MaxLength="1" />
+          <Property Name="PASS" Type="varchar" MaxLength="20" />
+          <Property Name="PWGG" Type="smallint" />
+          <Property Name="PWSC" Type="datetime2" Precision="3" />
+          <Property Name="NOME" Type="varchar" MaxLength="100" />
+          <Property Name="LANG" Type="varchar" MaxLength="3" />
+          <Property Name="EMAI" Type="varchar" MaxLength="255" />
+          <Property Name="TELE" Type="varchar" MaxLength="50" />
+          <Property Name="FAXN" Type="varchar" MaxLength="50" />
+          <Property Name="UFFI" Type="varchar" MaxLength="100" />
+          <Property Name="RIF1" Type="varchar" MaxLength="100" />
+          <Property Name="RIF2" Type="varchar" MaxLength="100" />
+          <Property Name="TELE2" Type="varchar" MaxLength="100" />
+          <Property Name="ADR_ID" Type="uniqueidentifier" />
+          <Property Name="TOKEN" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DATA_CREAZIONE" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="DATA_SCADENZA" Type="datetime2" Precision="3" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReqGoodTransferWithAddresses">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateTransportType" />
+            <PropertyRef Name="RequestState" />
+            <PropertyRef Name="FromType" />
+            <PropertyRef Name="DestType" />
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AddressFrom" Type="uniqueidentifier" />
+          <Property Name="AddreessDest" Type="uniqueidentifier" />
+          <Property Name="DateTransportFixed" Type="datetime" />
+          <Property Name="DateTransportType" Type="int" Nullable="false" />
+          <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequestState" Type="int" Nullable="false" />
+          <Property Name="FromType" Type="int" Nullable="false" />
+          <Property Name="FromCounty" Type="varchar" MaxLength="15" />
+          <Property Name="FromCountry" Type="varchar" MaxLength="20" />
+          <Property Name="FromDistrict" Type="varchar" MaxLength="25" />
+          <Property Name="FromHouseName" Type="varchar" MaxLength="100" />
+          <Property Name="FromCreationDate" Type="datetime" />
+          <Property Name="FromHouseNumber" Type="varchar" MaxLength="5" />
+          <Property Name="FromPostCode" Type="varchar" MaxLength="9" />
+          <Property Name="FromStreet1" Type="varchar" MaxLength="100" />
+          <Property Name="FromStreet2" Type="varchar" MaxLength="100" />
+          <Property Name="FromTown" Type="varchar" MaxLength="25" />
+          <Property Name="DestType" Type="int" Nullable="false" />
+          <Property Name="DestCounty" Type="varchar" MaxLength="15" />
+          <Property Name="DestCountry" Type="varchar" MaxLength="20" />
+          <Property Name="DestDistrict" Type="varchar" MaxLength="25" />
+          <Property Name="DestHouseName" Type="varchar" MaxLength="100" />
+          <Property Name="DestCreationDate" Type="datetime" />
+          <Property Name="DestHouseNumber" Type="varchar" MaxLength="5" />
+          <Property Name="DestPostCode" Type="varchar" MaxLength="9" />
+          <Property Name="DestStreet1" Type="varchar" MaxLength="100" />
+          <Property Name="DestStreet2" Type="varchar" MaxLength="100" />
+          <Property Name="DestTown" Type="varchar" MaxLength="25" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="UserCounty" Type="varchar" MaxLength="15" />
+          <Property Name="UserCountry" Type="varchar" MaxLength="20" />
+          <Property Name="UserDistrict" Type="varchar" MaxLength="25" />
+          <Property Name="UserHouseName" Type="varchar" MaxLength="100" />
+          <Property Name="UserCreationDate" Type="datetime" />
+          <Property Name="UserHouseNumber" Type="varchar" MaxLength="5" />
+          <Property Name="UserPostCode" Type="varchar" MaxLength="9" />
+          <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
+          <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
+          <Property Name="UserTown" Type="varchar" MaxLength="25" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="255" />
+          <Property Name="UserTELE" Type="varchar" MaxLength="50" />
+          <Property Name="UserTEL2" Type="varchar" MaxLength="100" />
+          <Property Name="UserLang" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <Association Name="FK_CO01UT_Addresses">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="CO01UT" Type="Self.CO01UT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="CO01UT">
+              <PropertyRef Name="ADR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReqGoodTransfer_Addresses">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="AddressFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReqGoodTransfer_Addresses1">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="AddreessDest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReqGoodTransfer_CO01UT">
+          <End Role="CO01UT" Type="Self.CO01UT" Multiplicity="0..1" />
+          <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CO01UT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="f_DeleteFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromCO_TOKEN_ByKeyFields">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="f_DeleteFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromCO01UT_ByKeyFields">
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_DeleteFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromReqGoodTransfer_ByKeyFields">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO_TOKEN_ByKeyFields">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO_TOKEN_BySomeEqualFields">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+          <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO01UT_ByKeyFields">
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO01UT_BySomeEqualFields">
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UTEN" Type="varchar" Mode="In" />
+          <Parameter Name="TIPU" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="PWGG" Type="smallint" Mode="In" />
+          <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+          <Parameter Name="NOME" Type="varchar" Mode="In" />
+          <Parameter Name="LANG" Type="varchar" Mode="In" />
+          <Parameter Name="EMAI" Type="varchar" Mode="In" />
+          <Parameter Name="TELE" Type="varchar" Mode="In" />
+          <Parameter Name="FAXN" Type="varchar" Mode="In" />
+          <Parameter Name="UFFI" Type="varchar" Mode="In" />
+          <Parameter Name="RIF1" Type="varchar" Mode="In" />
+          <Parameter Name="RIF2" Type="varchar" Mode="In" />
+          <Parameter Name="TELE2" Type="varchar" Mode="In" />
+          <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+          <Parameter Name="DateTransportType" Type="int" Mode="In" />
+          <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+          <Parameter Name="RequestState" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f_InsertIntoCO_TOKEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoCO_TOKEN">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+          <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="f_InsertIntoCO01UT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoCO01UT">
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UTEN" Type="varchar" Mode="In" />
+          <Parameter Name="TIPU" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="PWGG" Type="smallint" Mode="In" />
+          <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+          <Parameter Name="NOME" Type="varchar" Mode="In" />
+          <Parameter Name="LANG" Type="varchar" Mode="In" />
+          <Parameter Name="EMAI" Type="varchar" Mode="In" />
+          <Parameter Name="TELE" Type="varchar" Mode="In" />
+          <Parameter Name="FAXN" Type="varchar" Mode="In" />
+          <Parameter Name="UFFI" Type="varchar" Mode="In" />
+          <Parameter Name="RIF1" Type="varchar" Mode="In" />
+          <Parameter Name="RIF2" Type="varchar" Mode="In" />
+          <Parameter Name="TELE2" Type="varchar" Mode="In" />
+          <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_InsertIntoReqGoodTransfer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoReqGoodTransfer">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+          <Parameter Name="DateTransportType" Type="int" Mode="In" />
+          <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+          <Parameter Name="RequestState" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromCO_TOKEN_ByKeyFields">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+          <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+          <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="f_UpdateAllFieldsFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromCO01UT_ByKeyFields">
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UTEN" Type="varchar" Mode="In" />
+          <Parameter Name="TIPU" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="PWGG" Type="smallint" Mode="In" />
+          <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+          <Parameter Name="NOME" Type="varchar" Mode="In" />
+          <Parameter Name="LANG" Type="varchar" Mode="In" />
+          <Parameter Name="EMAI" Type="varchar" Mode="In" />
+          <Parameter Name="TELE" Type="varchar" Mode="In" />
+          <Parameter Name="FAXN" Type="varchar" Mode="In" />
+          <Parameter Name="UFFI" Type="varchar" Mode="In" />
+          <Parameter Name="RIF1" Type="varchar" Mode="In" />
+          <Parameter Name="RIF2" Type="varchar" Mode="In" />
+          <Parameter Name="TELE2" Type="varchar" Mode="In" />
+          <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+          <Parameter Name="DateTransportType" Type="int" Mode="In" />
+          <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+          <Parameter Name="RequestState" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="zUTILS_CreateStoredFromNewTable_fix_injection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TableName" Type="varchar" Mode="In" />
+          <Parameter Name="SchemaName" Type="varchar" Mode="In" />
+          <Parameter Name="PrefixName" Type="varchar" Mode="In" />
+          <Parameter Name="LittleBoxDbAndUserPrefix" Type="varchar" Mode="In" />
+          <Parameter Name="user_security_context" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CarryOnModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CO_TOKEN" EntityType="Self.CO_TOKEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CO01UT" EntityType="Self.CO01UT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReqGoodTransfer" EntityType="Self.ReqGoodTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportOptions" EntityType="Self.TransportOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CO_VW_USER_TOKEN" EntityType="Self.CO_VW_USER_TOKEN" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CO_VW_USER_TOKEN].[ID] AS [ID], 
+    [CO_VW_USER_TOKEN].[UTEN] AS [UTEN], 
+    [CO_VW_USER_TOKEN].[TIPU] AS [TIPU], 
+    [CO_VW_USER_TOKEN].[PASS] AS [PASS], 
+    [CO_VW_USER_TOKEN].[PWGG] AS [PWGG], 
+    [CO_VW_USER_TOKEN].[PWSC] AS [PWSC], 
+    [CO_VW_USER_TOKEN].[NOME] AS [NOME], 
+    [CO_VW_USER_TOKEN].[LANG] AS [LANG], 
+    [CO_VW_USER_TOKEN].[EMAI] AS [EMAI], 
+    [CO_VW_USER_TOKEN].[TELE] AS [TELE], 
+    [CO_VW_USER_TOKEN].[FAXN] AS [FAXN], 
+    [CO_VW_USER_TOKEN].[UFFI] AS [UFFI], 
+    [CO_VW_USER_TOKEN].[RIF1] AS [RIF1], 
+    [CO_VW_USER_TOKEN].[RIF2] AS [RIF2], 
+    [CO_VW_USER_TOKEN].[TELE2] AS [TELE2], 
+    [CO_VW_USER_TOKEN].[ADR_ID] AS [ADR_ID], 
+    [CO_VW_USER_TOKEN].[TOKEN] AS [TOKEN], 
+    [CO_VW_USER_TOKEN].[DATA_CREAZIONE] AS [DATA_CREAZIONE], 
+    [CO_VW_USER_TOKEN].[DATA_ULTIMO_UTILIZZO] AS [DATA_ULTIMO_UTILIZZO], 
+    [CO_VW_USER_TOKEN].[DATA_SCADENZA] AS [DATA_SCADENZA], 
+    [CO_VW_USER_TOKEN].[USERNAME] AS [USERNAME]
+    FROM [dbo].[CO_VW_USER_TOKEN] AS [CO_VW_USER_TOKEN]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ReqGoodTransferWithAddresses" EntityType="Self.ReqGoodTransferWithAddresses" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReqGoodTransferWithAddresses].[Id] AS [Id], 
+    [ReqGoodTransferWithAddresses].[AddressFrom] AS [AddressFrom], 
+    [ReqGoodTransferWithAddresses].[AddreessDest] AS [AddreessDest], 
+    [ReqGoodTransferWithAddresses].[DateTransportFixed] AS [DateTransportFixed], 
+    [ReqGoodTransferWithAddresses].[DateTransportType] AS [DateTransportType], 
+    [ReqGoodTransferWithAddresses].[DateTransportInfo] AS [DateTransportInfo], 
+    [ReqGoodTransferWithAddresses].[RequestState] AS [RequestState], 
+    [ReqGoodTransferWithAddresses].[FromType] AS [FromType], 
+    [ReqGoodTransferWithAddresses].[FromCounty] AS [FromCounty], 
+    [ReqGoodTransferWithAddresses].[FromCountry] AS [FromCountry], 
+    [ReqGoodTransferWithAddresses].[FromDistrict] AS [FromDistrict], 
+    [ReqGoodTransferWithAddresses].[FromHouseName] AS [FromHouseName], 
+    [ReqGoodTransferWithAddresses].[FromCreationDate] AS [FromCreationDate], 
+    [ReqGoodTransferWithAddresses].[FromHouseNumber] AS [FromHouseNumber], 
+    [ReqGoodTransferWithAddresses].[FromPostCode] AS [FromPostCode], 
+    [ReqGoodTransferWithAddresses].[FromStreet1] AS [FromStreet1], 
+    [ReqGoodTransferWithAddresses].[FromStreet2] AS [FromStreet2], 
+    [ReqGoodTransferWithAddresses].[FromTown] AS [FromTown], 
+    [ReqGoodTransferWithAddresses].[DestType] AS [DestType], 
+    [ReqGoodTransferWithAddresses].[DestCounty] AS [DestCounty], 
+    [ReqGoodTransferWithAddresses].[DestCountry] AS [DestCountry], 
+    [ReqGoodTransferWithAddresses].[DestDistrict] AS [DestDistrict], 
+    [ReqGoodTransferWithAddresses].[DestHouseName] AS [DestHouseName], 
+    [ReqGoodTransferWithAddresses].[DestCreationDate] AS [DestCreationDate], 
+    [ReqGoodTransferWithAddresses].[DestHouseNumber] AS [DestHouseNumber], 
+    [ReqGoodTransferWithAddresses].[DestPostCode] AS [DestPostCode], 
+    [ReqGoodTransferWithAddresses].[DestStreet1] AS [DestStreet1], 
+    [ReqGoodTransferWithAddresses].[DestStreet2] AS [DestStreet2], 
+    [ReqGoodTransferWithAddresses].[DestTown] AS [DestTown], 
+    [ReqGoodTransferWithAddresses].[UserType] AS [UserType], 
+    [ReqGoodTransferWithAddresses].[UserCounty] AS [UserCounty], 
+    [ReqGoodTransferWithAddresses].[UserCountry] AS [UserCountry], 
+    [ReqGoodTransferWithAddresses].[UserDistrict] AS [UserDistrict], 
+    [ReqGoodTransferWithAddresses].[UserHouseName] AS [UserHouseName], 
+    [ReqGoodTransferWithAddresses].[UserCreationDate] AS [UserCreationDate], 
+    [ReqGoodTransferWithAddresses].[UserHouseNumber] AS [UserHouseNumber], 
+    [ReqGoodTransferWithAddresses].[UserPostCode] AS [UserPostCode], 
+    [ReqGoodTransferWithAddresses].[UserStreet1] AS [UserStreet1], 
+    [ReqGoodTransferWithAddresses].[UserStreet2] AS [UserStreet2], 
+    [ReqGoodTransferWithAddresses].[UserTown] AS [UserTown], 
+    [ReqGoodTransferWithAddresses].[UserName] AS [UserName], 
+    [ReqGoodTransferWithAddresses].[UserEmail] AS [UserEmail], 
+    [ReqGoodTransferWithAddresses].[UserTELE] AS [UserTELE], 
+    [ReqGoodTransferWithAddresses].[UserTEL2] AS [UserTEL2], 
+    [ReqGoodTransferWithAddresses].[UserLang] AS [UserLang]
+    FROM [dbo].[ReqGoodTransferWithAddresses] AS [ReqGoodTransferWithAddresses]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CO01UT_Addresses" Association="Self.FK_CO01UT_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="CO01UT" EntitySet="CO01UT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReqGoodTransfer_Addresses" Association="Self.FK_ReqGoodTransfer_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReqGoodTransfer_Addresses1" Association="Self.FK_ReqGoodTransfer_Addresses1">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReqGoodTransfer_CO01UT" Association="Self.FK_ReqGoodTransfer_CO01UT">
+            <End Role="CO01UT" EntitySet="CO01UT" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarryOnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="County" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="HouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="HouseNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Town" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ReqGoodTransfer" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses" FromRole="Addresses" ToRole="ReqGoodTransfer" />
+          <NavigationProperty Name="ReqGoodTransfer1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses1" FromRole="Addresses" ToRole="ReqGoodTransfer" />
+          <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_CO01UT_Addresses" FromRole="Addresses" ToRole="CO01UT" />
+        </EntityType>
+        <EntityType Name="ReqGoodTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AddressFrom" Type="Guid" />
+          <Property Name="AddreessDest" Type="Guid" />
+          <Property Name="DateTransportFixed" Type="DateTime" Precision="3" />
+          <Property Name="DateTransportType" Type="Int32" Nullable="false" />
+          <Property Name="DateTransportInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestState" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses" FromRole="ReqGoodTransfer" ToRole="Addresses" />
+          <NavigationProperty Name="Addresses1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses1" FromRole="ReqGoodTransfer" ToRole="Addresses" />
+          <Property Name="UserId" Type="Guid" />
+          <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_ReqGoodTransfer_CO01UT" FromRole="ReqGoodTransfer" ToRole="CO01UT" />
+        </EntityType>
+        <EntityContainer Name="CarryOnEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" />
+          <EntitySet Name="ReqGoodTransfer" EntityType="Self.ReqGoodTransfer" />
+          <AssociationSet Name="FK_ReqGoodTransfer_Addresses" Association="CarryOnModel.FK_ReqGoodTransfer_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReqGoodTransfer_Addresses1" Association="CarryOnModel.FK_ReqGoodTransfer_Addresses1">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+          <EntitySet Name="TransportOptions" EntityType="CarryOnModel.TransportOptions" />
+          <FunctionImport Name="f_DeleteFromReqGoodTransfer_ByKeyFields">
+          <Parameter Name="Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransferWithAddresses)">
+          <Parameter Name="Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_InsertIntoReqGoodTransfer">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="AddressFrom" Mode="In" Type="Guid" />
+            <Parameter Name="AddreessDest" Mode="In" Type="Guid" />
+            <Parameter Name="DateTransportFixed" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
+            <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
+            <Parameter Name="RequestState" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="AddressFrom" Mode="In" Type="Guid" />
+            <Parameter Name="AddreessDest" Mode="In" Type="Guid" />
+            <Parameter Name="DateTransportFixed" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
+            <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
+            <Parameter Name="RequestState" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="zUTILS_CreateStoredFromNewTable_fix_injection" ReturnType="Collection(CarryOnModel.zUTILS_CreateStoredFromNewTable_fix_injection_Result)">
+            <Parameter Name="TableName" Mode="In" Type="String" />
+            <Parameter Name="SchemaName" Mode="In" Type="String" />
+            <Parameter Name="PrefixName" Mode="In" Type="String" />
+            <Parameter Name="LittleBoxDbAndUserPrefix" Mode="In" Type="String" />
+            <Parameter Name="user_security_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllReqGoodTransfer_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransfer)">
+          <Parameter Name="Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransferWithAddresses)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="AddressFrom" Mode="In" Type="Guid" />
+            <Parameter Name="AddreessDest" Mode="In" Type="Guid" />
+            <Parameter Name="DateTransportFixed" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
+            <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
+            <Parameter Name="RequestState" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CO01UT" EntityType="CarryOnModel.CO01UT" />
+          <EntitySet Name="ReqGoodTransferWithAddresses" EntityType="CarryOnModel.ReqGoodTransferWithAddresses" />
+          <AssociationSet Name="FK_CO01UT_Addresses" Association="CarryOnModel.FK_CO01UT_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="CO01UT" EntitySet="CO01UT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReqGoodTransfer_CO01UT" Association="CarryOnModel.FK_ReqGoodTransfer_CO01UT">
+            <End Role="CO01UT" EntitySet="CO01UT" />
+            <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+          </AssociationSet>
+          <FunctionImport Name="f_DeleteFromCO01UT_ByKeyFields">
+          <Parameter Name="ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromCO01UT_ByKeyFields" ReturnType="Collection(CarryOnModel.db_CO01UT)">
+          <Parameter Name="ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_CO01UT)">
+            <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="UTEN" Mode="In" Type="String" />
+            <Parameter Name="TIPU" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="PWGG" Mode="In" Type="Int16" />
+            <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+            <Parameter Name="NOME" Mode="In" Type="String" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+            <Parameter Name="EMAI" Mode="In" Type="String" />
+            <Parameter Name="TELE" Mode="In" Type="String" />
+            <Parameter Name="FAXN" Mode="In" Type="String" />
+            <Parameter Name="UFFI" Mode="In" Type="String" />
+            <Parameter Name="RIF1" Mode="In" Type="String" />
+            <Parameter Name="RIF2" Mode="In" Type="String" />
+            <Parameter Name="TELE2" Mode="In" Type="String" />
+            <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_InsertIntoCO01UT">
+            <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="UTEN" Mode="In" Type="String" />
+            <Parameter Name="TIPU" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="PWGG" Mode="In" Type="Int16" />
+            <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+            <Parameter Name="NOME" Mode="In" Type="String" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+            <Parameter Name="EMAI" Mode="In" Type="String" />
+            <Parameter Name="TELE" Mode="In" Type="String" />
+            <Parameter Name="FAXN" Mode="In" Type="String" />
+            <Parameter Name="UFFI" Mode="In" Type="String" />
+            <Parameter Name="RIF1" Mode="In" Type="String" />
+            <Parameter Name="RIF2" Mode="In" Type="String" />
+            <Parameter Name="TELE2" Mode="In" Type="String" />
+            <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="f_UpdateAllFieldsFromCO01UT_ByKeyFields">
+            <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="UTEN" Mode="In" Type="String" />
+            <Parameter Name="TIPU" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="PWGG" Mode="In" Type="Int16" />
+            <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+            <Parameter Name="NOME" Mode="In" Type="String" />
+            <Parameter Name="LANG" Mode="In" Type="String" />
+            <Parameter Name="EMAI" Mode="In" Type="String" />
+            <Parameter Name="TELE" Mode="In" Type="String" />
+            <Parameter Name="FAXN" Mode="In" Type="String" />
+            <Parameter Name="UFFI" Mode="In" Type="String" />
+            <Parameter Name="RIF1" Mode="In" Type="String" />
+            <Parameter Name="RIF2" Mode="In" Type="String" />
+            <Parameter Name="TELE2" Mode="In" Type="String" />
+            <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="CO_TOKEN" EntityType="CarryOnModel.CO_TOKEN" />
+          <EntitySet Name="CO_VW_USER_TOKEN" EntityType="CarryOnModel.CO_VW_USER_TOKEN" />
+          <FunctionImport Name="GetViewUserToken" ReturnType="Collection(CarryOnModel.db_VW_USER_TOKEN)">
+          <Parameter Name="TOKEN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteToken">
+            <Parameter Name="TOKEN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" ReturnType="Collection(CarryOnModel.f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result)">
+            <Parameter Name="TOKEN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_CO_TOKEN)">
+            <Parameter Name="TOKEN" Mode="In" Type="String" />
+            <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_InsertIntoCO_TOKEN">
+            <Parameter Name="TOKEN" Mode="In" Type="String" />
+            <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields">
+            <Parameter Name="TOKEN" Mode="In" Type="String" />
+            <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+            <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <Association Name="FK_ReqGoodTransfer_Addresses">
+          <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
+          <End Type="CarryOnModel.ReqGoodTransfer" Role="ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="AddressFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReqGoodTransfer_Addresses1">
+          <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
+          <End Type="CarryOnModel.ReqGoodTransfer" Role="ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="AddreessDest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TransportOptions">
+          <Key>
+            <PropertyRef Name="TransportId" />
+            <PropertyRef Name="OptKey" />
+          </Key>
+          <Property Name="TransportId" Type="Guid" Nullable="false" />
+          <Property Name="OptKey" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="OptValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="AddressFrom" Nullable="true" />
+          <Property Type="Guid" Name="AddreessDest" Nullable="true" />
+          <Property Type="DateTime" Name="DateTransportFixed" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DateTransportType" Nullable="false" />
+          <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RequestState" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="zUTILS_CreateStoredFromNewTable_fix_injection_Result">
+          <Property Type="String" Name="Column1" Nullable="false" MaxLength="4" />
+          <Property Type="Int32" Name="column_order_id" Nullable="false" />
+          <Property Type="String" Name="Column2" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="db_ReqGoodTransfer">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="AddressFrom" Nullable="true" />
+          <Property Type="Guid" Name="AddreessDest" Nullable="true" />
+          <Property Type="DateTime" Name="DateTransportFixed" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DateTransportType" Nullable="false" />
+          <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RequestState" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="AddressFrom" Nullable="true" />
+          <Property Type="Guid" Name="AddreessDest" Nullable="true" />
+          <Property Type="DateTime" Name="DateTransportFixed" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DateTransportType" Nullable="false" />
+          <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RequestState" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="db_ReqGoodTransferWithAddresses">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="AddressFrom" Nullable="true" />
+          <Property Type="Guid" Name="AddreessDest" Nullable="true" />
+          <Property Type="DateTime" Name="DateTransportFixed" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DateTransportType" Nullable="false" />
+          <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RequestState" Nullable="false" />
+          <Property Type="Int32" Name="FromType" Nullable="false" />
+          <Property Type="String" Name="FromCounty" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="FromCountry" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FromDistrict" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="FromHouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="FromCreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromHouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="FromPostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="FromStreet1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FromStreet2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FromTown" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="DestType" Nullable="false" />
+          <Property Type="String" Name="DestCounty" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DestCountry" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="DestDistrict" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="DestHouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="DestCreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DestHouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="DestPostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="DestStreet1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DestStreet2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DestTown" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="UserType" Nullable="false" />
+          <Property Type="String" Name="UserCounty" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="UserCountry" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UserDistrict" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="UserHouseName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="UserCreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserHouseNumber" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="UserPostCode" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="UserStreet1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserStreet2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserTown" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
+        </ComplexType>
+        <EntityType Name="CO01UT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIPU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PWGG" Type="Int16" />
+          <Property Name="PWSC" Type="DateTime" Precision="3" />
+          <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LANG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EMAI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FAXN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UFFI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RIF1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RIF2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELE2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADR_ID" Type="Guid" />
+          <NavigationProperty Name="Addresses" Relationship="CarryOnModel.FK_CO01UT_Addresses" FromRole="CO01UT" ToRole="Addresses" />
+          <NavigationProperty Name="ReqGoodTransfer" Relationship="CarryOnModel.FK_ReqGoodTransfer_CO01UT" FromRole="CO01UT" ToRole="ReqGoodTransfer" />
+        </EntityType>
+        <EntityType Name="ReqGoodTransferWithAddresses">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateTransportType" />
+            <PropertyRef Name="RequestState" />
+            <PropertyRef Name="FromType" />
+            <PropertyRef Name="DestType" />
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AddressFrom" Type="Guid" />
+          <Property Name="AddreessDest" Type="Guid" />
+          <Property Name="DateTransportFixed" Type="DateTime" Precision="3" />
+          <Property Name="DateTransportType" Type="Int32" Nullable="false" />
+          <Property Name="DateTransportInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestState" Type="Int32" Nullable="false" />
+          <Property Name="FromType" Type="Int32" Nullable="false" />
+          <Property Name="FromCounty" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FromCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FromDistrict" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FromHouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FromCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="FromHouseNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FromPostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="FromStreet1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FromStreet2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FromTown" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DestType" Type="Int32" Nullable="false" />
+          <Property Name="DestCounty" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DestCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DestDistrict" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DestHouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DestCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="DestHouseNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DestPostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="DestStreet1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DestStreet2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DestTown" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="UserCounty" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="UserCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserDistrict" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserHouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="UserHouseNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="UserPostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="UserStreet1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserStreet2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTown" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CO01UT_Addresses">
+          <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
+          <End Type="CarryOnModel.CO01UT" Role="CO01UT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="CO01UT">
+              <PropertyRef Name="ADR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReqGoodTransfer_CO01UT">
+          <End Type="CarryOnModel.CO01UT" Role="CO01UT" Multiplicity="0..1" />
+          <End Type="CarryOnModel.ReqGoodTransfer" Role="ReqGoodTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CO01UT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReqGoodTransfer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="f_GetAllFieldsFromCO01UT_ByKeyFields_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="PWGG" Nullable="true" />
+          <Property Type="DateTime" Name="PWSC" Nullable="true" />
+          <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="PWGG" Nullable="true" />
+          <Property Type="DateTime" Name="PWSC" Nullable="true" />
+          <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="db_CO01UT">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="PWGG" Nullable="true" />
+          <Property Type="DateTime" Name="PWSC" Nullable="true" />
+          <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CO_TOKEN">
+          <Key>
+            <PropertyRef Name="TOKEN" />
+          </Key>
+          <Property Name="TOKEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_CREAZIONE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATA_ULTIMO_UTILIZZO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATA_SCADENZA" Type="DateTime" Precision="3" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CO_VW_USER_TOKEN">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UTEN" />
+            <PropertyRef Name="TOKEN" />
+            <PropertyRef Name="DATA_CREAZIONE" />
+            <PropertyRef Name="DATA_ULTIMO_UTILIZZO" />
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIPU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PWGG" Type="Int16" />
+          <Property Name="PWSC" Type="DateTime" Precision="3" />
+          <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LANG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EMAI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FAXN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UFFI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RIF1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RIF2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELE2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADR_ID" Type="Guid" />
+          <Property Name="TOKEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_CREAZIONE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATA_ULTIMO_UTILIZZO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATA_SCADENZA" Type="DateTime" Precision="3" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="PWGG" Nullable="true" />
+          <Property Type="DateTime" Name="PWSC" Nullable="true" />
+          <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+          <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="db_VW_USER_TOKEN">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="PWGG" Nullable="true" />
+          <Property Type="DateTime" Name="PWSC" Nullable="true" />
+          <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+          <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result">
+          <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields_Result">
+          <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="db_CO_TOKEN">
+          <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarryOnModelStoreContainer" CdmEntityContainer="CarryOnEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="CarryOnModel.Addresses">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReqGoodTransfer">
+            <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransfer">
+              <MappingFragment StoreEntitySet="ReqGoodTransfer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportOptions">
+            <EntityTypeMapping TypeName="CarryOnModel.TransportOptions">
+              <MappingFragment StoreEntitySet="TransportOptions">
+                <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+                <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+                <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_DeleteFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromReqGoodTransfer_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="FromType" ColumnName="FromType" />
+                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
+                <ScalarProperty Name="FromCountry" ColumnName="FromCountry" />
+                <ScalarProperty Name="FromDistrict" ColumnName="FromDistrict" />
+                <ScalarProperty Name="FromHouseName" ColumnName="FromHouseName" />
+                <ScalarProperty Name="FromCreationDate" ColumnName="FromCreationDate" />
+                <ScalarProperty Name="FromHouseNumber" ColumnName="FromHouseNumber" />
+                <ScalarProperty Name="FromPostCode" ColumnName="FromPostCode" />
+                <ScalarProperty Name="FromStreet1" ColumnName="FromStreet1" />
+                <ScalarProperty Name="FromStreet2" ColumnName="FromStreet2" />
+                <ScalarProperty Name="FromTown" ColumnName="FromTown" />
+                <ScalarProperty Name="DestType" ColumnName="DestType" />
+                <ScalarProperty Name="DestCounty" ColumnName="DestCounty" />
+                <ScalarProperty Name="DestCountry" ColumnName="DestCountry" />
+                <ScalarProperty Name="DestDistrict" ColumnName="DestDistrict" />
+                <ScalarProperty Name="DestHouseName" ColumnName="DestHouseName" />
+                <ScalarProperty Name="DestCreationDate" ColumnName="DestCreationDate" />
+                <ScalarProperty Name="DestHouseNumber" ColumnName="DestHouseNumber" />
+                <ScalarProperty Name="DestPostCode" ColumnName="DestPostCode" />
+                <ScalarProperty Name="DestStreet1" ColumnName="DestStreet1" />
+                <ScalarProperty Name="DestStreet2" ColumnName="DestStreet2" />
+                <ScalarProperty Name="DestTown" ColumnName="DestTown" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserCounty" ColumnName="UserCounty" />
+                <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
+                <ScalarProperty Name="UserDistrict" ColumnName="UserDistrict" />
+                <ScalarProperty Name="UserHouseName" ColumnName="UserHouseName" />
+                <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
+                <ScalarProperty Name="UserHouseNumber" ColumnName="UserHouseNumber" />
+                <ScalarProperty Name="UserPostCode" ColumnName="UserPostCode" />
+                <ScalarProperty Name="UserStreet1" ColumnName="UserStreet1" />
+                <ScalarProperty Name="UserStreet2" ColumnName="UserStreet2" />
+                <ScalarProperty Name="UserTown" ColumnName="UserTown" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_InsertIntoReqGoodTransfer" FunctionName="CarryOnModel.Store.f_InsertIntoReqGoodTransfer" />
+          <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="zUTILS_CreateStoredFromNewTable_fix_injection" FunctionName="CarryOnModel.Store.zUTILS_CreateStoredFromNewTable_fix_injection">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.zUTILS_CreateStoredFromNewTable_fix_injection_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="column_order_id" ColumnName="column_order_id" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransfer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="FromType" ColumnName="FromType" />
+                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
+                <ScalarProperty Name="FromCountry" ColumnName="FromCountry" />
+                <ScalarProperty Name="FromDistrict" ColumnName="FromDistrict" />
+                <ScalarProperty Name="FromHouseName" ColumnName="FromHouseName" />
+                <ScalarProperty Name="FromCreationDate" ColumnName="FromCreationDate" />
+                <ScalarProperty Name="FromHouseNumber" ColumnName="FromHouseNumber" />
+                <ScalarProperty Name="FromPostCode" ColumnName="FromPostCode" />
+                <ScalarProperty Name="FromStreet1" ColumnName="FromStreet1" />
+                <ScalarProperty Name="FromStreet2" ColumnName="FromStreet2" />
+                <ScalarProperty Name="FromTown" ColumnName="FromTown" />
+                <ScalarProperty Name="DestType" ColumnName="DestType" />
+                <ScalarProperty Name="DestCounty" ColumnName="DestCounty" />
+                <ScalarProperty Name="DestCountry" ColumnName="DestCountry" />
+                <ScalarProperty Name="DestDistrict" ColumnName="DestDistrict" />
+                <ScalarProperty Name="DestHouseName" ColumnName="DestHouseName" />
+                <ScalarProperty Name="DestCreationDate" ColumnName="DestCreationDate" />
+                <ScalarProperty Name="DestHouseNumber" ColumnName="DestHouseNumber" />
+                <ScalarProperty Name="DestPostCode" ColumnName="DestPostCode" />
+                <ScalarProperty Name="DestStreet1" ColumnName="DestStreet1" />
+                <ScalarProperty Name="DestStreet2" ColumnName="DestStreet2" />
+                <ScalarProperty Name="DestTown" ColumnName="DestTown" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserCounty" ColumnName="UserCounty" />
+                <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
+                <ScalarProperty Name="UserDistrict" ColumnName="UserDistrict" />
+                <ScalarProperty Name="UserHouseName" ColumnName="UserHouseName" />
+                <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
+                <ScalarProperty Name="UserHouseNumber" ColumnName="UserHouseNumber" />
+                <ScalarProperty Name="UserPostCode" ColumnName="UserPostCode" />
+                <ScalarProperty Name="UserStreet1" ColumnName="UserStreet1" />
+                <ScalarProperty Name="UserStreet2" ColumnName="UserStreet2" />
+                <ScalarProperty Name="UserTown" ColumnName="UserTown" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CO01UT">
+            <EntityTypeMapping TypeName="CarryOnModel.CO01UT">
+              <MappingFragment StoreEntitySet="CO01UT">
+                <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+                <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+                <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+                <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+                <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+                <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+                <ScalarProperty Name="TELE" ColumnName="TELE" />
+                <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+                <ScalarProperty Name="LANG" ColumnName="LANG" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+                <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+                <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReqGoodTransferWithAddresses">
+            <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransferWithAddresses">
+              <MappingFragment StoreEntitySet="ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserTown" ColumnName="UserTown" />
+                <ScalarProperty Name="UserStreet2" ColumnName="UserStreet2" />
+                <ScalarProperty Name="UserStreet1" ColumnName="UserStreet1" />
+                <ScalarProperty Name="UserPostCode" ColumnName="UserPostCode" />
+                <ScalarProperty Name="UserHouseNumber" ColumnName="UserHouseNumber" />
+                <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
+                <ScalarProperty Name="UserHouseName" ColumnName="UserHouseName" />
+                <ScalarProperty Name="UserDistrict" ColumnName="UserDistrict" />
+                <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
+                <ScalarProperty Name="UserCounty" ColumnName="UserCounty" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="DestTown" ColumnName="DestTown" />
+                <ScalarProperty Name="DestStreet2" ColumnName="DestStreet2" />
+                <ScalarProperty Name="DestStreet1" ColumnName="DestStreet1" />
+                <ScalarProperty Name="DestPostCode" ColumnName="DestPostCode" />
+                <ScalarProperty Name="DestHouseNumber" ColumnName="DestHouseNumber" />
+                <ScalarProperty Name="DestCreationDate" ColumnName="DestCreationDate" />
+                <ScalarProperty Name="DestHouseName" ColumnName="DestHouseName" />
+                <ScalarProperty Name="DestDistrict" ColumnName="DestDistrict" />
+                <ScalarProperty Name="DestCountry" ColumnName="DestCountry" />
+                <ScalarProperty Name="DestCounty" ColumnName="DestCounty" />
+                <ScalarProperty Name="DestType" ColumnName="DestType" />
+                <ScalarProperty Name="FromTown" ColumnName="FromTown" />
+                <ScalarProperty Name="FromStreet2" ColumnName="FromStreet2" />
+                <ScalarProperty Name="FromStreet1" ColumnName="FromStreet1" />
+                <ScalarProperty Name="FromPostCode" ColumnName="FromPostCode" />
+                <ScalarProperty Name="FromHouseNumber" ColumnName="FromHouseNumber" />
+                <ScalarProperty Name="FromCreationDate" ColumnName="FromCreationDate" />
+                <ScalarProperty Name="FromHouseName" ColumnName="FromHouseName" />
+                <ScalarProperty Name="FromDistrict" ColumnName="FromDistrict" />
+                <ScalarProperty Name="FromCountry" ColumnName="FromCountry" />
+                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
+                <ScalarProperty Name="FromType" ColumnName="FromType" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_DeleteFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromCO01UT_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO01UT_ByKeyFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_CO01UT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+                <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+                <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="LANG" ColumnName="LANG" />
+                <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+                <ScalarProperty Name="TELE" ColumnName="TELE" />
+                <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+                <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+                <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+                <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+                <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+                <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO01UT_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO01UT_BySomeEqualFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_CO01UT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+                <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+                <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="LANG" ColumnName="LANG" />
+                <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+                <ScalarProperty Name="TELE" ColumnName="TELE" />
+                <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+                <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+                <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+                <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+                <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+                <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_InsertIntoCO01UT" FunctionName="CarryOnModel.Store.f_InsertIntoCO01UT" />
+          <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO01UT_ByKeyFields" />
+          <EntitySetMapping Name="CO_TOKEN">
+            <EntityTypeMapping TypeName="CarryOnModel.CO_TOKEN">
+              <MappingFragment StoreEntitySet="CO_TOKEN">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+                <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+                <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CO_VW_USER_TOKEN">
+            <EntityTypeMapping TypeName="CarryOnModel.CO_VW_USER_TOKEN">
+              <MappingFragment StoreEntitySet="CO_VW_USER_TOKEN">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+                <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+                <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+                <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+                <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+                <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+                <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+                <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+                <ScalarProperty Name="TELE" ColumnName="TELE" />
+                <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+                <ScalarProperty Name="LANG" ColumnName="LANG" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+                <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+                <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetViewUserToken" FunctionName="CarryOnModel.Store.CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_VW_USER_TOKEN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+                <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+                <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="LANG" ColumnName="LANG" />
+                <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+                <ScalarProperty Name="TELE" ColumnName="TELE" />
+                <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+                <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+                <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+                <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+                <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+                <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+                <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+                <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteToken" FunctionName="CarryOnModel.Store.f_DeleteFromCO_TOKEN_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO_TOKEN_ByKeyFields">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result">
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+                <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+                <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_CO_TOKEN">
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+                <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+                <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_InsertIntoCO_TOKEN" FunctionName="CarryOnModel.Store.f_InsertIntoCO_TOKEN" />
+          <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

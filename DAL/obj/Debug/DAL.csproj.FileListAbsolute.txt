@@ -1,0 +1,12 @@
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\DAL.dll.config
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\DAL.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\DAL.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\Entities.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\Entities.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Debug\DAL.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Debug\DAL.pdb

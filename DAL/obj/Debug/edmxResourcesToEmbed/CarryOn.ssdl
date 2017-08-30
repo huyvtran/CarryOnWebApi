@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarryOnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="County" Type="varchar" MaxLength="15" />
+    <Property Name="Country" Type="varchar" MaxLength="20" />
+    <Property Name="District" Type="varchar" MaxLength="25" />
+    <Property Name="HouseName" Type="varchar" MaxLength="100" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="HouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="PostCode" Type="varchar" MaxLength="9" />
+    <Property Name="Street1" Type="varchar" MaxLength="100" />
+    <Property Name="Street2" Type="varchar" MaxLength="100" />
+    <Property Name="Town" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="CO_TOKEN">
+    <Key>
+      <PropertyRef Name="TOKEN" />
+    </Key>
+    <Property Name="TOKEN" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DATA_CREAZIONE" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="DATA_SCADENZA" Type="datetime2" Precision="3" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CO01UT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TIPU" Type="varchar" MaxLength="1" />
+    <Property Name="PASS" Type="varchar" MaxLength="20" />
+    <Property Name="PWGG" Type="smallint" />
+    <Property Name="PWSC" Type="datetime2" Precision="3" />
+    <Property Name="NOME" Type="varchar" MaxLength="100" />
+    <Property Name="LANG" Type="varchar" MaxLength="3" />
+    <Property Name="EMAI" Type="varchar" MaxLength="255" />
+    <Property Name="TELE" Type="varchar" MaxLength="50" />
+    <Property Name="FAXN" Type="varchar" MaxLength="50" />
+    <Property Name="UFFI" Type="varchar" MaxLength="100" />
+    <Property Name="RIF1" Type="varchar" MaxLength="100" />
+    <Property Name="RIF2" Type="varchar" MaxLength="100" />
+    <Property Name="TELE2" Type="varchar" MaxLength="100" />
+    <Property Name="ADR_ID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ReqGoodTransfer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AddressFrom" Type="uniqueidentifier" />
+    <Property Name="AddreessDest" Type="uniqueidentifier" />
+    <Property Name="DateTransportFixed" Type="datetime" />
+    <Property Name="DateTransportType" Type="int" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RequestState" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="TransportOptions">
+    <Key>
+      <PropertyRef Name="TransportId" />
+      <PropertyRef Name="OptKey" />
+    </Key>
+    <Property Name="TransportId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OptKey" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="OptValue" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CarryOn.dbo.CO_VW_USER_TOKEN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CO_VW_USER_TOKEN">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UTEN" />
+      <PropertyRef Name="TOKEN" />
+      <PropertyRef Name="DATA_CREAZIONE" />
+      <PropertyRef Name="DATA_ULTIMO_UTILIZZO" />
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TIPU" Type="varchar" MaxLength="1" />
+    <Property Name="PASS" Type="varchar" MaxLength="20" />
+    <Property Name="PWGG" Type="smallint" />
+    <Property Name="PWSC" Type="datetime2" Precision="3" />
+    <Property Name="NOME" Type="varchar" MaxLength="100" />
+    <Property Name="LANG" Type="varchar" MaxLength="3" />
+    <Property Name="EMAI" Type="varchar" MaxLength="255" />
+    <Property Name="TELE" Type="varchar" MaxLength="50" />
+    <Property Name="FAXN" Type="varchar" MaxLength="50" />
+    <Property Name="UFFI" Type="varchar" MaxLength="100" />
+    <Property Name="RIF1" Type="varchar" MaxLength="100" />
+    <Property Name="RIF2" Type="varchar" MaxLength="100" />
+    <Property Name="TELE2" Type="varchar" MaxLength="100" />
+    <Property Name="ADR_ID" Type="uniqueidentifier" />
+    <Property Name="TOKEN" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DATA_CREAZIONE" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="DATA_SCADENZA" Type="datetime2" Precision="3" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReqGoodTransferWithAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DateTransportType" />
+      <PropertyRef Name="RequestState" />
+      <PropertyRef Name="FromType" />
+      <PropertyRef Name="DestType" />
+      <PropertyRef Name="UserType" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AddressFrom" Type="uniqueidentifier" />
+    <Property Name="AddreessDest" Type="uniqueidentifier" />
+    <Property Name="DateTransportFixed" Type="datetime" />
+    <Property Name="DateTransportType" Type="int" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RequestState" Type="int" Nullable="false" />
+    <Property Name="FromType" Type="int" Nullable="false" />
+    <Property Name="FromCounty" Type="varchar" MaxLength="15" />
+    <Property Name="FromCountry" Type="varchar" MaxLength="20" />
+    <Property Name="FromDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="FromHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="FromCreationDate" Type="datetime" />
+    <Property Name="FromHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="FromPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="FromStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="FromStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="FromTown" Type="varchar" MaxLength="25" />
+    <Property Name="DestType" Type="int" Nullable="false" />
+    <Property Name="DestCounty" Type="varchar" MaxLength="15" />
+    <Property Name="DestCountry" Type="varchar" MaxLength="20" />
+    <Property Name="DestDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="DestHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="DestCreationDate" Type="datetime" />
+    <Property Name="DestHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="DestPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="DestStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="DestStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="DestTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="UserCounty" Type="varchar" MaxLength="15" />
+    <Property Name="UserCountry" Type="varchar" MaxLength="20" />
+    <Property Name="UserDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="UserHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="UserCreationDate" Type="datetime" />
+    <Property Name="UserHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="UserPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="UserTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="255" />
+    <Property Name="UserTELE" Type="varchar" MaxLength="50" />
+    <Property Name="UserTEL2" Type="varchar" MaxLength="100" />
+    <Property Name="UserLang" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <Association Name="FK_CO01UT_Addresses">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="CO01UT" Type="Self.CO01UT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="CO01UT">
+        <PropertyRef Name="ADR_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReqGoodTransfer_Addresses">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="ReqGoodTransfer">
+        <PropertyRef Name="AddressFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReqGoodTransfer_Addresses1">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="ReqGoodTransfer">
+        <PropertyRef Name="AddreessDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReqGoodTransfer_CO01UT">
+    <End Role="CO01UT" Type="Self.CO01UT" Multiplicity="0..1" />
+    <End Role="ReqGoodTransfer" Type="Self.ReqGoodTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CO01UT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReqGoodTransfer">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="f_DeleteFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromCO_TOKEN_ByKeyFields">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="f_DeleteFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromCO01UT_ByKeyFields">
+    <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_DeleteFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromReqGoodTransfer_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO_TOKEN_ByKeyFields">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO_TOKEN_BySomeEqualFields">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+    <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+    <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO01UT_ByKeyFields">
+    <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromCO01UT_BySomeEqualFields">
+    <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UTEN" Type="varchar" Mode="In" />
+    <Parameter Name="TIPU" Type="varchar" Mode="In" />
+    <Parameter Name="PASS" Type="varchar" Mode="In" />
+    <Parameter Name="PWGG" Type="smallint" Mode="In" />
+    <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+    <Parameter Name="NOME" Type="varchar" Mode="In" />
+    <Parameter Name="LANG" Type="varchar" Mode="In" />
+    <Parameter Name="EMAI" Type="varchar" Mode="In" />
+    <Parameter Name="TELE" Type="varchar" Mode="In" />
+    <Parameter Name="FAXN" Type="varchar" Mode="In" />
+    <Parameter Name="UFFI" Type="varchar" Mode="In" />
+    <Parameter Name="RIF1" Type="varchar" Mode="In" />
+    <Parameter Name="RIF2" Type="varchar" Mode="In" />
+    <Parameter Name="TELE2" Type="varchar" Mode="In" />
+    <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+  </Function>
+  <Function Name="f_InsertIntoCO_TOKEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoCO_TOKEN">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+    <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+    <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="f_InsertIntoCO01UT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoCO01UT">
+    <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UTEN" Type="varchar" Mode="In" />
+    <Parameter Name="TIPU" Type="varchar" Mode="In" />
+    <Parameter Name="PASS" Type="varchar" Mode="In" />
+    <Parameter Name="PWGG" Type="smallint" Mode="In" />
+    <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+    <Parameter Name="NOME" Type="varchar" Mode="In" />
+    <Parameter Name="LANG" Type="varchar" Mode="In" />
+    <Parameter Name="EMAI" Type="varchar" Mode="In" />
+    <Parameter Name="TELE" Type="varchar" Mode="In" />
+    <Parameter Name="FAXN" Type="varchar" Mode="In" />
+    <Parameter Name="UFFI" Type="varchar" Mode="In" />
+    <Parameter Name="RIF1" Type="varchar" Mode="In" />
+    <Parameter Name="RIF2" Type="varchar" Mode="In" />
+    <Parameter Name="TELE2" Type="varchar" Mode="In" />
+    <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_InsertIntoReqGoodTransfer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoReqGoodTransfer">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+  </Function>
+  <Function Name="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromCO_TOKEN_ByKeyFields">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+    <Parameter Name="DATA_CREAZIONE" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_ULTIMO_UTILIZZO" Type="datetime2" Mode="In" />
+    <Parameter Name="DATA_SCADENZA" Type="datetime2" Mode="In" />
+    <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="f_UpdateAllFieldsFromCO01UT_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromCO01UT_ByKeyFields">
+    <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UTEN" Type="varchar" Mode="In" />
+    <Parameter Name="TIPU" Type="varchar" Mode="In" />
+    <Parameter Name="PASS" Type="varchar" Mode="In" />
+    <Parameter Name="PWGG" Type="smallint" Mode="In" />
+    <Parameter Name="PWSC" Type="datetime2" Mode="In" />
+    <Parameter Name="NOME" Type="varchar" Mode="In" />
+    <Parameter Name="LANG" Type="varchar" Mode="In" />
+    <Parameter Name="EMAI" Type="varchar" Mode="In" />
+    <Parameter Name="TELE" Type="varchar" Mode="In" />
+    <Parameter Name="FAXN" Type="varchar" Mode="In" />
+    <Parameter Name="UFFI" Type="varchar" Mode="In" />
+    <Parameter Name="RIF1" Type="varchar" Mode="In" />
+    <Parameter Name="RIF2" Type="varchar" Mode="In" />
+    <Parameter Name="TELE2" Type="varchar" Mode="In" />
+    <Parameter Name="ADR_ID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TOKEN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="zUTILS_CreateStoredFromNewTable_fix_injection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TableName" Type="varchar" Mode="In" />
+    <Parameter Name="SchemaName" Type="varchar" Mode="In" />
+    <Parameter Name="PrefixName" Type="varchar" Mode="In" />
+    <Parameter Name="LittleBoxDbAndUserPrefix" Type="varchar" Mode="In" />
+    <Parameter Name="user_security_context" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CarryOnModelStoreContainer">
+    <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CO_TOKEN" EntityType="Self.CO_TOKEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CO01UT" EntityType="Self.CO01UT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReqGoodTransfer" EntityType="Self.ReqGoodTransfer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransportOptions" EntityType="Self.TransportOptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CO_VW_USER_TOKEN" EntityType="Self.CO_VW_USER_TOKEN" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CO_VW_USER_TOKEN].[ID] AS [ID], 
+    [CO_VW_USER_TOKEN].[UTEN] AS [UTEN], 
+    [CO_VW_USER_TOKEN].[TIPU] AS [TIPU], 
+    [CO_VW_USER_TOKEN].[PASS] AS [PASS], 
+    [CO_VW_USER_TOKEN].[PWGG] AS [PWGG], 
+    [CO_VW_USER_TOKEN].[PWSC] AS [PWSC], 
+    [CO_VW_USER_TOKEN].[NOME] AS [NOME], 
+    [CO_VW_USER_TOKEN].[LANG] AS [LANG], 
+    [CO_VW_USER_TOKEN].[EMAI] AS [EMAI], 
+    [CO_VW_USER_TOKEN].[TELE] AS [TELE], 
+    [CO_VW_USER_TOKEN].[FAXN] AS [FAXN], 
+    [CO_VW_USER_TOKEN].[UFFI] AS [UFFI], 
+    [CO_VW_USER_TOKEN].[RIF1] AS [RIF1], 
+    [CO_VW_USER_TOKEN].[RIF2] AS [RIF2], 
+    [CO_VW_USER_TOKEN].[TELE2] AS [TELE2], 
+    [CO_VW_USER_TOKEN].[ADR_ID] AS [ADR_ID], 
+    [CO_VW_USER_TOKEN].[TOKEN] AS [TOKEN], 
+    [CO_VW_USER_TOKEN].[DATA_CREAZIONE] AS [DATA_CREAZIONE], 
+    [CO_VW_USER_TOKEN].[DATA_ULTIMO_UTILIZZO] AS [DATA_ULTIMO_UTILIZZO], 
+    [CO_VW_USER_TOKEN].[DATA_SCADENZA] AS [DATA_SCADENZA], 
+    [CO_VW_USER_TOKEN].[USERNAME] AS [USERNAME]
+    FROM [dbo].[CO_VW_USER_TOKEN] AS [CO_VW_USER_TOKEN]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReqGoodTransferWithAddresses" EntityType="Self.ReqGoodTransferWithAddresses" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReqGoodTransferWithAddresses].[Id] AS [Id], 
+    [ReqGoodTransferWithAddresses].[AddressFrom] AS [AddressFrom], 
+    [ReqGoodTransferWithAddresses].[AddreessDest] AS [AddreessDest], 
+    [ReqGoodTransferWithAddresses].[DateTransportFixed] AS [DateTransportFixed], 
+    [ReqGoodTransferWithAddresses].[DateTransportType] AS [DateTransportType], 
+    [ReqGoodTransferWithAddresses].[DateTransportInfo] AS [DateTransportInfo], 
+    [ReqGoodTransferWithAddresses].[RequestState] AS [RequestState], 
+    [ReqGoodTransferWithAddresses].[FromType] AS [FromType], 
+    [ReqGoodTransferWithAddresses].[FromCounty] AS [FromCounty], 
+    [ReqGoodTransferWithAddresses].[FromCountry] AS [FromCountry], 
+    [ReqGoodTransferWithAddresses].[FromDistrict] AS [FromDistrict], 
+    [ReqGoodTransferWithAddresses].[FromHouseName] AS [FromHouseName], 
+    [ReqGoodTransferWithAddresses].[FromCreationDate] AS [FromCreationDate], 
+    [ReqGoodTransferWithAddresses].[FromHouseNumber] AS [FromHouseNumber], 
+    [ReqGoodTransferWithAddresses].[FromPostCode] AS [FromPostCode], 
+    [ReqGoodTransferWithAddresses].[FromStreet1] AS [FromStreet1], 
+    [ReqGoodTransferWithAddresses].[FromStreet2] AS [FromStreet2], 
+    [ReqGoodTransferWithAddresses].[FromTown] AS [FromTown], 
+    [ReqGoodTransferWithAddresses].[DestType] AS [DestType], 
+    [ReqGoodTransferWithAddresses].[DestCounty] AS [DestCounty], 
+    [ReqGoodTransferWithAddresses].[DestCountry] AS [DestCountry], 
+    [ReqGoodTransferWithAddresses].[DestDistrict] AS [DestDistrict], 
+    [ReqGoodTransferWithAddresses].[DestHouseName] AS [DestHouseName], 
+    [ReqGoodTransferWithAddresses].[DestCreationDate] AS [DestCreationDate], 
+    [ReqGoodTransferWithAddresses].[DestHouseNumber] AS [DestHouseNumber], 
+    [ReqGoodTransferWithAddresses].[DestPostCode] AS [DestPostCode], 
+    [ReqGoodTransferWithAddresses].[DestStreet1] AS [DestStreet1], 
+    [ReqGoodTransferWithAddresses].[DestStreet2] AS [DestStreet2], 
+    [ReqGoodTransferWithAddresses].[DestTown] AS [DestTown], 
+    [ReqGoodTransferWithAddresses].[UserType] AS [UserType], 
+    [ReqGoodTransferWithAddresses].[UserCounty] AS [UserCounty], 
+    [ReqGoodTransferWithAddresses].[UserCountry] AS [UserCountry], 
+    [ReqGoodTransferWithAddresses].[UserDistrict] AS [UserDistrict], 
+    [ReqGoodTransferWithAddresses].[UserHouseName] AS [UserHouseName], 
+    [ReqGoodTransferWithAddresses].[UserCreationDate] AS [UserCreationDate], 
+    [ReqGoodTransferWithAddresses].[UserHouseNumber] AS [UserHouseNumber], 
+    [ReqGoodTransferWithAddresses].[UserPostCode] AS [UserPostCode], 
+    [ReqGoodTransferWithAddresses].[UserStreet1] AS [UserStreet1], 
+    [ReqGoodTransferWithAddresses].[UserStreet2] AS [UserStreet2], 
+    [ReqGoodTransferWithAddresses].[UserTown] AS [UserTown], 
+    [ReqGoodTransferWithAddresses].[UserName] AS [UserName], 
+    [ReqGoodTransferWithAddresses].[UserEmail] AS [UserEmail], 
+    [ReqGoodTransferWithAddresses].[UserTELE] AS [UserTELE], 
+    [ReqGoodTransferWithAddresses].[UserTEL2] AS [UserTEL2], 
+    [ReqGoodTransferWithAddresses].[UserLang] AS [UserLang]
+    FROM [dbo].[ReqGoodTransferWithAddresses] AS [ReqGoodTransferWithAddresses]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CO01UT_Addresses" Association="Self.FK_CO01UT_Addresses">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="CO01UT" EntitySet="CO01UT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReqGoodTransfer_Addresses" Association="Self.FK_ReqGoodTransfer_Addresses">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReqGoodTransfer_Addresses1" Association="Self.FK_ReqGoodTransfer_Addresses1">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReqGoodTransfer_CO01UT" Association="Self.FK_ReqGoodTransfer_CO01UT">
+      <End Role="CO01UT" EntitySet="CO01UT" />
+      <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

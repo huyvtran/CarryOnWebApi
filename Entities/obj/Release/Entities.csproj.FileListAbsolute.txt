@@ -1,0 +1,4 @@
+C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\bin\Release\Entities.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\bin\Release\Entities.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Release\Entities.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Release\Entities.pdb

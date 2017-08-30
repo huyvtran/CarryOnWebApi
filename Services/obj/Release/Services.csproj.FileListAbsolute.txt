@@ -1,0 +1,15 @@
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\Services.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\Services.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\AutoMapper.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\DAL.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\Entities.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\EntityFramework.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\EntityFramework.SqlServer.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\DAL.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\Entities.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\AutoMapper.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\EntityFramework.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\EntityFramework.SqlServer.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.csprojResolveAssemblyReference.cache
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.pdb

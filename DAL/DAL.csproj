@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9FC40437-9301-427D-A9EF-7F2CC35318CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addresses.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarryOn.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarryOn.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarryOn.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarryOn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarryOn.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CO01UT.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CO_TOKEN.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CO_VW_USER_TOKEN.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DalManager.cs" />
+    <Compile Include="db_CO01UT.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_CO_TOKEN.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_ReqGoodTransfer.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_ReqGoodTransferWithAddresses.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_VW_USER_TOKEN.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromCO01UT_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromCO01UT_BySomeEqualFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDalManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReqGoodTransfer.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqGoodTransferWithAddresses.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransportOptions.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="zUTILS_CreateStoredFromNewTable_fix_injection_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="CarryOn.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarryOn.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="CarryOn.edmx.diagram">
+      <DependentUpon>CarryOn.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CarryOn.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarryOn.edmx</DependentUpon>
+      <LastGenOutput>CarryOn.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CarryOn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarryOn.edmx</DependentUpon>
+      <LastGenOutput>CarryOn.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{531b9cc4-0966-496c-aece-0f5dde8b387e}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

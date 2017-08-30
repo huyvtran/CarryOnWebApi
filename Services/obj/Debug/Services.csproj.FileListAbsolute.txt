@@ -1,0 +1,17 @@
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Debug\Services.csprojResolveAssemblyReference.cache
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\Services.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\Services.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\AutoMapper.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\DAL.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\Entities.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\EntityFramework.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\EntityFramework.SqlServer.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\DAL.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\Entities.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\AutoMapper.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\EntityFramework.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\EntityFramework.SqlServer.xml
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Debug\Services.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Debug\Services.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\log4net.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Debug\log4net.xml

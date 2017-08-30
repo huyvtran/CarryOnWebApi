@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="000b17b765994d4ba1620823c0d042d4" Name="Diagram1">
+        <EntityTypeShape EntityType="CarryOnModel.Addresses" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarryOnModel.ReqGoodTransfer" Width="2.125" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_Addresses" />
+        <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_Addresses1" />
+        <EntityTypeShape EntityType="CarryOnModel.TransportOptions" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CarryOnModel.CO01UT" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="CarryOnModel.ReqGoodTransferWithAddresses" Width="1.5" PointX="5.375" PointY="3.75" />
+        <AssociationConnector Association="CarryOnModel.FK_CO01UT_Addresses" />
+        <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_CO01UT" />
+        <EntityTypeShape EntityType="CarryOnModel.CO_TOKEN" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CarryOnModel.CO_VW_USER_TOKEN" Width="1.5" PointX="7.375" PointY="3.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
