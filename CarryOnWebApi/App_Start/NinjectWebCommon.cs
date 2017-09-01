@@ -69,6 +69,7 @@ namespace CarryOnWebApi
         {
             kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>(); 
             kernel.Bind<IDalManager>().To<DalManager>(); 
+            kernel.Bind<IConfigurationProvider>().To<Configuration>(); 
         }        
     }
 }

@@ -25,15 +25,18 @@ using CarryOnWebApi.CustomAttributes;
 
 namespace CarryOnWebApi.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : ApiController
     {
         private IAccountService accountService;
         private ILogService logger;
+        private IConfigurationProvider configuration = null;
 
-        public AccountController(IAccountService accountService, ILogService logger)
+        public AccountController(IAccountService accountService, ILogService logger,
+            IConfigurationProvider _config)
         {
             this.accountService = accountService;
             this.logger = logger;
+            this.configuration = _config;
         }
 
         //
@@ -41,13 +44,13 @@ namespace CarryOnWebApi.Controllers
         [HttpPost]
         public ResultModel<UserModel> Login(LoginViewModel model)
         {
+            logger.LogApi(() => Login(model), model.Username);
             ErrorsEnum retMsg = ErrorsEnum.GENERIC_ERROR;
             var res = new ResultModel<UserModel>();
             res.ResultData = new UserModel();
 
             try
             {
-                logger.LogApi(() => Login(model), model.Username);
 
                 bool error = false;
                 if (!ModelState.IsValid)
@@ -92,6 +95,7 @@ namespace CarryOnWebApi.Controllers
 
         //
         // POST: /Account/Logout
+        [AuthorizeUser]
         [HttpPost]
         public BaseResultModel Logout()
         {
@@ -101,7 +105,8 @@ namespace CarryOnWebApi.Controllers
                 error = true;
             }
 
-            var token = Request.Headers["Token"];
+            var user = configuration.UserInfo;
+            var token = user.Token;
 
             logger.LogApi(() => Logout(), accountService.GetUserByToken(token).UTEN);
 
@@ -129,14 +134,15 @@ namespace CarryOnWebApi.Controllers
             return result;
         }
 
-        
+
         //
         // POST: /Account/ChangePassword
         [AuthorizeByToken]
         [HttpPost]
         public BaseResultModel ChangePassword(string oldPassword, string newPassword)
         {
-            var user = RouteData.Values["user"] as UserModel;
+            //var user = RouteData.Values["user"] as UserModel;
+            var user = configuration.UserInfo;
             logger.LogApi(() => ChangePassword("**********", "**********"), user.UTEN);
 
             var result = new BaseResultModel();
@@ -188,7 +194,7 @@ namespace CarryOnWebApi.Controllers
         [HttpPost]
         public ResultModel<UserModel> CreateUser(UserModel userModel)
         {
-            var user = RouteData.Values["user"] as UserModel;
+            var user = configuration.UserInfo;
             logger.LogApi(() => CreateUser(userModel), user.UTEN);
 
             // check if all required fields are filled in
@@ -208,7 +214,7 @@ namespace CarryOnWebApi.Controllers
         [HttpPost]
         public ResultModel<UserModel> UpdateUser(UserModel userModel)
         {
-            var user = RouteData.Values["user"] as UserModel;
+            var user = configuration.UserInfo;
             logger.LogApi(() => UpdateUser(userModel), user.UTEN);
 
             // check if all required fields are filled in
@@ -246,65 +252,6 @@ namespace CarryOnWebApi.Controllers
                 ResultMessage = null,
                 InfoLog = ""
             };
-        }
-        
-        #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
-        //private ActionResult RedirectToLocal(string returnUrl)
-        //{
-        //    if (Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //internal class ChallengeResult : HttpUnauthorizedResult
-        //{
-        //    public ChallengeResult(string provider, string redirectUri)
-        //        : this(provider, redirectUri, null)
-        //    {
-        //    }
-
-        //    public ChallengeResult(string provider, string redirectUri, string userId)
-        //    {
-        //        LoginProvider = provider;
-        //        RedirectUri = redirectUri;
-        //        UserId = userId;
-        //    }
-
-        //    public string LoginProvider { get; set; }
-        //    public string RedirectUri { get; set; }
-        //    public string UserId { get; set; }
-
-        //    public override void ExecuteResult(ControllerContext context)
-        //    {
-        //        var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-        //        if (UserId != null)
-        //        {
-        //            properties.Dictionary[XsrfKey] = UserId;
-        //        }
-        //        context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
-        //    }
-        //}
-        #endregion
+        }        
     }
 }

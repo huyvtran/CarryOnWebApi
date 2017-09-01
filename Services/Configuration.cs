@@ -1,4 +1,5 @@
-﻿using Services.Interfaces;
+﻿using Entities;
+using Services.Interfaces;
 using System;
 using System.Configuration;
 using System.Globalization;
@@ -33,6 +34,7 @@ namespace Services
         private static IConfigurationProvider CurrentConfiguration;
         private string path = "";
         private string serverPath = "";
+        private UserModel _userInfo;
 
         public Configuration()
         {
@@ -49,6 +51,21 @@ namespace Services
             this.path = path;
             this.serverPath = serverPath;
 
+        }
+
+        /// <summary>
+        ///  Get or set user info
+        /// </summary>
+        public UserModel UserInfo
+        {
+            get
+            {
+                return _userInfo;
+            }
+            set
+            {
+                _userInfo = value;
+            }
         }
 
         /// <summary>

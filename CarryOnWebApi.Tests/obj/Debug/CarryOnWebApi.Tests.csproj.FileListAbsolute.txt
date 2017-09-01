@@ -81,5 +81,3 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\obj\Debug\CarryOnWebApi.
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\obj\Debug\CarryOnWebApi.Tests.pdb
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\bin\Debug\log4net.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\bin\Debug\log4net.xml
-C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
-C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml

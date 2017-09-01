@@ -1,4 +1,5 @@
 ﻿
+using Entities;
 using System;
 
 namespace Services.Interfaces
@@ -6,6 +7,11 @@ namespace Services.Interfaces
     /// <summary>Interface that provide configuration member</summary>
     public interface IConfigurationProvider
     {
+        /// <summary>
+        ///  Get or set user info
+        /// </summary>
+        UserModel UserInfo { get; set; }
+
         /// <summary>
         /// Gets the document folder.
         /// </summary>

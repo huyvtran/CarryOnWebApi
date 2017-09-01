@@ -43,7 +43,7 @@ namespace CarryOnWebApi.Tests.Controllers
         public void GetAllNoFilters()
         {
             // Arrange
-            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService);
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
 
             // Act
             var result = reqGoodTransferController.Get(null);
