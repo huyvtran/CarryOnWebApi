@@ -91,3 +91,5 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\AutoMapper.xml
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Release\CarryOnWebApi.csprojResolveAssemblyReference.cache
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Release\CarryOnWebApi.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Release\CarryOnWebApi.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\log4net.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\log4net.xml

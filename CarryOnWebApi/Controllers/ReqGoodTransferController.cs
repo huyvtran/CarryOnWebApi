@@ -16,6 +16,8 @@ namespace CarryOnWebApi.Controllers
         private ILogService logger;
         private IConfigurationProvider configuration = null;
 
+        public ReqGoodTransferController() { }
+
         public ReqGoodTransferController(IReqGoodTransferService reqGoodTransferService, ILogService logger,
             IConfigurationProvider _config)
         {
@@ -30,8 +32,7 @@ namespace CarryOnWebApi.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        [AuthorizeUser]
-
+        //[AuthorizeUser]
         public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id)
         {
             logger.LogApi(() => Get(id), null);

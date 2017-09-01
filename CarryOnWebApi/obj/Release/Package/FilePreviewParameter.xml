@@ -4,7 +4,7 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\mfo\\Projects\\CarryOn\\Code\\WebAPI\\CarryOnWebApi\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\mfo\\Projects\\CarryOn\\Code\\WebAPI\\CarryOnWebApi\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="CarryOnEntities-Web.config Connection String" description="" value="metadata=res://*/CarryOn.csdl|res://*/CarryOn.ssdl|res://*/CarryOn.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PC1545\SQLEXPRESS12;initial catalog=CarryOn;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+  <parameter name="CarryOnEntities-Web.config Connection String" description="" value="metadata=res://*/CarryOn.csdl|res://*/CarryOn.ssdl|res://*/CarryOn.msl;provider=System.Data.SqlClient;provider connection string='data source=tcp:carryonserver.database.windows.net,1433;initial catalog=CarryOn;user id=mario.fornaroli;password=Maomao@01;MultipleActiveResultSets=True;App=EntityFramework'" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\mfo\\Projects\\CarryOn\\Code\\WebAPI\\CarryOnWebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CarryOnEntities']/@connectionString" />
   </parameter>
   <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-CarryOnWebApi-20170818043609.mdf;Initial Catalog=aspnet-CarryOnWebApi-20170818043609;Integrated Security=True" tags="">

@@ -101,6 +101,169 @@
       <End Role="CO01UT" EntitySet="CO01UT" />
       <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
     </AssociationSet>
+    <FunctionImport Name="f_DeleteFromCO01UT_ByKeyFields">
+      <Parameter Name="ID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromCO01UT_ByKeyFields" ReturnType="Collection(CarryOnModel.db_CO01UT)">
+      <Parameter Name="ID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_CO01UT)">
+      <Parameter Name="ID" Mode="In" Type="Guid" />
+      <Parameter Name="UTEN" Mode="In" Type="String" />
+      <Parameter Name="TIPU" Mode="In" Type="String" />
+      <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="PWGG" Mode="In" Type="Int16" />
+      <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+      <Parameter Name="NOME" Mode="In" Type="String" />
+      <Parameter Name="LANG" Mode="In" Type="String" />
+      <Parameter Name="EMAI" Mode="In" Type="String" />
+      <Parameter Name="TELE" Mode="In" Type="String" />
+      <Parameter Name="FAXN" Mode="In" Type="String" />
+      <Parameter Name="UFFI" Mode="In" Type="String" />
+      <Parameter Name="RIF1" Mode="In" Type="String" />
+      <Parameter Name="RIF2" Mode="In" Type="String" />
+      <Parameter Name="TELE2" Mode="In" Type="String" />
+      <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoCO01UT">
+      <Parameter Name="ID" Mode="In" Type="Guid" />
+      <Parameter Name="UTEN" Mode="In" Type="String" />
+      <Parameter Name="TIPU" Mode="In" Type="String" />
+      <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="PWGG" Mode="In" Type="Int16" />
+      <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+      <Parameter Name="NOME" Mode="In" Type="String" />
+      <Parameter Name="LANG" Mode="In" Type="String" />
+      <Parameter Name="EMAI" Mode="In" Type="String" />
+      <Parameter Name="TELE" Mode="In" Type="String" />
+      <Parameter Name="FAXN" Mode="In" Type="String" />
+      <Parameter Name="UFFI" Mode="In" Type="String" />
+      <Parameter Name="RIF1" Mode="In" Type="String" />
+      <Parameter Name="RIF2" Mode="In" Type="String" />
+      <Parameter Name="TELE2" Mode="In" Type="String" />
+      <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromCO01UT_ByKeyFields">
+      <Parameter Name="ID" Mode="In" Type="Guid" />
+      <Parameter Name="UTEN" Mode="In" Type="String" />
+      <Parameter Name="TIPU" Mode="In" Type="String" />
+      <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="PWGG" Mode="In" Type="Int16" />
+      <Parameter Name="PWSC" Mode="In" Type="DateTime" />
+      <Parameter Name="NOME" Mode="In" Type="String" />
+      <Parameter Name="LANG" Mode="In" Type="String" />
+      <Parameter Name="EMAI" Mode="In" Type="String" />
+      <Parameter Name="TELE" Mode="In" Type="String" />
+      <Parameter Name="FAXN" Mode="In" Type="String" />
+      <Parameter Name="UFFI" Mode="In" Type="String" />
+      <Parameter Name="RIF1" Mode="In" Type="String" />
+      <Parameter Name="RIF2" Mode="In" Type="String" />
+      <Parameter Name="TELE2" Mode="In" Type="String" />
+      <Parameter Name="ADR_ID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <EntitySet Name="CO_TOKEN" EntityType="CarryOnModel.CO_TOKEN" />
+    <EntitySet Name="CO_VW_USER_TOKEN" EntityType="CarryOnModel.CO_VW_USER_TOKEN" />
+    <FunctionImport Name="GetViewUserToken" ReturnType="Collection(CarryOnModel.db_VW_USER_TOKEN)">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteToken">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" ReturnType="Collection(CarryOnModel.f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result)">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_CO_TOKEN)">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+      <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+      <Parameter Name="USERNAME" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoCO_TOKEN">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+      <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+      <Parameter Name="USERNAME" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields">
+      <Parameter Name="TOKEN" Mode="In" Type="String" />
+      <Parameter Name="DATA_CREAZIONE" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_ULTIMO_UTILIZZO" Mode="In" Type="DateTime" />
+      <Parameter Name="DATA_SCADENZA" Mode="In" Type="DateTime" />
+      <Parameter Name="USERNAME" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_DeleteFromAddresses_ByKeyFields">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_DeleteFromTransportOptions_ByKeyFields">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromAddresses_ByKeyFields" ReturnType="Collection(CarryOnModel.db_Address)">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromAddresses_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_Address)">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransportOptions)">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoAddresses">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoTransportOptions">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromAddresses_ByKeyFields">
+      <Parameter Name="AddressID" Mode="In" Type="Guid" />
+      <Parameter Name="Type" Mode="In" Type="Int32" />
+      <Parameter Name="County" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="HouseNumber" Mode="In" Type="String" />
+      <Parameter Name="PostCode" Mode="In" Type="String" />
+      <Parameter Name="Street1" Mode="In" Type="String" />
+      <Parameter Name="Street2" Mode="In" Type="String" />
+      <Parameter Name="Town" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromTransportOptions_ByKeyFields">
+      <Parameter Name="TransportId" Mode="In" Type="Guid" />
+      <Parameter Name="OptKey" Mode="In" Type="String" />
+      <Parameter Name="OptValue" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_ReqGoodTransfer_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -316,4 +479,223 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="f_GetAllFieldsFromCO01UT_ByKeyFields_Result">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="PWGG" Nullable="true" />
+    <Property Type="DateTime" Name="PWSC" Nullable="true" />
+    <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromCO01UT_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="PWGG" Nullable="true" />
+    <Property Type="DateTime" Name="PWSC" Nullable="true" />
+    <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_CO01UT">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="PWGG" Nullable="true" />
+    <Property Type="DateTime" Name="PWSC" Nullable="true" />
+    <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="CO_TOKEN">
+    <Key>
+      <PropertyRef Name="TOKEN" />
+    </Key>
+    <Property Name="TOKEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DATA_CREAZIONE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_ULTIMO_UTILIZZO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_SCADENZA" Type="DateTime" Precision="3" />
+    <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CO_VW_USER_TOKEN">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UTEN" />
+      <PropertyRef Name="TOKEN" />
+      <PropertyRef Name="DATA_CREAZIONE" />
+      <PropertyRef Name="DATA_ULTIMO_UTILIZZO" />
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UTEN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TIPU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PWGG" Type="Int16" />
+    <Property Name="PWSC" Type="DateTime" Precision="3" />
+    <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LANG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="EMAI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FAXN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UFFI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RIF1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RIF2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TELE2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ADR_ID" Type="Guid" />
+    <Property Name="TOKEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DATA_CREAZIONE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_ULTIMO_UTILIZZO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATA_SCADENZA" Type="DateTime" Precision="3" />
+    <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields_Result">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="PWGG" Nullable="true" />
+    <Property Type="DateTime" Name="PWSC" Nullable="true" />
+    <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+    <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+    <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="db_VW_USER_TOKEN">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="String" Name="UTEN" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TIPU" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PASS" Nullable="true" MaxLength="20" />
+    <Property Type="Int16" Name="PWGG" Nullable="true" />
+    <Property Type="DateTime" Name="PWSC" Nullable="true" />
+    <Property Type="String" Name="NOME" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LANG" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EMAI" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FAXN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UFFI" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="RIF2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TELE2" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ADR_ID" Nullable="true" />
+    <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+    <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result">
+    <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+    <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields_Result">
+    <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+    <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="db_CO_TOKEN">
+    <Property Type="String" Name="TOKEN" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="DATA_CREAZIONE" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_ULTIMO_UTILIZZO" Nullable="false" />
+    <Property Type="DateTime" Name="DATA_SCADENZA" Nullable="true" />
+    <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromAddresses_ByKeyFields_Result">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromAddresses_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromTransportOptions_ByKeyFields_Result">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_ReqGoodTransportOptions">
+    <Property Type="Guid" Name="TransportId" Nullable="false" />
+    <Property Type="String" Name="OptKey" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="OptValue" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_Address">
+    <Property Type="Guid" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="Type" Nullable="false" />
+    <Property Type="String" Name="County" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="HouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="HouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Street1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Street2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Town" Nullable="true" MaxLength="25" />
+  </ComplexType>
 </Schema>

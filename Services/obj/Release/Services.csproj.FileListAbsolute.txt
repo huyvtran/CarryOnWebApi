@@ -13,3 +13,5 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\EntityFramework.SqlServ
 C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.csprojResolveAssemblyReference.cache
 C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\Services\obj\Release\Services.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\log4net.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\Services\bin\Release\log4net.xml

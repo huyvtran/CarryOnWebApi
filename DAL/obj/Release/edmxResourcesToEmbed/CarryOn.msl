@@ -242,5 +242,202 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="f_DeleteFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromCO01UT_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO01UT_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_CO01UT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+          <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+          <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="LANG" ColumnName="LANG" />
+          <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+          <ScalarProperty Name="TELE" ColumnName="TELE" />
+          <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+          <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+          <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+          <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+          <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+          <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO01UT_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO01UT_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_CO01UT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+          <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+          <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="LANG" ColumnName="LANG" />
+          <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+          <ScalarProperty Name="TELE" ColumnName="TELE" />
+          <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+          <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+          <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+          <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+          <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+          <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_InsertIntoCO01UT" FunctionName="CarryOnModel.Store.f_InsertIntoCO01UT" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO01UT_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO01UT_ByKeyFields" />
+    <EntitySetMapping Name="CO_TOKEN">
+      <EntityTypeMapping TypeName="CarryOnModel.CO_TOKEN">
+        <MappingFragment StoreEntitySet="CO_TOKEN">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+          <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+          <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+          <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CO_VW_USER_TOKEN">
+      <EntityTypeMapping TypeName="CarryOnModel.CO_VW_USER_TOKEN">
+        <MappingFragment StoreEntitySet="CO_VW_USER_TOKEN">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+          <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+          <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+          <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+          <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+          <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+          <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+          <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+          <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+          <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+          <ScalarProperty Name="TELE" ColumnName="TELE" />
+          <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+          <ScalarProperty Name="LANG" ColumnName="LANG" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+          <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+          <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetViewUserToken" FunctionName="CarryOnModel.Store.CO_GetAllFieldsFromCO_VW_USER_TOKEN_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_VW_USER_TOKEN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UTEN" ColumnName="UTEN" />
+          <ScalarProperty Name="TIPU" ColumnName="TIPU" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="PWGG" ColumnName="PWGG" />
+          <ScalarProperty Name="PWSC" ColumnName="PWSC" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="LANG" ColumnName="LANG" />
+          <ScalarProperty Name="EMAI" ColumnName="EMAI" />
+          <ScalarProperty Name="TELE" ColumnName="TELE" />
+          <ScalarProperty Name="FAXN" ColumnName="FAXN" />
+          <ScalarProperty Name="UFFI" ColumnName="UFFI" />
+          <ScalarProperty Name="RIF1" ColumnName="RIF1" />
+          <ScalarProperty Name="RIF2" ColumnName="RIF2" />
+          <ScalarProperty Name="TELE2" ColumnName="TELE2" />
+          <ScalarProperty Name="ADR_ID" ColumnName="ADR_ID" />
+          <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+          <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+          <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+          <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DeleteToken" FunctionName="CarryOnModel.Store.f_DeleteFromCO_TOKEN_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO_TOKEN_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.f_GetAllFieldsFromCO_TOKEN_ByKeyFields_Result">
+          <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+          <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+          <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+          <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_CO_TOKEN">
+          <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+          <ScalarProperty Name="DATA_CREAZIONE" ColumnName="DATA_CREAZIONE" />
+          <ScalarProperty Name="DATA_ULTIMO_UTILIZZO" ColumnName="DATA_ULTIMO_UTILIZZO" />
+          <ScalarProperty Name="DATA_SCADENZA" ColumnName="DATA_SCADENZA" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_InsertIntoCO_TOKEN" FunctionName="CarryOnModel.Store.f_InsertIntoCO_TOKEN" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromCO_TOKEN_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_DeleteFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromAddresses_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_DeleteFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromTransportOptions_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Street1" ColumnName="Street1" />
+          <ScalarProperty Name="Street2" ColumnName="Street2" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromAddresses_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromAddresses_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Street1" ColumnName="Street1" />
+          <ScalarProperty Name="Street2" ColumnName="Street2" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_ByKeyFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+          <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+          <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+          <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportOptions_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportOptions_BySomeEqualFields">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransportOptions">
+          <ScalarProperty Name="TransportId" ColumnName="TransportId" />
+          <ScalarProperty Name="OptKey" ColumnName="OptKey" />
+          <ScalarProperty Name="OptValue" ColumnName="OptValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_InsertIntoAddresses" FunctionName="CarryOnModel.Store.f_InsertIntoAddresses" />
+    <FunctionImportMapping FunctionImportName="f_InsertIntoTransportOptions" FunctionName="CarryOnModel.Store.f_InsertIntoTransportOptions" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromAddresses_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromAddresses_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromTransportOptions_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromTransportOptions_ByKeyFields" />
   </EntityContainerMapping>
 </Mapping>
