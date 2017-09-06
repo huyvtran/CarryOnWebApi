@@ -54,6 +54,8 @@ namespace Entities
         public string UserTELE { get; set; }
         public string UserTEL2 { get; set; }
         public string UserLang { get; set; }
+        public string VolRequired { get; set; }
+
         public List<ReqGoodTransportOptions> ReqGoodTransportOpt { get; set; }
 
         public string MyProperty { get; set; }
@@ -61,7 +63,7 @@ namespace Entities
         {
             get
             {
-                return FormatAddressStr(new List<string> { this.FromStreet1, this.FromHouseNumber, this.FromTown, this.FromDistrict, this.FromPostCode, this.FromCountry });
+                return FormatAddressStr(new List<string> { this.FromStreet1, this.FromHouseNumber, this.FromTown, this.FromDistrict, this.FromPostCode, this.FromCountry.Substring(0, 2) });
             }
         }
 
@@ -69,7 +71,7 @@ namespace Entities
         {
             get
             {
-                return FormatAddressStr(new List<string> { this.DestStreet1, this.DestHouseNumber, this.DestTown, this.DestDistrict, this.DestPostCode, this.DestCountry });
+                return FormatAddressStr(new List<string> { this.DestStreet1, this.DestHouseNumber, this.DestTown, this.DestDistrict, this.DestPostCode, this.DestCountry.Substring(0, 2) });
             }
         }
 
@@ -77,13 +79,13 @@ namespace Entities
         {
             get
             {
-                return FormatAddressStr(new List<string> { this.UserStreet1, this.UserHouseNumber, this.UserTown, this.UserDistrict, this.UserPostCode, this.UserCountry });
+                return FormatAddressStr(new List<string> { this.UserStreet1, this.UserHouseNumber, this.UserTown, this.UserDistrict, this.UserPostCode, this.UserCountry.Substring(0, 2) });
             }
         }
 
         private string FormatAddressStr(List<string> inputValues)
         {
-            return String.Join(",", inputValues.Where(x => !string.IsNullOrEmpty(x)));
+            return String.Join(", ", inputValues.Where(x => !string.IsNullOrEmpty(x)).Distinct());
         }
     }
 }

@@ -65,6 +65,7 @@
           <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
           <Property Name="RequestState" Type="int" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="VolRequired" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TransportOptions">
           <Key>
@@ -126,6 +127,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Property Name="DateTransportType" Type="int" Nullable="false" />
           <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
           <Property Name="RequestState" Type="int" Nullable="false" />
+          <Property Name="VolRequired" Type="nvarchar" MaxLength="50" />
           <Property Name="FromType" Type="int" Nullable="false" />
           <Property Name="FromCounty" Type="varchar" MaxLength="15" />
           <Property Name="FromCountry" Type="varchar" MaxLength="20" />
@@ -279,15 +281,6 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
         </Function>
         <Function Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
-        </Function>
-        <Function Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
-          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
-          <Parameter Name="DateTransportType" Type="int" Mode="In" />
-          <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
-          <Parameter Name="RequestState" Type="int" Mode="In" />
         </Function>
         <Function Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportOptions_ByKeyFields">
           <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
@@ -454,6 +447,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     [ReqGoodTransferWithAddresses].[DateTransportType] AS [DateTransportType], 
     [ReqGoodTransferWithAddresses].[DateTransportInfo] AS [DateTransportInfo], 
     [ReqGoodTransferWithAddresses].[RequestState] AS [RequestState], 
+    [ReqGoodTransferWithAddresses].[VolRequired] AS [VolRequired], 
     [ReqGoodTransferWithAddresses].[FromType] AS [FromType], 
     [ReqGoodTransferWithAddresses].[FromCounty] AS [FromCounty], 
     [ReqGoodTransferWithAddresses].[FromCountry] AS [FromCountry], 
@@ -550,6 +544,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <NavigationProperty Name="Addresses1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses1" FromRole="ReqGoodTransfer" ToRole="Addresses" />
           <Property Name="UserId" Type="Guid" />
           <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_ReqGoodTransfer_CO01UT" FromRole="ReqGoodTransfer" ToRole="CO01UT" />
+          <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="CarryOnEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Addresses" />
@@ -891,6 +886,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="VolRequired" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="CO01UT">
           <Key>
@@ -969,6 +965,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CO01UT_Addresses">
           <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -1240,6 +1237,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <EntitySetMapping Name="ReqGoodTransfer">
             <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransfer">
               <MappingFragment StoreEntitySet="ReqGoodTransfer">
+                <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
@@ -1309,6 +1307,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
                 <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
                 <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
                 <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+                <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1333,57 +1332,6 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
                 <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
                 <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
                 <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-                <ScalarProperty Name="FromType" ColumnName="FromType" />
-                <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
-                <ScalarProperty Name="FromCountry" ColumnName="FromCountry" />
-                <ScalarProperty Name="FromDistrict" ColumnName="FromDistrict" />
-                <ScalarProperty Name="FromHouseName" ColumnName="FromHouseName" />
-                <ScalarProperty Name="FromCreationDate" ColumnName="FromCreationDate" />
-                <ScalarProperty Name="FromHouseNumber" ColumnName="FromHouseNumber" />
-                <ScalarProperty Name="FromPostCode" ColumnName="FromPostCode" />
-                <ScalarProperty Name="FromStreet1" ColumnName="FromStreet1" />
-                <ScalarProperty Name="FromStreet2" ColumnName="FromStreet2" />
-                <ScalarProperty Name="FromTown" ColumnName="FromTown" />
-                <ScalarProperty Name="DestType" ColumnName="DestType" />
-                <ScalarProperty Name="DestCounty" ColumnName="DestCounty" />
-                <ScalarProperty Name="DestCountry" ColumnName="DestCountry" />
-                <ScalarProperty Name="DestDistrict" ColumnName="DestDistrict" />
-                <ScalarProperty Name="DestHouseName" ColumnName="DestHouseName" />
-                <ScalarProperty Name="DestCreationDate" ColumnName="DestCreationDate" />
-                <ScalarProperty Name="DestHouseNumber" ColumnName="DestHouseNumber" />
-                <ScalarProperty Name="DestPostCode" ColumnName="DestPostCode" />
-                <ScalarProperty Name="DestStreet1" ColumnName="DestStreet1" />
-                <ScalarProperty Name="DestStreet2" ColumnName="DestStreet2" />
-                <ScalarProperty Name="DestTown" ColumnName="DestTown" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="UserCounty" ColumnName="UserCounty" />
-                <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
-                <ScalarProperty Name="UserDistrict" ColumnName="UserDistrict" />
-                <ScalarProperty Name="UserHouseName" ColumnName="UserHouseName" />
-                <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
-                <ScalarProperty Name="UserHouseNumber" ColumnName="UserHouseNumber" />
-                <ScalarProperty Name="UserPostCode" ColumnName="UserPostCode" />
-                <ScalarProperty Name="UserStreet1" ColumnName="UserStreet1" />
-                <ScalarProperty Name="UserStreet2" ColumnName="UserStreet2" />
-                <ScalarProperty Name="UserTown" ColumnName="UserTown" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1412,6 +1360,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
           <EntitySetMapping Name="ReqGoodTransferWithAddresses">
             <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransferWithAddresses">
               <MappingFragment StoreEntitySet="ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
                 <ScalarProperty Name="UserLang" ColumnName="UserLang" />
                 <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
                 <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />

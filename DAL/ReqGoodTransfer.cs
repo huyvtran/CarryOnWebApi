@@ -22,6 +22,7 @@ namespace DAL
         public string DateTransportInfo { get; set; }
         public int RequestState { get; set; }
         public Nullable<System.Guid> UserId { get; set; }
+        public string VolRequired { get; set; }
     
         public virtual Addresses Addresses { get; set; }
         public virtual Addresses Addresses1 { get; set; }

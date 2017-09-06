@@ -22,6 +22,7 @@
     <EntitySetMapping Name="ReqGoodTransfer">
       <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransfer">
         <MappingFragment StoreEntitySet="ReqGoodTransfer">
+          <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
@@ -91,6 +92,7 @@
           <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
           <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
           <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+          <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -115,57 +117,6 @@
           <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
           <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
           <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-          <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-          <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-          <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-          <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-          <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-          <ScalarProperty Name="FromType" ColumnName="FromType" />
-          <ScalarProperty Name="FromCounty" ColumnName="FromCounty" />
-          <ScalarProperty Name="FromCountry" ColumnName="FromCountry" />
-          <ScalarProperty Name="FromDistrict" ColumnName="FromDistrict" />
-          <ScalarProperty Name="FromHouseName" ColumnName="FromHouseName" />
-          <ScalarProperty Name="FromCreationDate" ColumnName="FromCreationDate" />
-          <ScalarProperty Name="FromHouseNumber" ColumnName="FromHouseNumber" />
-          <ScalarProperty Name="FromPostCode" ColumnName="FromPostCode" />
-          <ScalarProperty Name="FromStreet1" ColumnName="FromStreet1" />
-          <ScalarProperty Name="FromStreet2" ColumnName="FromStreet2" />
-          <ScalarProperty Name="FromTown" ColumnName="FromTown" />
-          <ScalarProperty Name="DestType" ColumnName="DestType" />
-          <ScalarProperty Name="DestCounty" ColumnName="DestCounty" />
-          <ScalarProperty Name="DestCountry" ColumnName="DestCountry" />
-          <ScalarProperty Name="DestDistrict" ColumnName="DestDistrict" />
-          <ScalarProperty Name="DestHouseName" ColumnName="DestHouseName" />
-          <ScalarProperty Name="DestCreationDate" ColumnName="DestCreationDate" />
-          <ScalarProperty Name="DestHouseNumber" ColumnName="DestHouseNumber" />
-          <ScalarProperty Name="DestPostCode" ColumnName="DestPostCode" />
-          <ScalarProperty Name="DestStreet1" ColumnName="DestStreet1" />
-          <ScalarProperty Name="DestStreet2" ColumnName="DestStreet2" />
-          <ScalarProperty Name="DestTown" ColumnName="DestTown" />
-          <ScalarProperty Name="UserType" ColumnName="UserType" />
-          <ScalarProperty Name="UserCounty" ColumnName="UserCounty" />
-          <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
-          <ScalarProperty Name="UserDistrict" ColumnName="UserDistrict" />
-          <ScalarProperty Name="UserHouseName" ColumnName="UserHouseName" />
-          <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
-          <ScalarProperty Name="UserHouseNumber" ColumnName="UserHouseNumber" />
-          <ScalarProperty Name="UserPostCode" ColumnName="UserPostCode" />
-          <ScalarProperty Name="UserStreet1" ColumnName="UserStreet1" />
-          <ScalarProperty Name="UserStreet2" ColumnName="UserStreet2" />
-          <ScalarProperty Name="UserTown" ColumnName="UserTown" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -194,6 +145,7 @@
     <EntitySetMapping Name="ReqGoodTransferWithAddresses">
       <EntityTypeMapping TypeName="CarryOnModel.ReqGoodTransferWithAddresses">
         <MappingFragment StoreEntitySet="ReqGoodTransferWithAddresses">
+          <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
           <ScalarProperty Name="UserLang" ColumnName="UserLang" />
           <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
           <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />

@@ -183,7 +183,7 @@ namespace DAL
         public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeyFields(Guid? reqId)
         {
             //return entities.GetAllReqGoodTransfer_ByKeyFields(reqId).ToList();
-            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(reqId, null, null, null, null, null, null).ToList();
+            return entities.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields(reqId).ToList();
         }
 
         public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)

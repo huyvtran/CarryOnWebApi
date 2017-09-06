@@ -27,8 +27,7 @@ namespace Services
             var retList = new List<ReqGoodTransferModel>();
 
             /* Get items from db */
-            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null
-                , null, null, null);
+            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
 
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)
