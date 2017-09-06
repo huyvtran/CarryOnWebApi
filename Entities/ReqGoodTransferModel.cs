@@ -55,5 +55,35 @@ namespace Entities
         public string UserTEL2 { get; set; }
         public string UserLang { get; set; }
         public List<ReqGoodTransportOptions> ReqGoodTransportOpt { get; set; }
+
+        public string MyProperty { get; set; }
+        public string AddressFromFormattedStr
+        {
+            get
+            {
+                return FormatAddressStr(new List<string> { this.FromStreet1, this.FromHouseNumber, this.FromTown, this.FromDistrict, this.FromPostCode, this.FromCountry });
+            }
+        }
+
+        public string AddressDestFormattedStr
+        {
+            get
+            {
+                return FormatAddressStr(new List<string> { this.DestStreet1, this.DestHouseNumber, this.DestTown, this.DestDistrict, this.DestPostCode, this.DestCountry });
+            }
+        }
+
+        public string AddressUserFormattedStr
+        {
+            get
+            {
+                return FormatAddressStr(new List<string> { this.UserStreet1, this.UserHouseNumber, this.UserTown, this.UserDistrict, this.UserPostCode, this.UserCountry });
+            }
+        }
+
+        private string FormatAddressStr(List<string> inputValues)
+        {
+            return String.Join(",", inputValues.Where(x => !string.IsNullOrEmpty(x)));
+        }
     }
 }
