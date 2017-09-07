@@ -35,6 +35,7 @@
     <NavigationProperty Name="Addresses1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses1" FromRole="ReqGoodTransfer" ToRole="Addresses" />
     <Property Name="UserId" Type="Guid" />
     <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_ReqGoodTransfer_CO01UT" FromRole="ReqGoodTransfer" ToRole="CO01UT" />
+    <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="CarryOnEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Addresses" />
@@ -376,6 +377,7 @@
     <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="VolRequired" Nullable="true" MaxLength="50" />
   </ComplexType>
   <EntityType Name="CO01UT">
     <Key>
@@ -454,6 +456,7 @@
     <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_CO01UT_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />

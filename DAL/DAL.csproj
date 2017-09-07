@@ -81,6 +81,7 @@
     <Compile Include="CO_VW_USER_TOKEN.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="DalManagerMock.cs" />
     <Compile Include="DalManager.cs" />
     <Compile Include="db_Address.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
@@ -133,6 +134,7 @@
     <Compile Include="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MockHelper.cs" />
     <Compile Include="IDalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReqGoodTransfer.cs">

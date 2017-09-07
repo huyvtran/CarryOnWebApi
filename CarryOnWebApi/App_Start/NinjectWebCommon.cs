@@ -15,6 +15,7 @@ namespace CarryOnWebApi
     using Services;
     using DAL;
     using Services.Interfaces;
+    using System.Web.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -67,10 +68,21 @@ namespace CarryOnWebApi
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>(); 
-            kernel.Bind<IDalManager>().To<DalManager>(); 
-            kernel.Bind<IConfigurationProvider>().To<Configuration>(); 
-            kernel.Bind<ILogService>().To<Log4NetLogService> (); 
+            if (string.IsNullOrEmpty(WebConfigurationManager.AppSettings["Mock"]) ||
+                (WebConfigurationManager.AppSettings["Mock"].ToLower() != "true"))
+            {
+                kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>();
+                kernel.Bind<IDalManager>().To<DalManager>();
+                kernel.Bind<IConfigurationProvider>().To<Configuration>();
+                kernel.Bind<ILogService>().To<Log4NetLogService>();
+            }
+            else {
+                kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>();
+                /* Mock */
+                kernel.Bind<IDalManager>().To<DalManagerMock>();
+                kernel.Bind<IConfigurationProvider>().To<Configuration>();
+                kernel.Bind<ILogService>().To<Log4NetLogService>();
+            };
         }        
     }
 }
