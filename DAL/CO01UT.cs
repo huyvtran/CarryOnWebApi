@@ -18,6 +18,7 @@ namespace DAL
         public CO01UT()
         {
             this.ReqGoodTransfer = new HashSet<ReqGoodTransfer>();
+            this.TransportAv = new HashSet<TransportAv>();
         }
     
         public System.Guid ID { get; set; }
@@ -40,5 +41,7 @@ namespace DAL
         public virtual Addresses Addresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReqGoodTransfer> ReqGoodTransfer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransportAv> TransportAv { get; set; }
     }
 }

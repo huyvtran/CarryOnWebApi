@@ -34,6 +34,8 @@ namespace DAL
         public virtual DbSet<ReqGoodTransferWithAddresses> ReqGoodTransferWithAddresses { get; set; }
         public virtual DbSet<CO_TOKEN> CO_TOKEN { get; set; }
         public virtual DbSet<CO_VW_USER_TOKEN> CO_VW_USER_TOKEN { get; set; }
+        public virtual DbSet<TransportAv> TransportAv { get; set; }
+        public virtual DbSet<TransportAvWithAddresses> TransportAvWithAddresses { get; set; }
     
         public virtual int f_DeleteFromReqGoodTransfer_ByKeyFields(Nullable<System.Guid> id)
         {
@@ -765,6 +767,147 @@ namespace DAL
                 new ObjectParameter("OptValue", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromTransportOptions_ByKeyFields", transportIdParameter, optKeyParameter, optValueParameter);
+        }
+    
+        public virtual int f_DeleteFromTransportAv_ByKeyFields(Nullable<System.Guid> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_DeleteFromTransportAv_ByKeyFields", idParameter);
+        }
+    
+        public virtual ObjectResult<db_TransportAvWithAddress> f_GetAllFieldsFromTransportAv_ByKeyFields(Nullable<System.Guid> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_TransportAvWithAddress>("f_GetAllFieldsFromTransportAv_ByKeyFields", idParameter);
+        }
+    
+        public virtual ObjectResult<db_TransportAvWithAddress> f_GetAllFieldsFromTransportAv_BySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var addressFromParameter = addressFrom.HasValue ?
+                new ObjectParameter("AddressFrom", addressFrom) :
+                new ObjectParameter("AddressFrom", typeof(System.Guid));
+    
+            var addreessDestParameter = addreessDest.HasValue ?
+                new ObjectParameter("AddreessDest", addreessDest) :
+                new ObjectParameter("AddreessDest", typeof(System.Guid));
+    
+            var dateTransportFixedParameter = dateTransportFixed.HasValue ?
+                new ObjectParameter("DateTransportFixed", dateTransportFixed) :
+                new ObjectParameter("DateTransportFixed", typeof(System.DateTime));
+    
+            var dateTransportTypeParameter = dateTransportType.HasValue ?
+                new ObjectParameter("DateTransportType", dateTransportType) :
+                new ObjectParameter("DateTransportType", typeof(int));
+    
+            var dateTransportInfoParameter = dateTransportInfo != null ?
+                new ObjectParameter("DateTransportInfo", dateTransportInfo) :
+                new ObjectParameter("DateTransportInfo", typeof(string));
+    
+            var requestStateParameter = requestState.HasValue ?
+                new ObjectParameter("RequestState", requestState) :
+                new ObjectParameter("RequestState", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volAvailableParameter = volAvailable != null ?
+                new ObjectParameter("VolAvailable", volAvailable) :
+                new ObjectParameter("VolAvailable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_TransportAvWithAddress>("f_GetAllFieldsFromTransportAv_BySomeEqualFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volAvailableParameter);
+        }
+    
+        public virtual int f_InsertIntoTransportAv(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var addressFromParameter = addressFrom.HasValue ?
+                new ObjectParameter("AddressFrom", addressFrom) :
+                new ObjectParameter("AddressFrom", typeof(System.Guid));
+    
+            var addreessDestParameter = addreessDest.HasValue ?
+                new ObjectParameter("AddreessDest", addreessDest) :
+                new ObjectParameter("AddreessDest", typeof(System.Guid));
+    
+            var dateTransportFixedParameter = dateTransportFixed.HasValue ?
+                new ObjectParameter("DateTransportFixed", dateTransportFixed) :
+                new ObjectParameter("DateTransportFixed", typeof(System.DateTime));
+    
+            var dateTransportTypeParameter = dateTransportType.HasValue ?
+                new ObjectParameter("DateTransportType", dateTransportType) :
+                new ObjectParameter("DateTransportType", typeof(int));
+    
+            var dateTransportInfoParameter = dateTransportInfo != null ?
+                new ObjectParameter("DateTransportInfo", dateTransportInfo) :
+                new ObjectParameter("DateTransportInfo", typeof(string));
+    
+            var requestStateParameter = requestState.HasValue ?
+                new ObjectParameter("RequestState", requestState) :
+                new ObjectParameter("RequestState", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volAvailableParameter = volAvailable != null ?
+                new ObjectParameter("VolAvailable", volAvailable) :
+                new ObjectParameter("VolAvailable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoTransportAv", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volAvailableParameter);
+        }
+    
+        public virtual int f_UpdateAllFieldsFromTransportAv_ByKeyFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var addressFromParameter = addressFrom.HasValue ?
+                new ObjectParameter("AddressFrom", addressFrom) :
+                new ObjectParameter("AddressFrom", typeof(System.Guid));
+    
+            var addreessDestParameter = addreessDest.HasValue ?
+                new ObjectParameter("AddreessDest", addreessDest) :
+                new ObjectParameter("AddreessDest", typeof(System.Guid));
+    
+            var dateTransportFixedParameter = dateTransportFixed.HasValue ?
+                new ObjectParameter("DateTransportFixed", dateTransportFixed) :
+                new ObjectParameter("DateTransportFixed", typeof(System.DateTime));
+    
+            var dateTransportTypeParameter = dateTransportType.HasValue ?
+                new ObjectParameter("DateTransportType", dateTransportType) :
+                new ObjectParameter("DateTransportType", typeof(int));
+    
+            var dateTransportInfoParameter = dateTransportInfo != null ?
+                new ObjectParameter("DateTransportInfo", dateTransportInfo) :
+                new ObjectParameter("DateTransportInfo", typeof(string));
+    
+            var requestStateParameter = requestState.HasValue ?
+                new ObjectParameter("RequestState", requestState) :
+                new ObjectParameter("RequestState", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volAvailableParameter = volAvailable != null ?
+                new ObjectParameter("VolAvailable", volAvailable) :
+                new ObjectParameter("VolAvailable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromTransportAv_ByKeyFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volAvailableParameter);
         }
     }
 }

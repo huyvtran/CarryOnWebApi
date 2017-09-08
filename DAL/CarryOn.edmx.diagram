@@ -16,6 +16,11 @@
         <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_CO01UT" />
         <EntityTypeShape EntityType="CarryOnModel.CO_TOKEN" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="CarryOnModel.CO_VW_USER_TOKEN" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CarryOnModel.TransportAv" Width="1.5" PointX="10.25" PointY="4.375" />
+        <EntityTypeShape EntityType="CarryOnModel.TransportAvWithAddresses" Width="1.5" PointX="7.375" PointY="9.75" />
+        <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses" />
+        <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses1" />
+        <AssociationConnector Association="CarryOnModel.FK_TransportAv_CO01UT" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
