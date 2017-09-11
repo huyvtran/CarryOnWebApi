@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public interface IDalManager
-    {
-        List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeyFields(Guid? reqId);
-        List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState);
+    { 
+               
+        #region User
 
         /// <summary>
         /// Get a db_VW_USER_TOKEN by token
@@ -47,13 +47,7 @@ namespace DAL
         /// </summary>
         /// <param name="user"></param>
         void UpdateUser(db_CO01UT user);
-
-        /// <summary>
-        /// Delete a token
-        /// </summary>
-        /// <param name="token">token</param>
-        void DeleteToken(string token);
-
+        
         /// <summary>
         /// Update user password
         /// </summary>
@@ -61,14 +55,7 @@ namespace DAL
         /// <param name="password"> new password</param>
         /// <returns></returns>
         void UpdateUserPassword(string username, string password);
-
-        /// <summary>
-        /// Get a Token by username
-        /// </summary>
-        /// <param name="username">username</param>
-        /// <returns></returns>
-        List<db_CO_TOKEN> GetTokenByUsername(string username);
-
+        
         /// <summary>
         /// Get User by Email
         /// </summary>
@@ -82,6 +69,11 @@ namespace DAL
         /// <param name="username">username</param>
         /// <param name="email">user email</param>
         void UpdateUserEmail(string username, string email);
+
+        #endregion
+
+
+        #region Token
 
         /// <summary>
         /// Insert a Token
@@ -99,12 +91,24 @@ namespace DAL
         /// <param name="lastUsageDate">last usate date</param>
         /// <param name="expirationDate">expiration date</param>
         void RefreshToken(string token, DateTime lastUsageDate, DateTime expirationDate);
+
         /// <summary>
-        ///  Transport Id
+        /// Get a Token by username
         /// </summary>
-        /// <param name="transportId"></param>
-        /// <returns>Options list</returns>
-        List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId);
+        /// <param name="username">username</param>
+        /// <returns></returns>
+        List<db_CO_TOKEN> GetTokenByUsername(string username);
+
+        /// <summary>
+        /// Delete a token
+        /// </summary>
+        /// <param name="token">token</param>
+        void DeleteToken(string token);
+
+        #endregion
+
+
+        #region Address
 
         /// <summary>
         /// Add address
@@ -124,23 +128,107 @@ namespace DAL
         /// <param name="adr">address to add</param>
         void DeleteAddress(Guid adrId);
 
+        #endregion
+
+
+        #region ReqGoodTransfer
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reqId"></param>
+        /// <returns></returns>
+        List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeyFields(Guid? reqId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="addressFrom"></param>
+        /// <param name="addreessDest"></param>
+        /// <param name="dateTransportFixed"></param>
+        /// <param name="dateTransportType"></param>
+        /// <param name="dateTransportInfo"></param>
+        /// <param name="requestState"></param>
+        /// <param name="userId"></param>
+        /// <param name="volRequired"></param>
+        /// <returns></returns>
+        List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired);
+
         /// <summary>
         /// Add transfer good request
         /// </summary>
         /// <param name="reqGoodTransferItem">Transfer good request</param>
-        void InsertReqGoodTransfer(db_ReqGoodTransfer reqGoodTransferItem);
+        void InsertReqGoodTransfer(db_ReqGoodTransferWithAddresses reqGoodTransferItem);
 
         /// <summary>
         /// Update transfer good request
         /// </summary>
         /// <param name="reqGoodTransferItem">Transfer good request</param>
-        void UpdateReqGoodTransfer(db_ReqGoodTransfer reqGoodTransferItem);
+        void UpdateReqGoodTransfer(db_ReqGoodTransferWithAddresses reqGoodTransferItem);
 
         /// <summary>
         /// Delete transfer good request
         /// </summary>
         /// <param name="id">Item id</param>
         void DeleteReqGoodTransfer(Guid rgtId);
+
+        #endregion
+
+
+        #region TransferAv
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reqId"></param>
+        /// <returns></returns>
+        List<db_TransportAvWithAddress> GetTransportAv_ByKeyFields(Guid? reqId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="addressFrom"></param>
+        /// <param name="addreessDest"></param>
+        /// <param name="dateTransportFixed"></param>
+        /// <param name="dateTransportType"></param>
+        /// <param name="dateTransportInfo"></param>
+        /// <param name="requestState"></param>
+        /// <param name="userId"></param>
+        /// <param name="volRequired"></param>
+        /// <returns></returns>
+        List<db_TransportAvWithAddress> GetTransportAv_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transportAvItem"></param>
+        void InsertTransportAv(db_TransportAvWithAddress transportAvItem);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transportAvItem"></param>
+        void UpdateTransportAv(db_TransportAvWithAddress transportAvItem);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rgtId"></param>
+        void DeleteTransportAv(Guid rgtId);
+
+        #endregion
+
+
+        #region ReqGoodTransfer Options
+
+        /// <summary>
+        ///  Transport Id
+        /// </summary>
+        /// <param name="transportId"></param>
+        /// <returns>Options list</returns>
+        List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId);
 
         /// <summary>
         /// Add transfer good request Option
@@ -160,7 +248,7 @@ namespace DAL
         /// <param name="reqGoodTransferItem">Transfer good request option</param>
         void DeleteReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem);
 
-
+        #endregion
 
     }
 }

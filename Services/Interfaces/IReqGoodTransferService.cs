@@ -13,7 +13,7 @@ namespace Services.Interfaces
 
         BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user); 
         BaseResultModel UpdateReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user);
-        BaseResultModel DeleteReqGoodTransfer(Guid rgtId);
+        BaseResultModel DeleteReqGoodTransfer(Guid rgtId, UserModel user);
 
         
     }

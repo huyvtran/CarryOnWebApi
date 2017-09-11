@@ -10,29 +10,29 @@ using Entities.enums;
 
 namespace Services
 {
-    public class ReqGoodTransferService : IReqGoodTransferService
+    public class TransportAvService : ITransportAvService
     {
         public IDalManager _dbManager;
         private ILogService logger;
 
-        public ReqGoodTransferService(IDalManager dbManager, ILogService logger)
+        public TransportAvService(IDalManager dbManager, ILogService logger)
         {
             _dbManager = dbManager;
             this.logger = logger;
         }
 
-        public List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId)
+        public List<TransportAvModel> GetTransportAv(Guid? reqId)
         {
-            logger.Log(() => GetReqGoodTransfer(reqId));
-            var retList = new List<ReqGoodTransferModel>();
+            logger.Log(() => GetTransportAv(reqId));
+            var retList = new List<TransportAvModel>();
 
             /* Get items from db */
-            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
+            var db_TransportAv = _dbManager.GetTransportAv_ByKeyFields(reqId);
 
             /* Convert them to model */
-            foreach (var dbItem in db_ReqGoodTransfer)
+            foreach (var dbItem in db_TransportAv)
             {
-                retList.Add(Mapper.ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
+                retList.Add(Mapper.TransportAvMapper.TransportAv_DbToModel(dbItem));
             }
 
             /* Foreach item, get transport options */
@@ -40,15 +40,15 @@ namespace Services
             {
                 retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
                 var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
-                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => Mapper.ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
+                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => Mapper.TransportAvMapper.TransportAvOption_DbToModel(x)).ToList());
             }
 
             return retList;
         }
 
-        public BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user)
+        public BaseResultModel InsertTransportAv(TransportAvModel rqtModel, UserModel user)
         {
-            logger.Log(() => InsertReqGoodTransfer(rqtModel, user));
+            logger.Log(() => InsertTransportAv(rqtModel, user));
             var resultModel = new BaseResultModel() { OperationResult = true };
 
             try
@@ -103,16 +103,16 @@ namespace Services
                 };
                 _dbManager.InsertAddress(addressDest);
 
-                /* Add ReqGoodTransfer item */
-                var db_ReqGoodTransferModel = Mapper.ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
+                /* Add TransportAv item */
+                var db_TransportAvModel = Mapper.TransportAvMapper.TransportAv_ModelToDb(rqtModel);
                 /* Add guid */
-                db_ReqGoodTransferModel.Id = reqGoodTransportId;
-                db_ReqGoodTransferModel.AddressFrom = addressFromId;
-                db_ReqGoodTransferModel.AddreessDest = addressDestId;
+                db_TransportAvModel.Id = reqGoodTransportId;
+                db_TransportAvModel.AddressFrom = addressFromId;
+                db_TransportAvModel.AddreessDest = addressDestId;
                 /* Add to db */
-                _dbManager.InsertReqGoodTransfer(db_ReqGoodTransferModel);
+                _dbManager.InsertTransportAv(db_TransportAvModel);
                 
-                /* Add ReqGoodTransfer options items */
+                /* Add TransportAv options items */
                 foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                 {
                     optItem.TransportId = reqGoodTransportId;
@@ -123,24 +123,24 @@ namespace Services
             }
             catch (Exception e)
             {
-                logger.Log(() => InsertReqGoodTransfer(rqtModel, user), e);
+                logger.Log(() => InsertTransportAv(rqtModel, user), e);
                 resultModel.OperationResult = false;
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }
             return resultModel;
         }
 
-        public BaseResultModel UpdateReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user)
+        public BaseResultModel UpdateTransportAv(TransportAvModel rqtModel, UserModel user)
         {
-            logger.Log(() => UpdateReqGoodTransfer(rqtModel, user));
+            logger.Log(() => UpdateTransportAv(rqtModel, user));
             var resultModel = new BaseResultModel() { OperationResult = true };
 
             try
             {
                 /* Check if item exists on db for that user */
-                var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rqtModel.Id, null, null, null
+                var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rqtModel.Id, null, null, null
                     , null, null, null, user.ID, null).FirstOrDefault();
-                if (existing_ReqGoodTransfer == null)
+                if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;
                     resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
@@ -184,12 +184,12 @@ namespace Services
                 };
                 _dbManager.UpdateAddress(addressDest);
 
-                /* Add ReqGoodTransfer item */
-                var db_ReqGoodTransferModel = Mapper.ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
+                /* Add TransportAv item */
+                var db_TransportAvModel = Mapper.TransportAvMapper.TransportAv_ModelToDb(rqtModel);
 
-                _dbManager.UpdateReqGoodTransfer(db_ReqGoodTransferModel);
+                _dbManager.UpdateTransportAv(db_TransportAvModel);
 
-                /* Add ReqGoodTransfer options items */
+                /* Add TransportAv options items */
                 foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                 {
                     _dbManager.UpdateReqGoodTransferOption(optItem);
@@ -199,24 +199,24 @@ namespace Services
             }
             catch (Exception e)
             {
-                logger.Log(() => UpdateReqGoodTransfer(rqtModel, user), e);
+                logger.Log(() => UpdateTransportAv(rqtModel, user), e);
                 resultModel.OperationResult = false;
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }
             return resultModel;
         }
 
-        public BaseResultModel DeleteReqGoodTransfer(Guid rgtId, UserModel user)
+        public BaseResultModel DeleteTransportAv(Guid rgtId, UserModel user)
         {
-            logger.Log(() => DeleteReqGoodTransfer(rgtId, user));
+            logger.Log(() => DeleteTransportAv(rgtId, user));
             var resultModel = new BaseResultModel() { OperationResult = true };
 
             try
             {
                 /* Check if item exists on db for the current user*/
-                var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rgtId, null, null, null
+                var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rgtId, null, null, null
                     , null, null, null, user.ID, null).FirstOrDefault();
-                if (existing_ReqGoodTransfer == null)
+                if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;
                     resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
@@ -224,22 +224,22 @@ namespace Services
                 }
 
                 /* Delete addresses from */
-                _dbManager.DeleteAddress((Guid)existing_ReqGoodTransfer.AddressFrom);
+                _dbManager.DeleteAddress((Guid)existing_TransportAv.AddressFrom);
                 /* Delete addresses dest */
-                _dbManager.DeleteAddress((Guid)existing_ReqGoodTransfer.AddreessDest);
-                /* Delete ReqGoodTransfer options items */
+                _dbManager.DeleteAddress((Guid)existing_TransportAv.AddreessDest);
+                /* Delete TransportAv options items */
                 _dbManager.DeleteReqGoodTransferOption(new ReqGoodTransportOptions {
-                    TransportId = existing_ReqGoodTransfer.Id,
+                    TransportId = existing_TransportAv.Id,
                     OptKey = null,
                     OptValue = null
                 });
-                /* Delete ReqGoodTransfer item */
-                _dbManager.DeleteReqGoodTransfer(existing_ReqGoodTransfer.Id);                
+                /* Delete TransportAv item */
+                _dbManager.DeleteTransportAv(existing_TransportAv.Id);                
                 return resultModel;
             }
             catch (Exception e)
             {
-                logger.Log(() => DeleteReqGoodTransfer(rgtId, user), e);
+                logger.Log(() => DeleteTransportAv(rgtId, user), e);
                 resultModel.OperationResult = false;
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }

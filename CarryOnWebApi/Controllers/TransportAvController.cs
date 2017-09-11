@@ -10,35 +10,35 @@ using System.Web.Http;
 
 namespace CarryOnWebApi.Controllers
 {
-    public class ReqGoodTransferController : ApiController
+    public class TransportAvController : ApiController
     {
-        private readonly IReqGoodTransferService _reqGoodTransferService;
+        private readonly ITransportAvService _transportAvService;
         private ILogService logger;
         private IConfigurationProvider configuration = null;
 
-        public ReqGoodTransferController() { }
+        public TransportAvController() { }
 
-        public ReqGoodTransferController(IReqGoodTransferService reqGoodTransferService, ILogService logger,
+        public TransportAvController(ITransportAvService transportAvService, ILogService logger,
             IConfigurationProvider _config)
         {
-            _reqGoodTransferService = reqGoodTransferService;
+            _transportAvService = transportAvService;
             this.logger = logger;
             configuration = _config;
         }
 
-        // GET: api/ReqGoodTransfer
+        // GET: api/TransportAv
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         //[AuthorizeUser]
-        public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id)
+        public ResultModel<List<TransportAvModel>> Get(Guid? id)
         {
             logger.LogApi(() => Get(id), null);
 
-            var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
-            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(id);
+            var resultModel = new ResultModel<List<TransportAvModel>>();
+            resultModel.ResultData = _transportAvService.GetTransportAv(id);
 
             /* Return data */
             resultModel.OperationResult = true;
@@ -48,51 +48,51 @@ namespace CarryOnWebApi.Controllers
         [AuthorizeUser]
         [HttpPost]
 
-        public ResultModel<List<ReqGoodTransferModel>> GetFiltered(FilterParams filterparams)
+        public ResultModel<List<TransportAvModel>> GetFiltered(FilterParams filterparams)
         {
             logger.LogApi(() => GetFiltered(filterparams), null);
 
-            var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
+            var resultModel = new ResultModel<List<TransportAvModel>>();
 
             /* TO BE DEVELOPED */
-            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(null);
+            resultModel.ResultData = _transportAvService.GetTransportAv(null);
 
             /* Return data */
             resultModel.OperationResult = true;
             return resultModel;
         }
 
-        // POST: api/ReqGoodTransfer
+        // POST: api/TransportAv
         [AuthorizeUser]
         [HttpPost]
-        public BaseResultModel Post(ReqGoodTransferModel rqtModel)
+        public BaseResultModel Post(TransportAvModel rqtModel)
         {
             //var user = RouteData.Values["user"] as UserModel;
             var user = configuration.UserInfo;
 
             logger.LogApi(() => Post(rqtModel), user.UTEN);
 
-            var resultModel = _reqGoodTransferService.InsertReqGoodTransfer(rqtModel, user);
+            var resultModel = _transportAvService.InsertTransportAv(rqtModel, user);
 
             /* Return data */
             return resultModel;
         }
 
-        // PUT: api/ReqGoodTransfer/5
+        // PUT: api/TransportAv/5
         [AuthorizeUser]
         [HttpPut]
-        public BaseResultModel Put(ReqGoodTransferModel rqtModel)
+        public BaseResultModel Put(TransportAvModel rqtModel)
         {
             var user = configuration.UserInfo;
             logger.LogApi(() => Put(rqtModel), user.UTEN);
 
-            var resultModel = _reqGoodTransferService.UpdateReqGoodTransfer(rqtModel, user);
+            var resultModel = _transportAvService.UpdateTransportAv(rqtModel, user);
 
             /* Return data */
             return resultModel;
         }
 
-        // DELETE: api/ReqGoodTransfer/5
+        // DELETE: api/TransportAv/5
         [AuthorizeUser]
         [HttpDelete]
         public BaseResultModel Delete(Guid rgtId)
@@ -100,7 +100,7 @@ namespace CarryOnWebApi.Controllers
             var user = configuration.UserInfo;
             logger.LogApi(() => Delete(rgtId), user.UTEN);
 
-            var resultModel = _reqGoodTransferService.DeleteReqGoodTransfer(rgtId, user);
+            var resultModel = _transportAvService.DeleteTransportAv(rgtId, user);
 
             return resultModel;
         }

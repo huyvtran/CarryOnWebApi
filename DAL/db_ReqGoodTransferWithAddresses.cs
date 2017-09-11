@@ -59,5 +59,6 @@ namespace DAL
         public string UserTEL2 { get; set; }
         public string UserLang { get; set; }
         public string VolRequired { get; set; }
+        public System.Guid UserId { get; set; }
     }
 }

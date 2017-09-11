@@ -55,7 +55,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransferWithAddresses>("f_GetAllFieldsFromReqGoodTransfer_ByKeyFields", idParameter);
         }
     
-        public virtual int f_InsertIntoReqGoodTransfer(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
+        public virtual int f_InsertIntoReqGoodTransfer(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -85,10 +85,18 @@ namespace DAL
                 new ObjectParameter("RequestState", requestState) :
                 new ObjectParameter("RequestState", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoReqGoodTransfer", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter);
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volRequiredParameter = volRequired != null ?
+                new ObjectParameter("VolRequired", volRequired) :
+                new ObjectParameter("VolRequired", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoReqGoodTransfer", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volRequiredParameter);
         }
     
-        public virtual int f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
+        public virtual int f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -118,7 +126,15 @@ namespace DAL
                 new ObjectParameter("RequestState", requestState) :
                 new ObjectParameter("RequestState", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter);
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volRequiredParameter = volRequired != null ?
+                new ObjectParameter("VolRequired", volRequired) :
+                new ObjectParameter("VolRequired", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volRequiredParameter);
         }
     
         public virtual ObjectResult<zUTILS_CreateStoredFromNewTable_fix_injection_Result> zUTILS_CreateStoredFromNewTable_fix_injection(string tableName, string schemaName, string prefixName, string littleBoxDbAndUserPrefix, string user_security_context)
@@ -153,39 +169,6 @@ namespace DAL
                 new ObjectParameter("Id", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransfer>("GetAllReqGoodTransfer_ByKeyFields", idParameter);
-        }
-    
-        public virtual ObjectResult<db_ReqGoodTransferWithAddresses> f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(System.Guid));
-    
-            var addressFromParameter = addressFrom.HasValue ?
-                new ObjectParameter("AddressFrom", addressFrom) :
-                new ObjectParameter("AddressFrom", typeof(System.Guid));
-    
-            var addreessDestParameter = addreessDest.HasValue ?
-                new ObjectParameter("AddreessDest", addreessDest) :
-                new ObjectParameter("AddreessDest", typeof(System.Guid));
-    
-            var dateTransportFixedParameter = dateTransportFixed.HasValue ?
-                new ObjectParameter("DateTransportFixed", dateTransportFixed) :
-                new ObjectParameter("DateTransportFixed", typeof(System.DateTime));
-    
-            var dateTransportTypeParameter = dateTransportType.HasValue ?
-                new ObjectParameter("DateTransportType", dateTransportType) :
-                new ObjectParameter("DateTransportType", typeof(int));
-    
-            var dateTransportInfoParameter = dateTransportInfo != null ?
-                new ObjectParameter("DateTransportInfo", dateTransportInfo) :
-                new ObjectParameter("DateTransportInfo", typeof(string));
-    
-            var requestStateParameter = requestState.HasValue ?
-                new ObjectParameter("RequestState", requestState) :
-                new ObjectParameter("RequestState", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransferWithAddresses>("f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter);
         }
     
         public virtual int f_DeleteFromCO01UT_ByKeyFields(Nullable<System.Guid> iD)
@@ -908,6 +891,47 @@ namespace DAL
                 new ObjectParameter("VolAvailable", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromTransportAv_ByKeyFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volAvailableParameter);
+        }
+    
+        public virtual ObjectResult<db_ReqGoodTransferWithAddresses> f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var addressFromParameter = addressFrom.HasValue ?
+                new ObjectParameter("AddressFrom", addressFrom) :
+                new ObjectParameter("AddressFrom", typeof(System.Guid));
+    
+            var addreessDestParameter = addreessDest.HasValue ?
+                new ObjectParameter("AddreessDest", addreessDest) :
+                new ObjectParameter("AddreessDest", typeof(System.Guid));
+    
+            var dateTransportFixedParameter = dateTransportFixed.HasValue ?
+                new ObjectParameter("DateTransportFixed", dateTransportFixed) :
+                new ObjectParameter("DateTransportFixed", typeof(System.DateTime));
+    
+            var dateTransportTypeParameter = dateTransportType.HasValue ?
+                new ObjectParameter("DateTransportType", dateTransportType) :
+                new ObjectParameter("DateTransportType", typeof(int));
+    
+            var dateTransportInfoParameter = dateTransportInfo != null ?
+                new ObjectParameter("DateTransportInfo", dateTransportInfo) :
+                new ObjectParameter("DateTransportInfo", typeof(string));
+    
+            var requestStateParameter = requestState.HasValue ?
+                new ObjectParameter("RequestState", requestState) :
+                new ObjectParameter("RequestState", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var volRequiredParameter = volRequired != null ?
+                new ObjectParameter("VolRequired", volRequired) :
+                new ObjectParameter("VolRequired", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransferWithAddresses>("f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volRequiredParameter);
         }
     }
 }

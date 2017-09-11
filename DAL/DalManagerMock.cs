@@ -132,17 +132,17 @@ namespace DAL
             return MockHelper.getRqgtList();
         }
 
-        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
+        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired)
         {
             return MockHelper.getRqgtList();
         }
 
-        public void InsertReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        public void InsertReqGoodTransfer(db_ReqGoodTransferWithAddresses rgtItem)
         {
             return;
         }
 
-        public void UpdateReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        public void UpdateReqGoodTransfer(db_ReqGoodTransferWithAddresses rgtItem)
         {
             return;
         }
@@ -163,17 +163,46 @@ namespace DAL
 
         public void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void UpdateReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void DeleteReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)
         {
-            throw new NotImplementedException();
+            return;
+        }
+
+        #endregion
+
+        #region Transport availability
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByKeyFields(Guid? transportId)
+        {
+            return MockHelper.getTransportAvList();
+        }
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable)
+        {
+            return MockHelper.getTransportAvList();
+        }
+
+        public void InsertTransportAv(db_TransportAvWithAddress transportAvItem)
+        {
+            return;
+        }
+
+        public void UpdateTransportAv(db_TransportAvWithAddress transportAvItem)
+        {
+            return;
+        }
+
+        public void DeleteTransportAv(Guid rgtId)
+        {
+            return;
         }
 
         #endregion

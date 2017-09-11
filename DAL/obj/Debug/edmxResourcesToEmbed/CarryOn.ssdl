@@ -62,6 +62,20 @@
     <Property Name="UserId" Type="uniqueidentifier" />
     <Property Name="VolRequired" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="TransportAv">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AddressFrom" Type="uniqueidentifier" />
+    <Property Name="AddreessDest" Type="uniqueidentifier" />
+    <Property Name="DateTransportFixed" Type="datetime" />
+    <Property Name="DateTransportType" Type="int" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RequestState" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="VolAvailable" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="TransportOptions">
     <Key>
       <PropertyRef Name="TransportId" />
@@ -114,6 +128,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
       <PropertyRef Name="FromType" />
       <PropertyRef Name="DestType" />
       <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AddressFrom" Type="uniqueidentifier" />
@@ -156,6 +171,67 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
     <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
     <Property Name="UserTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="255" />
+    <Property Name="UserTELE" Type="varchar" MaxLength="50" />
+    <Property Name="UserTEL2" Type="varchar" MaxLength="100" />
+    <Property Name="UserLang" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TransportAvWithAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DateTransportType" />
+      <PropertyRef Name="RequestState" />
+      <PropertyRef Name="FromType" />
+      <PropertyRef Name="DestType" />
+      <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AddressFrom" Type="uniqueidentifier" />
+    <Property Name="AddreessDest" Type="uniqueidentifier" />
+    <Property Name="DateTransportFixed" Type="datetime" />
+    <Property Name="DateTransportType" Type="int" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RequestState" Type="int" Nullable="false" />
+    <Property Name="VolAvailable" Type="nvarchar" MaxLength="50" />
+    <Property Name="FromType" Type="int" Nullable="false" />
+    <Property Name="FromCounty" Type="varchar" MaxLength="15" />
+    <Property Name="FromCountry" Type="varchar" MaxLength="20" />
+    <Property Name="FromDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="FromHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="FromCreationDate" Type="datetime" />
+    <Property Name="FromHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="FromPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="FromStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="FromStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="FromTown" Type="varchar" MaxLength="25" />
+    <Property Name="DestType" Type="int" Nullable="false" />
+    <Property Name="DestCounty" Type="varchar" MaxLength="15" />
+    <Property Name="DestCountry" Type="varchar" MaxLength="20" />
+    <Property Name="DestDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="DestHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="DestCreationDate" Type="datetime" />
+    <Property Name="DestHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="DestPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="DestStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="DestStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="DestTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="UserCounty" Type="varchar" MaxLength="15" />
+    <Property Name="UserCountry" Type="varchar" MaxLength="20" />
+    <Property Name="UserDistrict" Type="varchar" MaxLength="25" />
+    <Property Name="UserHouseName" Type="varchar" MaxLength="100" />
+    <Property Name="UserCreationDate" Type="datetime" />
+    <Property Name="UserHouseNumber" Type="varchar" MaxLength="5" />
+    <Property Name="UserPostCode" Type="varchar" MaxLength="9" />
+    <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
+    <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
+    <Property Name="UserTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="100" />
     <Property Name="UserEmail" Type="varchar" MaxLength="255" />
     <Property Name="UserTELE" Type="varchar" MaxLength="50" />
@@ -210,6 +286,42 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TransportAv_Addresses">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="TransportAv" Type="Self.TransportAv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="TransportAv">
+        <PropertyRef Name="AddressFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransportAv_Addresses1">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="TransportAv" Type="Self.TransportAv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="TransportAv">
+        <PropertyRef Name="AddreessDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransportAv_CO01UT">
+    <End Role="CO01UT" Type="Self.CO01UT" Multiplicity="0..1" />
+    <End Role="TransportAv" Type="Self.TransportAv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CO01UT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TransportAv">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="f_DeleteFromAddresses_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromAddresses_ByKeyFields">
     <Parameter Name="AddressID" Type="uniqueidentifier" Mode="In" />
   </Function>
@@ -220,6 +332,9 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
   </Function>
   <Function Name="f_DeleteFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromReqGoodTransfer_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_DeleteFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromTransportAv_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
   </Function>
   <Function Name="f_DeleteFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_DeleteFromTransportOptions_ByKeyFields">
@@ -277,6 +392,31 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
   <Function Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
   </Function>
+  <Function Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromTransportAv_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_BySomeEqualFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolAvailable" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="f_GetAllFieldsFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportOptions_ByKeyFields">
     <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="OptKey" Type="nchar" Mode="In" />
@@ -333,6 +473,19 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <Parameter Name="DateTransportType" Type="int" Mode="In" />
     <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
     <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="f_InsertIntoTransportAv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoTransportAv">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolAvailable" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="f_InsertIntoTransportOptions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoTransportOptions">
     <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
@@ -386,6 +539,19 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <Parameter Name="DateTransportType" Type="int" Mode="In" />
     <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
     <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="f_UpdateAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromTransportAv_ByKeyFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolAvailable" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="f_UpdateAllFieldsFromTransportOptions_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromTransportOptions_ByKeyFields">
     <Parameter Name="TransportId" Type="uniqueidentifier" Mode="In" />
@@ -407,6 +573,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <EntitySet Name="CO_TOKEN" EntityType="Self.CO_TOKEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CO01UT" EntityType="Self.CO01UT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReqGoodTransfer" EntityType="Self.ReqGoodTransfer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransportAv" EntityType="Self.TransportAv" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransportOptions" EntityType="Self.TransportOptions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CO_VW_USER_TOKEN" EntityType="Self.CO_VW_USER_TOKEN" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -476,12 +643,64 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     [ReqGoodTransferWithAddresses].[UserStreet1] AS [UserStreet1], 
     [ReqGoodTransferWithAddresses].[UserStreet2] AS [UserStreet2], 
     [ReqGoodTransferWithAddresses].[UserTown] AS [UserTown], 
+    [ReqGoodTransferWithAddresses].[UserId] AS [UserId], 
     [ReqGoodTransferWithAddresses].[UserName] AS [UserName], 
     [ReqGoodTransferWithAddresses].[UserEmail] AS [UserEmail], 
     [ReqGoodTransferWithAddresses].[UserTELE] AS [UserTELE], 
     [ReqGoodTransferWithAddresses].[UserTEL2] AS [UserTEL2], 
     [ReqGoodTransferWithAddresses].[UserLang] AS [UserLang]
     FROM [dbo].[ReqGoodTransferWithAddresses] AS [ReqGoodTransferWithAddresses]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TransportAvWithAddresses" EntityType="Self.TransportAvWithAddresses" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TransportAvWithAddresses].[Id] AS [Id], 
+    [TransportAvWithAddresses].[AddressFrom] AS [AddressFrom], 
+    [TransportAvWithAddresses].[AddreessDest] AS [AddreessDest], 
+    [TransportAvWithAddresses].[DateTransportFixed] AS [DateTransportFixed], 
+    [TransportAvWithAddresses].[DateTransportType] AS [DateTransportType], 
+    [TransportAvWithAddresses].[DateTransportInfo] AS [DateTransportInfo], 
+    [TransportAvWithAddresses].[RequestState] AS [RequestState], 
+    [TransportAvWithAddresses].[VolAvailable] AS [VolAvailable], 
+    [TransportAvWithAddresses].[FromType] AS [FromType], 
+    [TransportAvWithAddresses].[FromCounty] AS [FromCounty], 
+    [TransportAvWithAddresses].[FromCountry] AS [FromCountry], 
+    [TransportAvWithAddresses].[FromDistrict] AS [FromDistrict], 
+    [TransportAvWithAddresses].[FromHouseName] AS [FromHouseName], 
+    [TransportAvWithAddresses].[FromCreationDate] AS [FromCreationDate], 
+    [TransportAvWithAddresses].[FromHouseNumber] AS [FromHouseNumber], 
+    [TransportAvWithAddresses].[FromPostCode] AS [FromPostCode], 
+    [TransportAvWithAddresses].[FromStreet1] AS [FromStreet1], 
+    [TransportAvWithAddresses].[FromStreet2] AS [FromStreet2], 
+    [TransportAvWithAddresses].[FromTown] AS [FromTown], 
+    [TransportAvWithAddresses].[DestType] AS [DestType], 
+    [TransportAvWithAddresses].[DestCounty] AS [DestCounty], 
+    [TransportAvWithAddresses].[DestCountry] AS [DestCountry], 
+    [TransportAvWithAddresses].[DestDistrict] AS [DestDistrict], 
+    [TransportAvWithAddresses].[DestHouseName] AS [DestHouseName], 
+    [TransportAvWithAddresses].[DestCreationDate] AS [DestCreationDate], 
+    [TransportAvWithAddresses].[DestHouseNumber] AS [DestHouseNumber], 
+    [TransportAvWithAddresses].[DestPostCode] AS [DestPostCode], 
+    [TransportAvWithAddresses].[DestStreet1] AS [DestStreet1], 
+    [TransportAvWithAddresses].[DestStreet2] AS [DestStreet2], 
+    [TransportAvWithAddresses].[DestTown] AS [DestTown], 
+    [TransportAvWithAddresses].[UserType] AS [UserType], 
+    [TransportAvWithAddresses].[UserCounty] AS [UserCounty], 
+    [TransportAvWithAddresses].[UserCountry] AS [UserCountry], 
+    [TransportAvWithAddresses].[UserDistrict] AS [UserDistrict], 
+    [TransportAvWithAddresses].[UserHouseName] AS [UserHouseName], 
+    [TransportAvWithAddresses].[UserCreationDate] AS [UserCreationDate], 
+    [TransportAvWithAddresses].[UserHouseNumber] AS [UserHouseNumber], 
+    [TransportAvWithAddresses].[UserPostCode] AS [UserPostCode], 
+    [TransportAvWithAddresses].[UserStreet1] AS [UserStreet1], 
+    [TransportAvWithAddresses].[UserStreet2] AS [UserStreet2], 
+    [TransportAvWithAddresses].[UserTown] AS [UserTown], 
+    [TransportAvWithAddresses].[UserId] AS [UserId], 
+    [TransportAvWithAddresses].[UserName] AS [UserName], 
+    [TransportAvWithAddresses].[UserEmail] AS [UserEmail], 
+    [TransportAvWithAddresses].[UserTELE] AS [UserTELE], 
+    [TransportAvWithAddresses].[UserTEL2] AS [UserTEL2], 
+    [TransportAvWithAddresses].[UserLang] AS [UserLang]
+    FROM [dbo].[TransportAvWithAddresses] AS [TransportAvWithAddresses]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_CO01UT_Addresses" Association="Self.FK_CO01UT_Addresses">
       <End Role="Addresses" EntitySet="Addresses" />
@@ -498,6 +717,18 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <AssociationSet Name="FK_ReqGoodTransfer_CO01UT" Association="Self.FK_ReqGoodTransfer_CO01UT">
       <End Role="CO01UT" EntitySet="CO01UT" />
       <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransportAv_Addresses" Association="Self.FK_TransportAv_Addresses">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="TransportAv" EntitySet="TransportAv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransportAv_Addresses1" Association="Self.FK_TransportAv_Addresses1">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="TransportAv" EntitySet="TransportAv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransportAv_CO01UT" Association="Self.FK_TransportAv_CO01UT">
+      <End Role="CO01UT" EntitySet="CO01UT" />
+      <End Role="TransportAv" EntitySet="TransportAv" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

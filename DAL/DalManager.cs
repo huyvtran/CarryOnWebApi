@@ -185,27 +185,60 @@ namespace DAL
             //return entities.GetAllReqGoodTransfer_ByKeyFields(reqId).ToList();
             return entities.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields(reqId).ToList();
         }
-
-        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState)
+        
+        public List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired)
         {
-            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest, dateTransportFixed, dateTransportType, dateTransportInfo, requestState).ToList();
+            return entities.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields(id, addressFrom, addreessDest,
+                dateTransportFixed, dateTransportType, dateTransportInfo, requestState, userId, volRequired).ToList();
         }
 
-        public void InsertReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        public void InsertReqGoodTransfer(db_ReqGoodTransferWithAddresses rgtItem)
         {
             entities.f_InsertIntoReqGoodTransfer(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
-                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState);
+                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState, rgtItem.UserId, rgtItem.VolRequired);
         }
 
-        public void UpdateReqGoodTransfer(db_ReqGoodTransfer rgtItem)
+        public void UpdateReqGoodTransfer(db_ReqGoodTransferWithAddresses rgtItem)
         {
             entities.f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
-                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState);
+                rgtItem.DateTransportFixed, rgtItem.DateTransportType, rgtItem.DateTransportInfo, rgtItem.RequestState, rgtItem.UserId, rgtItem.VolRequired);
         }
 
         public void DeleteReqGoodTransfer(Guid rgtId)
         {
             entities.f_DeleteFromReqGoodTransfer_ByKeyFields(rgtId);
+        }
+
+        #endregion
+
+        #region Transport availability
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByKeyFields(Guid? transportId)
+        {
+            return entities.f_GetAllFieldsFromTransportAv_ByKeyFields(transportId).ToList();
+        }
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volAvailable)
+        {
+            return entities.f_GetAllFieldsFromTransportAv_BySomeEqualFields(id, addressFrom, addreessDest,
+                dateTransportFixed, dateTransportType, dateTransportInfo, requestState, userId, volAvailable).ToList();
+        }
+
+        public void InsertTransportAv(db_TransportAvWithAddress transportAvItem)
+        {
+            entities.f_InsertIntoTransportAv(transportAvItem.Id, transportAvItem.AddressFrom, transportAvItem.AddreessDest,
+                transportAvItem.DateTransportFixed, transportAvItem.DateTransportType, transportAvItem.DateTransportInfo, transportAvItem.RequestState, transportAvItem.UserId, transportAvItem.VolAvailable);
+        }
+
+        public void UpdateTransportAv(db_TransportAvWithAddress transportAvItem)
+        {
+            entities.f_UpdateAllFieldsFromTransportAv_ByKeyFields(transportAvItem.Id, transportAvItem.AddressFrom, transportAvItem.AddreessDest,
+                transportAvItem.DateTransportFixed, transportAvItem.DateTransportType, transportAvItem.DateTransportInfo, transportAvItem.RequestState, transportAvItem.UserId, transportAvItem.VolAvailable);
+        }
+
+        public void DeleteTransportAv(Guid rgtId)
+        {
+            entities.f_DeleteFromTransportAv_ByKeyFields(rgtId);
         }
 
         #endregion
@@ -233,5 +266,6 @@ namespace DAL
         }
 
         #endregion
+        
     }
 }
