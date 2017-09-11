@@ -30,6 +30,8 @@ namespace CarryOnWebApi.Controllers
         private IAccountService accountService;
         private ILogService logger;
         private IConfigurationProvider configuration = null;
+        
+        public AccountController() { }
 
         public AccountController(IAccountService accountService, ILogService logger,
             IConfigurationProvider _config)
@@ -42,9 +44,10 @@ namespace CarryOnWebApi.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
+        [Route("api/Account/Login")]
         public ResultModel<UserModel> Login(LoginViewModel model)
         {
-            logger.LogApi(() => Login(model), model.Username);
+            logger.LogApi(() => Login(model), null);
             ErrorsEnum retMsg = ErrorsEnum.GENERIC_ERROR;
             var res = new ResultModel<UserModel>();
             res.ResultData = new UserModel();
@@ -97,6 +100,7 @@ namespace CarryOnWebApi.Controllers
         // POST: /Account/Logout
         [AuthorizeUser]
         [HttpPost]
+        [Route("api/Account/Logout")]
         public BaseResultModel Logout()
         {
             bool error = false;
@@ -124,6 +128,7 @@ namespace CarryOnWebApi.Controllers
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
+        [Route("api/Account/ForgotPassword")]
         public BaseResultModel ForgotPassword(ForgotPasswordViewModel model, string recoverBasicUrl)
         {
             logger.LogApi(() => ForgotPassword(model, recoverBasicUrl), model.Email);
@@ -139,6 +144,7 @@ namespace CarryOnWebApi.Controllers
         // POST: /Account/ChangePassword
         [AuthorizeByToken]
         [HttpPost]
+        [Route("api/Account/ChangePassword")]
         public BaseResultModel ChangePassword(string oldPassword, string newPassword)
         {
             //var user = RouteData.Values["user"] as UserModel;
@@ -171,6 +177,7 @@ namespace CarryOnWebApi.Controllers
 
         // POST: /Account/ResetPassword
         [HttpPost]
+        [Route("api/Account/ResetPassword")]
         public BaseResultModel ResetPassword(string resetPswdUserName, string resetPswdToken, string resetPswd)
         {
             logger.LogApi(() => ResetPassword(resetPswdUserName, resetPswdToken, "**********"), resetPswdUserName);
@@ -182,6 +189,7 @@ namespace CarryOnWebApi.Controllers
 
         // POST: /Account/RegisterEmail
         [HttpPost]
+        [Route("api/Account/RegisterEmail")]
         public BaseResultModel RegisterEmail(string userName, string email)
         {
             logger.LogApi(() => RegisterEmail(userName, email), userName);
@@ -192,6 +200,7 @@ namespace CarryOnWebApi.Controllers
         }
 
         [HttpPost]
+        [Route("api/Account/CreateUser")]
         public ResultModel<UserModel> CreateUser(UserModel userModel)
         {
             var user = configuration.UserInfo;
@@ -212,6 +221,7 @@ namespace CarryOnWebApi.Controllers
 
         [AuthorizeByToken]
         [HttpPost]
+        [Route("api/Account/UpdateUser")]
         public ResultModel<UserModel> UpdateUser(UserModel userModel)
         {
             var user = configuration.UserInfo;
@@ -240,6 +250,7 @@ namespace CarryOnWebApi.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("api/Account/WriteLog")]
         public BaseResultModel WriteLog(string status, string statusText, string url, string data, string user)
         {
             var message = $"{{Status={status}, StatusText={statusText}, Url={url}, User={user} Error={data}}}";

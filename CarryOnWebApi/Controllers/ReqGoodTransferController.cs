@@ -1,4 +1,5 @@
 ﻿using CarryOnWebApi.CustomAttributes;
+using CarryOnWebApi.Models;
 using Entities;
 using Services;
 using Services.Interfaces;

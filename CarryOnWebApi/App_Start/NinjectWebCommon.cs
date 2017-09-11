@@ -71,7 +71,8 @@ namespace CarryOnWebApi
             if (string.IsNullOrEmpty(WebConfigurationManager.AppSettings["Mock"]) ||
                 (WebConfigurationManager.AppSettings["Mock"].ToLower() != "true"))
             {
-                kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>();
+                kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>(); 
+                kernel.Bind<IAccountService>().To<AccountService>(); 
                 kernel.Bind<ITransportAvService>().To<TransportAvService>();
                 kernel.Bind<IDalManager>().To<DalManager>();
                 kernel.Bind<IConfigurationProvider>().To<Configuration>();
@@ -79,6 +80,7 @@ namespace CarryOnWebApi
             }
             else {
                 kernel.Bind<IReqGoodTransferService>().To<ReqGoodTransferService>();
+                kernel.Bind<IAccountService>().To<AccountService>(); 
                 kernel.Bind<ITransportAvService>().To<TransportAvService>();
                 /* Mock */
                 kernel.Bind<IDalManager>().To<DalManagerMock>();
