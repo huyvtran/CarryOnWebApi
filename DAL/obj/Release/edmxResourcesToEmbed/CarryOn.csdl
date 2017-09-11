@@ -65,6 +65,8 @@
       <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
       <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
       <Parameter Name="RequestState" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Guid" />
+      <Parameter Name="VolRequired" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="f_UpdateAllFieldsFromReqGoodTransfer_ByKeyFields">
       <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -74,6 +76,8 @@
       <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
       <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
       <Parameter Name="RequestState" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Guid" />
+      <Parameter Name="VolRequired" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="zUTILS_CreateStoredFromNewTable_fix_injection" ReturnType="Collection(CarryOnModel.zUTILS_CreateStoredFromNewTable_fix_injection_Result)">
       <Parameter Name="TableName" Mode="In" Type="String" />
@@ -84,15 +88,6 @@
     </FunctionImport>
     <FunctionImport Name="GetAllReqGoodTransfer_ByKeyFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransfer)">
       <Parameter Name="Id" Mode="In" Type="Guid" />
-    </FunctionImport>
-    <FunctionImport Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransferWithAddresses)">
-      <Parameter Name="Id" Mode="In" Type="Guid" />
-      <Parameter Name="AddressFrom" Mode="In" Type="Guid" />
-      <Parameter Name="AddreessDest" Mode="In" Type="Guid" />
-      <Parameter Name="DateTransportFixed" Mode="In" Type="DateTime" />
-      <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
-      <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
-      <Parameter Name="RequestState" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="CO01UT" EntityType="CarryOnModel.CO01UT" />
     <EntitySet Name="ReqGoodTransferWithAddresses" EntityType="CarryOnModel.ReqGoodTransferWithAddresses" />
@@ -320,6 +315,17 @@
       <Parameter Name="UserId" Mode="In" Type="Guid" />
       <Parameter Name="VolAvailable" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_ReqGoodTransferWithAddresses)">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+      <Parameter Name="AddressFrom" Mode="In" Type="Guid" />
+      <Parameter Name="AddreessDest" Mode="In" Type="Guid" />
+      <Parameter Name="DateTransportFixed" Mode="In" Type="DateTime" />
+      <Parameter Name="DateTransportType" Mode="In" Type="Int32" />
+      <Parameter Name="DateTransportInfo" Mode="In" Type="String" />
+      <Parameter Name="RequestState" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Guid" />
+      <Parameter Name="VolRequired" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_ReqGoodTransfer_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -433,6 +439,7 @@
     <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
     <Property Type="String" Name="VolRequired" Nullable="true" MaxLength="50" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
   </ComplexType>
   <EntityType Name="CO01UT">
     <Key>
@@ -466,6 +473,7 @@
       <PropertyRef Name="FromType" />
       <PropertyRef Name="DestType" />
       <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="AddressFrom" Type="Guid" />
@@ -513,6 +521,7 @@
     <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
   </EntityType>
   <Association Name="FK_CO01UT_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -782,6 +791,7 @@
       <PropertyRef Name="FromType" />
       <PropertyRef Name="DestType" />
       <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="AddressFrom" Type="Guid" />
@@ -829,6 +839,7 @@
     <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
   </EntityType>
   <Association Name="FK_TransportAv_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -896,7 +907,45 @@
     <Property Type="Int32" Name="DateTransportType" Nullable="false" />
     <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="RequestState" Nullable="false" />
-    <Property Type="Guid" Name="UserId" Nullable="true" />
     <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FromType" Nullable="false" />
+    <Property Type="String" Name="FromCounty" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="FromCountry" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FromDistrict" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="FromHouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="FromCreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromHouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="FromPostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="FromStreet1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FromStreet2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FromTown" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="DestType" Nullable="false" />
+    <Property Type="String" Name="DestCounty" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="DestCountry" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DestDistrict" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="DestHouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="DestCreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="DestHouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="DestPostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="DestStreet1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DestStreet2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="DestTown" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="UserType" Nullable="false" />
+    <Property Type="String" Name="UserCounty" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="UserCountry" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="UserDistrict" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="UserHouseName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="UserCreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UserHouseNumber" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="UserPostCode" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="UserStreet1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="UserStreet2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="UserTown" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
   </ComplexType>
 </Schema>

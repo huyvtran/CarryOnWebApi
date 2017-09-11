@@ -115,7 +115,7 @@ namespace DAL.Helper
                     UserTELE = null,
                     UserTown = "TestUser",
                     UserType = 0,
-                    VolAvailable = "10"
+                    VolAvailable = "200"
                 }
             };
 

@@ -128,6 +128,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
       <PropertyRef Name="FromType" />
       <PropertyRef Name="DestType" />
       <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AddressFrom" Type="uniqueidentifier" />
@@ -170,6 +171,7 @@ warning 6002: The table/view 'CarryOn.dbo.ReqGoodTransferWithAddresses' does not
     <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
     <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
     <Property Name="UserTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="100" />
     <Property Name="UserEmail" Type="varchar" MaxLength="255" />
     <Property Name="UserTELE" Type="varchar" MaxLength="50" />
@@ -186,6 +188,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
       <PropertyRef Name="FromType" />
       <PropertyRef Name="DestType" />
       <PropertyRef Name="UserType" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AddressFrom" Type="uniqueidentifier" />
@@ -228,6 +231,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
     <Property Name="UserStreet1" Type="varchar" MaxLength="100" />
     <Property Name="UserStreet2" Type="varchar" MaxLength="100" />
     <Property Name="UserTown" Type="varchar" MaxLength="25" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="100" />
     <Property Name="UserEmail" Type="varchar" MaxLength="255" />
     <Property Name="UserTELE" Type="varchar" MaxLength="50" />
@@ -388,6 +392,17 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
   <Function Name="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
   </Function>
+  <Function Name="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddressFrom" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="AddreessDest" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DateTransportFixed" Type="datetime" Mode="In" />
+    <Parameter Name="DateTransportType" Type="int" Mode="In" />
+    <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="f_GetAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
   </Function>
@@ -458,6 +473,8 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
     <Parameter Name="DateTransportType" Type="int" Mode="In" />
     <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
     <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="f_InsertIntoTransportAv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_InsertIntoTransportAv">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -522,6 +539,8 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
     <Parameter Name="DateTransportType" Type="int" Mode="In" />
     <Parameter Name="DateTransportInfo" Type="nvarchar" Mode="In" />
     <Parameter Name="RequestState" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="f_UpdateAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_UpdateAllFieldsFromTransportAv_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -624,6 +643,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
     [ReqGoodTransferWithAddresses].[UserStreet1] AS [UserStreet1], 
     [ReqGoodTransferWithAddresses].[UserStreet2] AS [UserStreet2], 
     [ReqGoodTransferWithAddresses].[UserTown] AS [UserTown], 
+    [ReqGoodTransferWithAddresses].[UserId] AS [UserId], 
     [ReqGoodTransferWithAddresses].[UserName] AS [UserName], 
     [ReqGoodTransferWithAddresses].[UserEmail] AS [UserEmail], 
     [ReqGoodTransferWithAddresses].[UserTELE] AS [UserTELE], 
@@ -674,6 +694,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithAddresses' does not hav
     [TransportAvWithAddresses].[UserStreet1] AS [UserStreet1], 
     [TransportAvWithAddresses].[UserStreet2] AS [UserStreet2], 
     [TransportAvWithAddresses].[UserTown] AS [UserTown], 
+    [TransportAvWithAddresses].[UserId] AS [UserId], 
     [TransportAvWithAddresses].[UserName] AS [UserName], 
     [TransportAvWithAddresses].[UserEmail] AS [UserEmail], 
     [TransportAvWithAddresses].[UserTELE] AS [UserTELE], 
