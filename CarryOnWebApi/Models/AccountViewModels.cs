@@ -61,6 +61,9 @@ namespace CarryOnWebApi.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "Token?")]
+        public string Token { get; set; }
     }
 
     public class RegisterViewModel

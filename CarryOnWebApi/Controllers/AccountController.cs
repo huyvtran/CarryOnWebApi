@@ -54,7 +54,6 @@ namespace CarryOnWebApi.Controllers
 
             try
             {
-
                 bool error = false;
                 if (!ModelState.IsValid)
                 {
@@ -62,7 +61,7 @@ namespace CarryOnWebApi.Controllers
                     retMsg = ErrorsEnum.LOGIN_INVALID_MODEL;
                 }
 
-                var user = accountService.UserLogin(model.Username, model.Password);
+                var user = accountService.UserLogin(model.Username, model.Password, model.Token);
                 if (user == null || string.IsNullOrEmpty(user.Token))
                 {
                     error = true;

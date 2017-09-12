@@ -143,6 +143,7 @@
     <Compile Include="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MockUserHelper.cs" />
     <Compile Include="Helper\MockHelper.cs" />
     <Compile Include="IDalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

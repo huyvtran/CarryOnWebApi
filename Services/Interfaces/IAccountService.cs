@@ -20,8 +20,9 @@ namespace Services.Interfaces
         /// </summary>
         /// <param name="username"> username</param>
         /// <param name="password">password</param>
+        /// <param name="token">token</param>
         /// <returns></returns>
-        UserModel UserLogin(string username, string password);
+        UserModel UserLogin(string username, string password, string token);
         /// <summary>
         /// get user object by token
         /// </summary>

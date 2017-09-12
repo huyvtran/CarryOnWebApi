@@ -16,13 +16,13 @@ namespace Services
     {
         private ILogService logger;
 
-        public AccountService(ILogService logger) : base(logger, new DalManager())
-        {
-            this.logger = logger;
-            dbManager = new DalManager();
-        }
+        //public AccountService(ILogService logger) : base(logger, new DalManager())
+        //{
+        //    this.logger = logger;
+        //    dbManager = new DalManager();
+        //}
 
-        public AccountService(ILogService logger, DalManager dbManager) : base(logger, new DalManager())
+        public AccountService(ILogService logger, IDalManager dbManager) : base(logger, dbManager)
         {
             this.logger = logger;
             this.dbManager = dbManager;
@@ -52,12 +52,18 @@ namespace Services
             }
         }
 
-        public UserModel UserLogin(string username, string password)
+        public UserModel UserLogin(string username, string password, string inputToken)
         {
-            logger.Log(() => UserLogin(username, null));
+            logger.Log(() => UserLogin(username, "****", "****"));
             UserModel user = null;
+            
             try
             {
+                /* Is login by token? */
+                if (!string.IsNullOrEmpty(inputToken)) {
+                    return GetUserByToken(inputToken);
+                }
+
                 var token = "";
                 var encryptedPassword = PasswordGenerator.GetEncryptedPassword(password);
 
@@ -77,7 +83,7 @@ namespace Services
             }
             catch (Exception e)
             {
-                logger.Log(() => UserLogin(username, null), e);
+                logger.Log(() => UserLogin(username, "****", "****"), e);
             }
             return user;
         }

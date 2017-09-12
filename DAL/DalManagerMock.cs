@@ -26,17 +26,17 @@ namespace DAL
 
         public db_VW_USER_TOKEN GetUserByToken(string token)
         {
-            throw new NotImplementedException();
+            return MockUserHelper.get_USER_TOKEN();
         }
 
         public db_CO01UT GetUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            return MockUserHelper.getUser();
         }
 
         public db_CO01UT GetUserByUsernameAndPassword(string username, string password)
         {
-            throw new NotImplementedException();
+            return MockUserHelper.getUser();
         }
 
         /// <summary>
@@ -47,12 +47,12 @@ namespace DAL
         /// <param name="role">role of user in company</param>
         public void InsertUser(db_CO01UT user)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void UpdateUser(db_CO01UT user)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace DAL
         /// <param name="password">new password</param>
         public void UpdateUserPassword(string username, string password)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public db_CO01UT GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return MockUserHelper.getUser();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace DAL
         /// <param name="email">user email</param>
         public void UpdateUserEmail(string username, string email)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         #endregion
@@ -86,22 +86,22 @@ namespace DAL
 
         public void InsertToken(string token, DateTime insertDate, DateTime expirationDate, string username)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void RefreshToken(string token, DateTime lastUsageDate, DateTime expirationDate)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public List<db_CO_TOKEN> GetTokenByUsername(string username)
         {
-            throw new NotImplementedException();
+            return MockUserHelper.getToken();
         }
 
         public void DeleteToken(string token)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         #endregion
