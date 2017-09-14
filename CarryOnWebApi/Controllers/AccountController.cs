@@ -201,9 +201,8 @@ namespace CarryOnWebApi.Controllers
         [HttpPost]
         [Route("api/Account/CreateUser")]
         public ResultModel<UserModel> CreateUser(UserModel userModel)
-        {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => CreateUser(userModel), user.UTEN);
+        {            
+            logger.LogApi(() => CreateUser(userModel), null);
 
             // check if all required fields are filled in
             if (!ModelState.IsValid)

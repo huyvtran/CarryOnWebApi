@@ -62,9 +62,6 @@
     <Compile Include="Interfaces\ITransportAvService.cs" />
     <Compile Include="Interfaces\IReqGoodTransferService.cs" />
     <Compile Include="Log4NetLogService.cs" />
-    <Compile Include="Mapper\TransportAvMapper.cs" />
-    <Compile Include="Mapper\UserMapper.cs" />
-    <Compile Include="Mapper\ReqGoodTransferMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransportAvService.cs" />
     <Compile Include="ReqGoodTransferService.cs" />

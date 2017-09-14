@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Mapper
+namespace DAL.Mapper
 {
     public static class TransportAvMapper
     {

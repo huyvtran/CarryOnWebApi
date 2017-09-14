@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Mapper
+namespace DAL.Mapper
 {
     public static class UserMapper
     {
@@ -36,7 +36,7 @@ namespace Services.Mapper
 
         public static db_CO01UT UserMapper_ModelToDb(UserModel db_rqtItem)
         {
-            return user_DbToModel.Map<db_CO01UT>(db_rqtItem);
+            return user_ModelToDb.Map<db_CO01UT>(db_rqtItem);
         }
         
         public static UserModel UserToken_DbUserToken(db_VW_USER_TOKEN db_rqtItem)

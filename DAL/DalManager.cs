@@ -64,7 +64,7 @@ namespace DAL
         /// <param name="role">role of user in company</param>
         public void InsertUser(db_CO01UT user)
         {
-            entities.f_InsertIntoCO01UT(new Guid(), user.UTEN, user.TIPU, user.PASS,
+            entities.f_InsertIntoCO01UT(Guid.NewGuid(), user.UTEN, user.TIPU, user.PASS,
                 user.PWGG, user.PWSC, user.NOME, user.LANG, user.EMAI,
                 user.TELE, user.FAXN, user.UFFI, user.RIF1, user.RIF2, user.TELE2, null);
         }

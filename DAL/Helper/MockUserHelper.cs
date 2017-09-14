@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL.Mapper;
+using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace DAL.Helper
 {
     public static class MockUserHelper
     {
-        public static db_CO01UT getUser()
+        public static db_CO01UT getUser_db()
         {
             return new db_CO01UT
             {
@@ -19,8 +21,14 @@ namespace DAL.Helper
                 TELE = "3325784589",
                 TELE2 = "0511235789",
                 NOME = "luca liguori",
-                ID = new Guid()
+                ID = Guid.NewGuid()
             };
+        }
+
+        public static UserModel getUser_feModel()
+        {
+            var user_db = getUser_db();
+            return UserMapper.UserMapper_DbToModel(user_db);
         }
 
         internal static List<db_CO_TOKEN> getToken()
@@ -40,7 +48,7 @@ namespace DAL.Helper
         internal static db_VW_USER_TOKEN get_USER_TOKEN()
         {
             var token = getToken().ToList().FirstOrDefault();
-            var user = getUser();
+            var user = getUser_db();
 
             return new db_VW_USER_TOKEN
             {

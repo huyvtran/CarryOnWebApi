@@ -7,6 +7,7 @@ using Entities;
 using DAL;
 using Services.Interfaces;
 using Entities.enums;
+using DAL.Mapper;
 
 namespace Services
 {
@@ -32,7 +33,7 @@ namespace Services
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)
             {
-                retList.Add(Mapper.ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
+                retList.Add(ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
             }
 
             /* Foreach item, get transport options */
@@ -40,7 +41,7 @@ namespace Services
             {
                 retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
                 var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
-                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => Mapper.ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
+                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
             }
 
             return retList;
@@ -63,9 +64,9 @@ namespace Services
                 }
 
                 /* Add addresses from */
-                var addressFromId = new Guid();
-                var addressDestId = new Guid();
-                var reqGoodTransportId = new Guid();
+                var addressFromId = Guid.NewGuid();
+                var addressDestId = Guid.NewGuid();
+                var reqGoodTransportId = Guid.NewGuid();
 
                 var addressFrom = new AddressModel
                 {
@@ -104,7 +105,7 @@ namespace Services
                 _dbManager.InsertAddress(addressDest);
 
                 /* Add ReqGoodTransfer item */
-                var db_ReqGoodTransferModel = Mapper.ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
+                var db_ReqGoodTransferModel = ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
                 /* Add guid */
                 db_ReqGoodTransferModel.Id = reqGoodTransportId;
                 db_ReqGoodTransferModel.AddressFrom = addressFromId;
@@ -185,7 +186,7 @@ namespace Services
                 _dbManager.UpdateAddress(addressDest);
 
                 /* Add ReqGoodTransfer item */
-                var db_ReqGoodTransferModel = Mapper.ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
+                var db_ReqGoodTransferModel = ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
 
                 _dbManager.UpdateReqGoodTransfer(db_ReqGoodTransferModel);
 

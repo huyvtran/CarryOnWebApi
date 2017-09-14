@@ -31,12 +31,12 @@ namespace DAL
 
         public db_CO01UT GetUserByUsername(string username)
         {
-            return MockUserHelper.getUser();
+            return MockUserHelper.getUser_db();
         }
 
         public db_CO01UT GetUserByUsernameAndPassword(string username, string password)
         {
-            return MockUserHelper.getUser();
+            return MockUserHelper.getUser_db();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace DAL
 
         public db_CO01UT GetUserByEmail(string email)
         {
-            return MockUserHelper.getUser();
+            return MockUserHelper.getUser_db();
         }
 
         /// <summary>

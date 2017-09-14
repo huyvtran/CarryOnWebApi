@@ -10,3 +10,5 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.xml
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\EntityFramework.SqlServer.xml
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Debug\DAL.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Debug\DAL.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\AutoMapper.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Debug\AutoMapper.xml
