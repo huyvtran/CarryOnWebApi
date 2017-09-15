@@ -22,13 +22,14 @@ namespace Services
             this.logger = logger;
         }
 
-        public List<TransportAvModel> GetTransportAv(Guid? reqId)
+        public List<TransportAvModel> GetTransportAv(Guid? reqId, Guid? userId)
         {
-            logger.Log(() => GetTransportAv(reqId));
+            logger.Log(() => GetTransportAv(reqId, userId));
             var retList = new List<TransportAvModel>();
 
             /* Get items from db */
-            var db_TransportAv = _dbManager.GetTransportAv_ByKeyFields(reqId);
+            var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(reqId, null, null, null, 
+                null, null, null, userId, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_TransportAv)

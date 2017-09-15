@@ -46,7 +46,7 @@ namespace CarryOnWebApi.Tests.Controllers
             ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
 
             // Act
-            var result = reqGoodTransferController.Get(null);
+            var result = reqGoodTransferController.Get(null, null);
 
             // Assert
             Assert.IsNotNull(result);

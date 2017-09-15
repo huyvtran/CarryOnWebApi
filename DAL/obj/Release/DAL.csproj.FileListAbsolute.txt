@@ -10,3 +10,5 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Release\EntityFramework.SqlServer.xm
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Release\DAL.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\obj\Release\DAL.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Release\AutoMapper.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\DAL\bin\Release\AutoMapper.xml

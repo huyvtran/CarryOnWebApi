@@ -22,13 +22,15 @@ namespace Services
             this.logger = logger;
         }
 
-        public List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId)
+        public List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId, Guid? userId)
         {
-            logger.Log(() => GetReqGoodTransfer(reqId));
+            logger.Log(() => GetReqGoodTransfer(reqId, userId));
             var retList = new List<ReqGoodTransferModel>();
 
             /* Get items from db */
-            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
+            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
+            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
+                , null, null, userId, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)

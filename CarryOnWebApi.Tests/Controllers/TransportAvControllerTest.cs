@@ -48,7 +48,7 @@ namespace CarryOnWebApi.Tests.Controllers
             TransportAvController transportAvController = new TransportAvController(transportAvService, logger, configuration);
 
             // Act
-            var result = transportAvController.Get(null);
+            var result = transportAvController.Get(null, null);
 
             // Assert
             Assert.IsNotNull(result);

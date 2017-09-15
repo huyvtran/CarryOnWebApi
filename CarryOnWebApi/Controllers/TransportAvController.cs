@@ -25,20 +25,15 @@ namespace CarryOnWebApi.Controllers
             this.logger = logger;
             configuration = _config;
         }
-
-        // GET: api/TransportAv
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+        
         //[AuthorizeUser]
-        public ResultModel<List<TransportAvModel>> Get(Guid? id)
+        [Route("api/TransportAv/Get")]
+        public ResultModel<List<TransportAvModel>> Get(Guid? id, Guid? userId)
         {
-            logger.LogApi(() => Get(id), null);
+            logger.LogApi(() => Get(id, userId), null);
 
             var resultModel = new ResultModel<List<TransportAvModel>>();
-            resultModel.ResultData = _transportAvService.GetTransportAv(id);
+            resultModel.ResultData = _transportAvService.GetTransportAv(id, userId);
 
             /* Return data */
             resultModel.OperationResult = true;
@@ -48,14 +43,17 @@ namespace CarryOnWebApi.Controllers
         [AuthorizeUser]
         [HttpPost]
 
-        public ResultModel<List<TransportAvModel>> GetFiltered(FilterParams filterparams)
+        [Route("api/TransportAv/FilteredTrAv")]
+        public ResultModel<List<TransportAvModel>> FilteredTrAv(SearchRtFilter filterparams)
         {
-            logger.LogApi(() => GetFiltered(filterparams), null);
+            logger.LogApi(() => FilteredTrAv(filterparams), null);
 
             var resultModel = new ResultModel<List<TransportAvModel>>();
 
             /* TO BE DEVELOPED */
-            resultModel.ResultData = _transportAvService.GetTransportAv(null);
+            Guid? _id = (filterparams != null && filterparams.TranspAvFilter != null) ? (Guid?)filterparams.TranspAvFilter.Id : null;
+            Guid? _userId = (filterparams != null && filterparams.TranspAvFilter != null) ? (Guid?)filterparams.TranspAvFilter.UserId : null;
+            resultModel.ResultData = _transportAvService.GetTransportAv(_id, _userId);
 
             /* Return data */
             resultModel.OperationResult = true;

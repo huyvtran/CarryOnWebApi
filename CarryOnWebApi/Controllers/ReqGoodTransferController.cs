@@ -26,37 +26,35 @@ namespace CarryOnWebApi.Controllers
             this.logger = logger;
             configuration = _config;
         }
-
-        // GET: api/ReqGoodTransfer
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+        
+        [Route("api/ReqGoodTransfer/Get")]
         //[AuthorizeUser]
-        public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id)
+        public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id, Guid? userId)
         {
-            logger.LogApi(() => Get(id), null);
+            logger.LogApi(() => Get(id, userId), null);
 
             var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
-            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(id);
+            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(id, userId);
 
             /* Return data */
             resultModel.OperationResult = true;
             return resultModel;
         }
-
-        [AuthorizeUser]
+        
+        //[AuthorizeUser]
         [HttpPost]
 
-        public ResultModel<List<ReqGoodTransferModel>> GetFiltered(FilterParams filterparams)
+        [Route("api/ReqGoodTransfer/FilteredRqgt")]
+        public ResultModel<List<ReqGoodTransferModel>> FilteredRqgt(SearchRtFilter filterparams)
         {
-            logger.LogApi(() => GetFiltered(filterparams), null);
+            logger.LogApi(() => FilteredRqgt(filterparams), null);
 
             var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
 
             /* TO BE DEVELOPED */
-            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(null);
+            Guid? _id = (filterparams != null && filterparams.RqgtFilter != null) ? (Guid?)filterparams.RqgtFilter.Id : null;
+            Guid? _userId = (filterparams != null && filterparams.RqgtFilter != null) ? (Guid?)filterparams.RqgtFilter.UserId : null;
+            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(_id, _userId);
 
             /* Return data */
             resultModel.OperationResult = true;
