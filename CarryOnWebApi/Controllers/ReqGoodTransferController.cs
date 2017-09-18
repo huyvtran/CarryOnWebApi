@@ -40,7 +40,7 @@ namespace CarryOnWebApi.Controllers
             resultModel.OperationResult = true;
             return resultModel;
         }
-        
+
         //[AuthorizeUser]
         [HttpPost]
 
@@ -55,6 +55,20 @@ namespace CarryOnWebApi.Controllers
             Guid? _id = (filterparams != null && filterparams.RqgtFilter != null) ? (Guid?)filterparams.RqgtFilter.Id : null;
             Guid? _userId = (filterparams != null && filterparams.RqgtFilter != null) ? (Guid?)filterparams.RqgtFilter.UserId : null;
             resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(_id, _userId);
+
+            /* Return data */
+            resultModel.OperationResult = true;
+            return resultModel;
+        }
+
+        [Route("api/ReqGoodTransfer/GetOptionsList")]
+        //[AuthorizeUser]
+        public ResultModel<List<ReqGoodTransportOptions>> GetOptionsList(Guid? id)
+        {
+            logger.LogApi(() => GetOptionsList(id), null);
+
+            var resultModel = new ResultModel<List<ReqGoodTransportOptions>>();
+            resultModel.ResultData = _reqGoodTransferService.GetOptionsList(id);
 
             /* Return data */
             resultModel.OperationResult = true;
