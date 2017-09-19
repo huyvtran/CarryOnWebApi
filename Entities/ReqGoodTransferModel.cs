@@ -28,7 +28,7 @@ namespace Entities
         public GeoCodeResult destAddress { get; set; }
         public GeoCodeResult userAddress { get; set; }
 
-        public List<ReqGoodTransportOptions> ReqGoodTransportOpt { get; set; }
+        public Dictionary<string, string> ReqGoodTransportOpt { get; set; }
         
     }
 }

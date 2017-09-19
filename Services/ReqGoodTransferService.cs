@@ -82,8 +82,13 @@ namespace Services
                 /* Add ReqGoodTransfer options items */
                 foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                 {
-                    optItem.TransportId = reqGoodTransportId;
-                    _dbManager.InsertReqGoodTransferOption(optItem);
+                    ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
+                    {
+                        TransportId = reqGoodTransportId,
+                        OptKey = optItem.Key,
+                        OptValue = optItem.Value
+                    };
+                    _dbManager.InsertReqGoodTransferOption(optToAdd);
                 }
 
                 return resultModel;
@@ -130,7 +135,13 @@ namespace Services
                 /* Add ReqGoodTransfer options items */
                 foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                 {
-                    _dbManager.UpdateReqGoodTransferOption(optItem);
+                    ReqGoodTransportOptions optToUpd = new ReqGoodTransportOptions
+                    {
+                        TransportId = rqtModel.Id,
+                        OptKey = optItem.Key,
+                        OptValue = optItem.Value
+                    };
+                    _dbManager.UpdateReqGoodTransferOption(optToUpd);
                 }
 
                 return resultModel;
@@ -185,16 +196,15 @@ namespace Services
             return resultModel;
         }
 
-        public List<ReqGoodTransportOptions> GetOptionsList(Guid? reqId)
+        public Dictionary<string, string> GetOptionsList(Guid? reqId)
         {
             logger.Log(() => GetOptionsList(reqId));
-            var retList = new List<ReqGoodTransportOptions>();
+            var retList = new Dictionary<string, string>();
 
             /* Foreach item, get transport options */
-            retList = new List<ReqGoodTransportOptions>();
+            retList = new Dictionary<string, string>();
             var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId((Guid)reqId);
-            retList.AddRange(transportGoodOpt.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
-
+            transportGoodOpt.ForEach(x => retList.Add(x.OptKey, x.OptValue));
             return retList;
         }
     }

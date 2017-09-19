@@ -7,7 +7,7 @@
   <parameter name="CarryOnEntities-Web.config Connection String" description="" value="metadata=res://*/CarryOn.csdl|res://*/CarryOn.ssdl|res://*/CarryOn.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PC1545\SQLEXPRESS12;initial catalog=CarryOn;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\mfo\\Projects\\CarryOn\\Code\\WebAPI\\CarryOnWebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CarryOnEntities']/@connectionString" />
   </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-CarryOnWebApi-20170818043609.mdf;Initial Catalog=aspnet-CarryOnWebApi-20170818043609;Integrated Security=True" tags="SqlConnectionString">
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-CarryOnWebApi-20170818043609.mdf;Initial Catalog=aspnet-CarryOnWebApi-20170818043609;Integrated Security=True" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\mfo\\Projects\\CarryOn\\Code\\WebAPI\\CarryOnWebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>

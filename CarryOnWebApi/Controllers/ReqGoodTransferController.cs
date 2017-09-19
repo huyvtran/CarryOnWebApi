@@ -63,11 +63,11 @@ namespace CarryOnWebApi.Controllers
 
         [Route("api/ReqGoodTransfer/GetOptionsList")]
         //[AuthorizeUser]
-        public ResultModel<List<ReqGoodTransportOptions>> GetOptionsList(Guid? id)
+        public ResultModel<Dictionary<string, string>> GetOptionsList(Guid? id)
         {
             logger.LogApi(() => GetOptionsList(id), null);
 
-            var resultModel = new ResultModel<List<ReqGoodTransportOptions>>();
+            var resultModel = new ResultModel<Dictionary<string, string>>();
             resultModel.ResultData = _reqGoodTransferService.GetOptionsList(id);
 
             /* Return data */

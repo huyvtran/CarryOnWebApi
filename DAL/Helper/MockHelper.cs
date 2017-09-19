@@ -15,7 +15,7 @@ namespace DAL.Helper
                 {
                     AddreessDest = new Guid("d56c8abe-d3f7-44bd-8087-1f2c8fde36c1"),
                     AddressFrom = new Guid("46d26fb9-6643-4e97-a10d-8f8e0a51ad3c"),
-                    DateTransportFixed = null,
+                    DateTransportFixed = DateTime.Today,
                     DateTransportInfo = "Prima possibile",
                     DateTransportType = 1,
                     dest_formatted_address = "Via Giadi 43, Budrio (BO)",
