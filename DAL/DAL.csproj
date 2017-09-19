@@ -96,6 +96,9 @@
     <Compile Include="db_CO_TOKEN.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="db_GeoCodeAddress.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="db_ReqGoodTransfer.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
@@ -129,6 +132,12 @@
     <Compile Include="f_GetAllFieldsFromCO_TOKEN_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="f_GetAllFieldsFromGeoCodeAddress_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromGeoCodeAddress_BySomeEqualFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
@@ -147,9 +156,13 @@
     <Compile Include="f_GetAllFieldsFromTransportOptions_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeoCodeAddress.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helper\MockUserHelper.cs" />
     <Compile Include="Helper\MockHelper.cs" />
     <Compile Include="IDalManager.cs" />
+    <Compile Include="Mapper\GeoCodeMapper.cs" />
     <Compile Include="Mapper\ReqGoodTransferMapper.cs" />
     <Compile Include="Mapper\TransportAvMapper.cs" />
     <Compile Include="Mapper\UserMapper.cs" />
@@ -160,10 +173,16 @@
     <Compile Include="ReqGoodTransferWithAddresses.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="RqgtWithGeoCodeAddresses.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="TransportAv.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="TransportAvWithAddresses.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransportAvWithGeoCodeAddresses.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="TransportOptions.cs">

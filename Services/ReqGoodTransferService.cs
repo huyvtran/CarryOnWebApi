@@ -38,14 +38,6 @@ namespace Services
                 retList.Add(ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
             }
 
-            /* Foreach item, get transport options */
-            foreach (var retItem in retList)
-            {
-                retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
-                var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
-                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
-            }
-
             return retList;
         }
 
@@ -70,40 +62,12 @@ namespace Services
                 var addressDestId = Guid.NewGuid();
                 var reqGoodTransportId = Guid.NewGuid();
 
-                var addressFrom = new AddressModel
-                {
-                    AddressID = addressFromId,
-                    Type = rqtModel.FromType,
-                    County = rqtModel.FromCounty,
-                    Country = rqtModel.FromCountry,
-                    District = rqtModel.FromDistrict,
-                    HouseName = rqtModel.FromHouseName,
-                    CreationDate = rqtModel.FromCreationDate,
-                    HouseNumber = rqtModel.FromHouseNumber,
-                    PostCode = rqtModel.FromPostCode,
-                    Street1 = rqtModel.FromStreet1,
-                    Street2 = rqtModel.FromStreet2,
-                    Town = rqtModel.FromTown
-                };
-
+                /* Add addresses destination */
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
                 _dbManager.InsertAddress(addressFrom);
 
                 /* Add addresses destination */
-                var addressDest = new AddressModel
-                {
-                    AddressID = addressDestId,
-                    Type = rqtModel.DestType,
-                    County = rqtModel.DestCounty,
-                    Country = rqtModel.DestCountry,
-                    District = rqtModel.DestDistrict,
-                    HouseName = rqtModel.DestHouseName,
-                    CreationDate = rqtModel.DestCreationDate,
-                    HouseNumber = rqtModel.DestHouseNumber,
-                    PostCode = rqtModel.DestPostCode,
-                    Street1 = rqtModel.DestStreet1,
-                    Street2 = rqtModel.DestStreet2,
-                    Town = rqtModel.DestTown
-                };
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
                 _dbManager.InsertAddress(addressDest);
 
                 /* Add ReqGoodTransfer item */
@@ -114,7 +78,7 @@ namespace Services
                 db_ReqGoodTransferModel.AddreessDest = addressDestId;
                 /* Add to db */
                 _dbManager.InsertReqGoodTransfer(db_ReqGoodTransferModel);
-                
+
                 /* Add ReqGoodTransfer options items */
                 foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                 {
@@ -151,40 +115,11 @@ namespace Services
                 }
 
                 /* Add addresses from */
-                var addressFrom = new AddressModel
-                {
-                    AddressID = (Guid)rqtModel.AddressFrom,
-                    Type = rqtModel.FromType,
-                    County = rqtModel.FromCounty,
-                    Country = rqtModel.FromCountry,
-                    District = rqtModel.FromDistrict,
-                    HouseName = rqtModel.FromHouseName,
-                    CreationDate = rqtModel.FromCreationDate,
-                    HouseNumber = rqtModel.FromHouseNumber,
-                    PostCode = rqtModel.FromPostCode,
-                    Street1 = rqtModel.FromStreet1,
-                    Street2 = rqtModel.FromStreet2,
-                    Town = rqtModel.FromTown
-                };
-
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
                 _dbManager.UpdateAddress(addressFrom);
 
                 /* Add addresses destination */
-                var addressDest = new AddressModel
-                {
-                    AddressID = (Guid)rqtModel.AddreessDest,
-                    Type = rqtModel.DestType,
-                    County = rqtModel.DestCounty,
-                    Country = rqtModel.DestCountry,
-                    District = rqtModel.DestDistrict,
-                    HouseName = rqtModel.DestHouseName,
-                    CreationDate = rqtModel.DestCreationDate,
-                    HouseNumber = rqtModel.DestHouseNumber,
-                    PostCode = rqtModel.DestPostCode,
-                    Street1 = rqtModel.DestStreet1,
-                    Street2 = rqtModel.DestStreet2,
-                    Town = rqtModel.DestTown
-                };
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
                 _dbManager.UpdateAddress(addressDest);
 
                 /* Add ReqGoodTransfer item */
@@ -231,13 +166,14 @@ namespace Services
                 /* Delete addresses dest */
                 _dbManager.DeleteAddress((Guid)existing_ReqGoodTransfer.AddreessDest);
                 /* Delete ReqGoodTransfer options items */
-                _dbManager.DeleteReqGoodTransferOption(new ReqGoodTransportOptions {
+                _dbManager.DeleteReqGoodTransferOption(new ReqGoodTransportOptions
+                {
                     TransportId = existing_ReqGoodTransfer.Id,
                     OptKey = null,
                     OptValue = null
                 });
                 /* Delete ReqGoodTransfer item */
-                _dbManager.DeleteReqGoodTransfer(existing_ReqGoodTransfer.Id);                
+                _dbManager.DeleteReqGoodTransfer(existing_ReqGoodTransfer.Id);
                 return resultModel;
             }
             catch (Exception e)
@@ -247,6 +183,19 @@ namespace Services
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }
             return resultModel;
+        }
+
+        public List<ReqGoodTransportOptions> GetOptionsList(Guid? reqId)
+        {
+            logger.Log(() => GetOptionsList(reqId));
+            var retList = new List<ReqGoodTransportOptions>();
+
+            /* Foreach item, get transport options */
+            retList = new List<ReqGoodTransportOptions>();
+            var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId((Guid)reqId);
+            retList.AddRange(transportGoodOpt.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList());
+
+            return retList;
         }
     }
 }

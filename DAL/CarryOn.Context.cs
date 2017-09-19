@@ -36,6 +36,9 @@ namespace DAL
         public virtual DbSet<CO_VW_USER_TOKEN> CO_VW_USER_TOKEN { get; set; }
         public virtual DbSet<TransportAv> TransportAv { get; set; }
         public virtual DbSet<TransportAvWithAddresses> TransportAvWithAddresses { get; set; }
+        public virtual DbSet<GeoCodeAddress> GeoCodeAddress { get; set; }
+        public virtual DbSet<RqgtWithGeoCodeAddresses> RqgtWithGeoCodeAddresses { get; set; }
+        public virtual DbSet<TransportAvWithGeoCodeAddresses> TransportAvWithGeoCodeAddresses { get; set; }
     
         public virtual int f_DeleteFromReqGoodTransfer_ByKeyFields(Nullable<System.Guid> id)
         {
@@ -932,6 +935,99 @@ namespace DAL
                 new ObjectParameter("VolRequired", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransferWithAddresses>("f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields", idParameter, addressFromParameter, addreessDestParameter, dateTransportFixedParameter, dateTransportTypeParameter, dateTransportInfoParameter, requestStateParameter, userIdParameter, volRequiredParameter);
+        }
+    
+        public virtual int f_DeleteFromGeoCodeAddress_ByKeyFields(Nullable<System.Guid> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_DeleteFromGeoCodeAddress_ByKeyFields", idParameter);
+        }
+    
+        public virtual ObjectResult<db_GeoCodeAddress> f_GetAllFieldsFromGeoCodeAddress_ByKeyFields(Nullable<System.Guid> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_GeoCodeAddress>("f_GetAllFieldsFromGeoCodeAddress_ByKeyFields", idParameter);
+        }
+    
+        public virtual ObjectResult<db_GeoCodeAddress> f_GetAllFieldsFromGeoCodeAddress_BySomeEqualFields(Nullable<System.Guid> id, string formatted_address, string location_type, string lat, string lng)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var formatted_addressParameter = formatted_address != null ?
+                new ObjectParameter("formatted_address", formatted_address) :
+                new ObjectParameter("formatted_address", typeof(string));
+    
+            var location_typeParameter = location_type != null ?
+                new ObjectParameter("location_type", location_type) :
+                new ObjectParameter("location_type", typeof(string));
+    
+            var latParameter = lat != null ?
+                new ObjectParameter("lat", lat) :
+                new ObjectParameter("lat", typeof(string));
+    
+            var lngParameter = lng != null ?
+                new ObjectParameter("lng", lng) :
+                new ObjectParameter("lng", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_GeoCodeAddress>("f_GetAllFieldsFromGeoCodeAddress_BySomeEqualFields", idParameter, formatted_addressParameter, location_typeParameter, latParameter, lngParameter);
+        }
+    
+        public virtual int f_InsertIntoGeoCodeAddress(Nullable<System.Guid> id, string formatted_address, string location_type, string lat, string lng)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var formatted_addressParameter = formatted_address != null ?
+                new ObjectParameter("formatted_address", formatted_address) :
+                new ObjectParameter("formatted_address", typeof(string));
+    
+            var location_typeParameter = location_type != null ?
+                new ObjectParameter("location_type", location_type) :
+                new ObjectParameter("location_type", typeof(string));
+    
+            var latParameter = lat != null ?
+                new ObjectParameter("lat", lat) :
+                new ObjectParameter("lat", typeof(string));
+    
+            var lngParameter = lng != null ?
+                new ObjectParameter("lng", lng) :
+                new ObjectParameter("lng", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_InsertIntoGeoCodeAddress", idParameter, formatted_addressParameter, location_typeParameter, latParameter, lngParameter);
+        }
+    
+        public virtual int f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields(Nullable<System.Guid> id, string formatted_address, string location_type, string lat, string lng)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var formatted_addressParameter = formatted_address != null ?
+                new ObjectParameter("formatted_address", formatted_address) :
+                new ObjectParameter("formatted_address", typeof(string));
+    
+            var location_typeParameter = location_type != null ?
+                new ObjectParameter("location_type", location_type) :
+                new ObjectParameter("location_type", typeof(string));
+    
+            var latParameter = lat != null ?
+                new ObjectParameter("lat", lat) :
+                new ObjectParameter("lat", typeof(string));
+    
+            var lngParameter = lng != null ?
+                new ObjectParameter("lng", lng) :
+                new ObjectParameter("lng", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields", idParameter, formatted_addressParameter, location_typeParameter, latParameter, lngParameter);
         }
     }
 }

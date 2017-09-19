@@ -24,18 +24,24 @@ namespace DAL.Mapper
             reqGoodTransfer_ModelToDb = config_reqGoodTransfer_ModelToDb.CreateMapper();
 
             /* reqGoodTransferOption_DbToModel */
-            var config_reqGoodTransferOption_DbToModel = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<db_ReqGoodTransferWithAddresses, ReqGoodTransferModel>());
+            var config_reqGoodTransferOption_DbToModel = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<db_ReqGoodTransportOptions, ReqGoodTransportOptions>());
             reqGoodTransferOption_DbToModel = config_reqGoodTransferOption_DbToModel.CreateMapper();
         }
 
         public static ReqGoodTransferModel ReqGoodTransfer_DbToModel(db_ReqGoodTransferWithAddresses db_rqtItem)
-        {            
-            return reqGoodTransfer_DbToModel.Map<ReqGoodTransferModel>(db_rqtItem);
+        {
+            ReqGoodTransferModel retModel = reqGoodTransfer_DbToModel.Map<ReqGoodTransferModel>(db_rqtItem);
+            /* now fill all addresses */
+            GeoCodeMapper.fillModelAddressesFromDb(retModel, db_rqtItem);
+            return retModel;
         }
 
-        public static db_ReqGoodTransferWithAddresses ReqGoodTransfer_ModelToDb(ReqGoodTransferModel db_rqtItem)
+        public static db_ReqGoodTransferWithAddresses ReqGoodTransfer_ModelToDb(ReqGoodTransferModel model)
         {
-            return reqGoodTransfer_ModelToDb.Map<db_ReqGoodTransferWithAddresses>(db_rqtItem);
+            db_ReqGoodTransferWithAddresses db_item = reqGoodTransfer_ModelToDb.Map<db_ReqGoodTransferWithAddresses>(model);
+            /* now fill all addresses */
+            GeoCodeMapper.fillDbFieldsAddressesFromModel(db_item, model);
+            return db_item;
         }
 
         public static ReqGoodTransportOptions ReqGoodTransferOption_DbToModel(db_ReqGoodTransportOptions db_optionItem)

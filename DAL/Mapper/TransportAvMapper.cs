@@ -29,13 +29,19 @@ namespace DAL.Mapper
         }
 
         public static TransportAvModel TransportAv_DbToModel(db_TransportAvWithAddress db_rqtItem)
-        {            
-            return transportAv_DbToModel.Map<TransportAvModel>(db_rqtItem);
+        {
+            TransportAvModel retModel = transportAv_DbToModel.Map<TransportAvModel>(db_rqtItem);
+            /* now fill all addresses */
+            GeoCodeMapper.fillModelAddressesFromDb(retModel, db_rqtItem);
+            return retModel;
         }
 
-        public static db_TransportAvWithAddress TransportAv_ModelToDb(TransportAvModel db_rqtItem)
+        public static db_TransportAvWithAddress TransportAv_ModelToDb(TransportAvModel model)
         {
-            return transportAv_ModelToDb.Map<db_TransportAvWithAddress>(db_rqtItem);
+            db_TransportAvWithAddress db_item = transportAv_ModelToDb.Map<db_TransportAvWithAddress>(model);
+            /* now fill all addresses */
+            GeoCodeMapper.fillDbFieldsAddressesFromModel(db_item, model);
+            return db_item;
         }
 
         public static ReqGoodTransportOptions TransportAvOption_DbToModel(db_ReqGoodTransportOptions db_optionItem)

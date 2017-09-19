@@ -38,6 +38,8 @@
     <Property Name="UserId" Type="Guid" />
     <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_ReqGoodTransfer_CO01UT" FromRole="ReqGoodTransfer" ToRole="CO01UT" />
     <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GeoCodeAddress" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses2" FromRole="ReqGoodTransfer" ToRole="GeoCodeAddress" />
+    <NavigationProperty Name="GeoCodeAddress1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses11" FromRole="ReqGoodTransfer" ToRole="GeoCodeAddress" />
   </EntityType>
   <EntityContainer Name="CarryOnEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Addresses" />
@@ -326,6 +328,52 @@
       <Parameter Name="UserId" Mode="In" Type="Guid" />
       <Parameter Name="VolRequired" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="GeoCodeAddress" EntityType="CarryOnModel.GeoCodeAddress" />
+    <EntitySet Name="RqgtWithGeoCodeAddresses" EntityType="CarryOnModel.RqgtWithGeoCodeAddresses" />
+    <EntitySet Name="TransportAvWithGeoCodeAddresses" EntityType="CarryOnModel.TransportAvWithGeoCodeAddresses" />
+    <AssociationSet Name="FK_ReqGoodTransfer_Addresses2" Association="CarryOnModel.FK_ReqGoodTransfer_Addresses2">
+      <End Role="GeoCodeAddress" EntitySet="GeoCodeAddress" />
+      <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReqGoodTransfer_Addresses11" Association="CarryOnModel.FK_ReqGoodTransfer_Addresses11">
+      <End Role="GeoCodeAddress" EntitySet="GeoCodeAddress" />
+      <End Role="ReqGoodTransfer" EntitySet="ReqGoodTransfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransportAv_Addresses2" Association="CarryOnModel.FK_TransportAv_Addresses2">
+      <End Role="GeoCodeAddress" EntitySet="GeoCodeAddress" />
+      <End Role="TransportAv" EntitySet="TransportAv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransportAv_Addresses11" Association="CarryOnModel.FK_TransportAv_Addresses11">
+      <End Role="GeoCodeAddress" EntitySet="GeoCodeAddress" />
+      <End Role="TransportAv" EntitySet="TransportAv" />
+    </AssociationSet>
+    <FunctionImport Name="f_DeleteFromGeoCodeAddress_ByKeyFields">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromGeoCodeAddress_ByKeyFields" ReturnType="Collection(CarryOnModel.db_GeoCodeAddress)">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="f_GetAllFieldsFromGeoCodeAddress_BySomeEqualFields" ReturnType="Collection(CarryOnModel.db_GeoCodeAddress)">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+      <Parameter Name="formatted_address" Mode="In" Type="String" />
+      <Parameter Name="location_type" Mode="In" Type="String" />
+      <Parameter Name="lat" Mode="In" Type="String" />
+      <Parameter Name="lng" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_InsertIntoGeoCodeAddress">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+      <Parameter Name="formatted_address" Mode="In" Type="String" />
+      <Parameter Name="location_type" Mode="In" Type="String" />
+      <Parameter Name="lat" Mode="In" Type="String" />
+      <Parameter Name="lng" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields">
+      <Parameter Name="Id" Mode="In" Type="Guid" />
+      <Parameter Name="formatted_address" Mode="In" Type="String" />
+      <Parameter Name="location_type" Mode="In" Type="String" />
+      <Parameter Name="lat" Mode="In" Type="String" />
+      <Parameter Name="lng" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_ReqGoodTransfer_Addresses">
     <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -400,39 +448,6 @@
     <Property Type="Int32" Name="DateTransportType" Nullable="false" />
     <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="RequestState" Nullable="false" />
-    <Property Type="Int32" Name="FromType" Nullable="false" />
-    <Property Type="String" Name="FromCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="FromCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="FromDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="FromHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="FromCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="FromHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="FromPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="FromStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="FromStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="FromTown" Nullable="true" MaxLength="25" />
-    <Property Type="Int32" Name="DestType" Nullable="false" />
-    <Property Type="String" Name="DestCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="DestCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="DestDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="DestHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="DestCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="DestHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="DestPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="DestStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="DestStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="DestTown" Nullable="true" MaxLength="25" />
-    <Property Type="Int32" Name="UserType" Nullable="false" />
-    <Property Type="String" Name="UserCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="UserCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="UserDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="UserHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="UserCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="UserHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="UserPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="UserStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="UserStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="UserTown" Nullable="true" MaxLength="25" />
     <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
@@ -440,6 +455,18 @@
     <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
     <Property Type="String" Name="VolRequired" Nullable="true" MaxLength="50" />
     <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="from_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="from_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="dest_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
   </ComplexType>
   <EntityType Name="CO01UT">
     <Key>
@@ -782,6 +809,8 @@
     <NavigationProperty Name="Addresses" Relationship="CarryOnModel.FK_TransportAv_Addresses" FromRole="TransportAv" ToRole="Addresses" />
     <NavigationProperty Name="Addresses1" Relationship="CarryOnModel.FK_TransportAv_Addresses1" FromRole="TransportAv" ToRole="Addresses" />
     <NavigationProperty Name="CO01UT" Relationship="CarryOnModel.FK_TransportAv_CO01UT" FromRole="TransportAv" ToRole="CO01UT" />
+    <NavigationProperty Name="GeoCodeAddress" Relationship="CarryOnModel.FK_TransportAv_Addresses2" FromRole="TransportAv" ToRole="GeoCodeAddress" />
+    <NavigationProperty Name="GeoCodeAddress1" Relationship="CarryOnModel.FK_TransportAv_Addresses11" FromRole="TransportAv" ToRole="GeoCodeAddress" />
   </EntityType>
   <EntityType Name="TransportAvWithAddresses">
     <Key>
@@ -907,45 +936,175 @@
     <Property Type="Int32" Name="DateTransportType" Nullable="false" />
     <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="RequestState" Nullable="false" />
-    <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="FromType" Nullable="false" />
-    <Property Type="String" Name="FromCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="FromCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="FromDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="FromHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="FromCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="FromHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="FromPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="FromStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="FromStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="FromTown" Nullable="true" MaxLength="25" />
-    <Property Type="Int32" Name="DestType" Nullable="false" />
-    <Property Type="String" Name="DestCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="DestCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="DestDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="DestHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="DestCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="DestHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="DestPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="DestStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="DestStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="DestTown" Nullable="true" MaxLength="25" />
-    <Property Type="Int32" Name="UserType" Nullable="false" />
-    <Property Type="String" Name="UserCounty" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="UserCountry" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="UserDistrict" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="UserHouseName" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="UserCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="UserHouseNumber" Nullable="true" MaxLength="5" />
-    <Property Type="String" Name="UserPostCode" Nullable="true" MaxLength="9" />
-    <Property Type="String" Name="UserStreet1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="UserStreet2" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="UserTown" Nullable="true" MaxLength="25" />
     <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
     <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="from_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="from_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="dest_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="GeoCodeAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ReqGoodTransfer" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses2" FromRole="GeoCodeAddress" ToRole="ReqGoodTransfer" />
+    <NavigationProperty Name="ReqGoodTransfer1" Relationship="CarryOnModel.FK_ReqGoodTransfer_Addresses11" FromRole="GeoCodeAddress" ToRole="ReqGoodTransfer" />
+    <NavigationProperty Name="TransportAv" Relationship="CarryOnModel.FK_TransportAv_Addresses2" FromRole="GeoCodeAddress" ToRole="TransportAv" />
+    <NavigationProperty Name="TransportAv1" Relationship="CarryOnModel.FK_TransportAv_Addresses11" FromRole="GeoCodeAddress" ToRole="TransportAv" />
+  </EntityType>
+  <EntityType Name="RqgtWithGeoCodeAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DateTransportType" />
+      <PropertyRef Name="RequestState" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="AddressFrom" Type="Guid" />
+    <Property Name="AddreessDest" Type="Guid" />
+    <Property Name="DateTransportFixed" Type="DateTime" Precision="3" />
+    <Property Name="DateTransportType" Type="Int32" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RequestState" Type="Int32" Nullable="false" />
+    <Property Name="VolRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="from_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="from_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="from_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="from_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="dest_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="dest_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dest_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="dest_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="user_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="user_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="user_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TransportAvWithGeoCodeAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DateTransportType" />
+      <PropertyRef Name="RequestState" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="AddressFrom" Type="Guid" />
+    <Property Name="AddreessDest" Type="Guid" />
+    <Property Name="DateTransportFixed" Type="DateTime" Precision="3" />
+    <Property Name="DateTransportType" Type="Int32" Nullable="false" />
+    <Property Name="DateTransportInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RequestState" Type="Int32" Nullable="false" />
+    <Property Name="from_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="from_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="from_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="from_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="dest_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="dest_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dest_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="dest_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="user_formatted_address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="user_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_lat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="user_lng" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UserTELE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserTEL2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserLang" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="VolAvailable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ReqGoodTransfer_Addresses2">
+    <End Type="CarryOnModel.GeoCodeAddress" Role="GeoCodeAddress" Multiplicity="0..1" />
+    <End Type="CarryOnModel.ReqGoodTransfer" Role="ReqGoodTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeoCodeAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReqGoodTransfer">
+        <PropertyRef Name="AddressFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReqGoodTransfer_Addresses11">
+    <End Type="CarryOnModel.GeoCodeAddress" Role="GeoCodeAddress" Multiplicity="0..1" />
+    <End Type="CarryOnModel.ReqGoodTransfer" Role="ReqGoodTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeoCodeAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReqGoodTransfer">
+        <PropertyRef Name="AddreessDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransportAv_Addresses2">
+    <End Type="CarryOnModel.GeoCodeAddress" Role="GeoCodeAddress" Multiplicity="0..1" />
+    <End Type="CarryOnModel.TransportAv" Role="TransportAv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeoCodeAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransportAv">
+        <PropertyRef Name="AddressFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransportAv_Addresses11">
+    <End Type="CarryOnModel.GeoCodeAddress" Role="GeoCodeAddress" Multiplicity="0..1" />
+    <End Type="CarryOnModel.TransportAv" Role="TransportAv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeoCodeAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransportAv">
+        <PropertyRef Name="AddreessDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="f_GetAllFieldsFromGeoCodeAddress_ByKeyFields_Result">
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="lng" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="f_GetAllFieldsFromGeoCodeAddress_BySomeEqualFields_Result">
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="lng" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="db_GeoCodeAddress">
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="formatted_address" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="location_type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="lat" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="lng" Nullable="true" MaxLength="20" />
   </ComplexType>
 </Schema>

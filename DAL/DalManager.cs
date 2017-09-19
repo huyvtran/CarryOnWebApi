@@ -137,38 +137,24 @@ namespace DAL
 
         #endregion
 
-        #region Addresses
+        #region GeoCode Addresses
 
-        public void InsertAddress(AddressModel adr)
+        public void InsertAddress(db_GeoCodeAddress adr)
         {
-            entities.f_InsertIntoAddresses(adr.AddressID,
-                adr.Type,
-                adr.County,
-                adr.Country,
-                adr.District,
-                adr.HouseName,
-                adr.CreationDate,
-                adr.HouseNumber,
-                adr.PostCode,
-                adr.Street1,
-                adr.Street2,
-                adr.Town);
+            entities.f_InsertIntoGeoCodeAddress(adr.Id,
+                adr.formatted_address,
+                adr.location_type,
+                adr.lat,
+                adr.lng);
         }
 
-        public void UpdateAddress(AddressModel adr)
+        public void UpdateAddress(db_GeoCodeAddress adr)
         {
-            entities.f_UpdateAllFieldsFromAddresses_ByKeyFields(adr.AddressID,
-                adr.Type,
-                adr.County,
-                adr.Country,
-                adr.District,
-                adr.HouseName,
-                adr.CreationDate,
-                adr.HouseNumber,
-                adr.PostCode,
-                adr.Street1,
-                adr.Street2,
-                adr.Town);
+            entities.f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields(adr.Id,
+                adr.formatted_address,
+                adr.location_type,
+                adr.lat,
+                adr.lng);
         }
 
         public void DeleteAddress(Guid adrId)

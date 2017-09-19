@@ -51,5 +51,18 @@ namespace CarryOnWebApi.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetOptions()
+        {
+            // Arrange
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
+
+            // Act
+            var result = reqGoodTransferController.GetOptionsList(new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"));
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }

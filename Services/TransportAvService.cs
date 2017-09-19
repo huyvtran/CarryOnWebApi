@@ -37,13 +37,13 @@ namespace Services
                 retList.Add(TransportAvMapper.TransportAv_DbToModel(dbItem));
             }
 
-            /* Foreach item, get transport options */
-            foreach (var retItem in retList)
-            {
-                retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
-                var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
-                retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => TransportAvMapper.TransportAvOption_DbToModel(x)).ToList());
-            }
+            ///* Foreach item, get transport options */
+            //foreach (var retItem in retList)
+            //{
+            //    retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
+            //    var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
+            //    retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => TransportAvMapper.TransportAvOption_DbToModel(x)).ToList());
+            //}
 
             return retList;
         }
@@ -69,40 +69,12 @@ namespace Services
                 var addressDestId = Guid.NewGuid();
                 var reqGoodTransportId = Guid.NewGuid();
 
-                var addressFrom = new AddressModel
-                {
-                    AddressID = addressFromId,
-                    Type = rqtModel.FromType,
-                    County = rqtModel.FromCounty,
-                    Country = rqtModel.FromCountry,
-                    District = rqtModel.FromDistrict,
-                    HouseName = rqtModel.FromHouseName,
-                    CreationDate = rqtModel.FromCreationDate,
-                    HouseNumber = rqtModel.FromHouseNumber,
-                    PostCode = rqtModel.FromPostCode,
-                    Street1 = rqtModel.FromStreet1,
-                    Street2 = rqtModel.FromStreet2,
-                    Town = rqtModel.FromTown
-                };
-
+                /* Add addresses from */
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
                 _dbManager.InsertAddress(addressFrom);
 
                 /* Add addresses destination */
-                var addressDest = new AddressModel
-                {
-                    AddressID = addressDestId,
-                    Type = rqtModel.DestType,
-                    County = rqtModel.DestCounty,
-                    Country = rqtModel.DestCountry,
-                    District = rqtModel.DestDistrict,
-                    HouseName = rqtModel.DestHouseName,
-                    CreationDate = rqtModel.DestCreationDate,
-                    HouseNumber = rqtModel.DestHouseNumber,
-                    PostCode = rqtModel.DestPostCode,
-                    Street1 = rqtModel.DestStreet1,
-                    Street2 = rqtModel.DestStreet2,
-                    Town = rqtModel.DestTown
-                };
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
                 _dbManager.InsertAddress(addressDest);
 
                 /* Add TransportAv item */
@@ -150,40 +122,11 @@ namespace Services
                 }
 
                 /* Add addresses from */
-                var addressFrom = new AddressModel
-                {
-                    AddressID = (Guid)rqtModel.AddressFrom,
-                    Type = rqtModel.FromType,
-                    County = rqtModel.FromCounty,
-                    Country = rqtModel.FromCountry,
-                    District = rqtModel.FromDistrict,
-                    HouseName = rqtModel.FromHouseName,
-                    CreationDate = rqtModel.FromCreationDate,
-                    HouseNumber = rqtModel.FromHouseNumber,
-                    PostCode = rqtModel.FromPostCode,
-                    Street1 = rqtModel.FromStreet1,
-                    Street2 = rqtModel.FromStreet2,
-                    Town = rqtModel.FromTown
-                };
-
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
                 _dbManager.UpdateAddress(addressFrom);
 
                 /* Add addresses destination */
-                var addressDest = new AddressModel
-                {
-                    AddressID = (Guid)rqtModel.AddreessDest,
-                    Type = rqtModel.DestType,
-                    County = rqtModel.DestCounty,
-                    Country = rqtModel.DestCountry,
-                    District = rqtModel.DestDistrict,
-                    HouseName = rqtModel.DestHouseName,
-                    CreationDate = rqtModel.DestCreationDate,
-                    HouseNumber = rqtModel.DestHouseNumber,
-                    PostCode = rqtModel.DestPostCode,
-                    Street1 = rqtModel.DestStreet1,
-                    Street2 = rqtModel.DestStreet2,
-                    Town = rqtModel.DestTown
-                };
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
                 _dbManager.UpdateAddress(addressDest);
 
                 /* Add TransportAv item */

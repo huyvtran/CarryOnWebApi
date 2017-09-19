@@ -108,12 +108,12 @@ namespace DAL
 
         #region Addresses
 
-        public void InsertAddress(AddressModel adr)
+        public void InsertAddress(db_GeoCodeAddress adr)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateAddress(AddressModel adr)
+        public void UpdateAddress(db_GeoCodeAddress adr)
         {
             throw new NotImplementedException();
         }
@@ -158,7 +158,17 @@ namespace DAL
 
         public List<db_ReqGoodTransportOptions> GetReqGoodTransportOptionsByTransportId(Guid transportId)
         {
-            return new List<db_ReqGoodTransportOptions>();
+            return new List<db_ReqGoodTransportOptions>() {
+                new db_ReqGoodTransportOptions {
+                    OptKey = "longDesc", OptValue = "Descrizione dell'annuncio inserito tramite dati di test utilizzati ai fini di prove in fase di sviluppo.Descrizione dell'annuncio inserito tramite dati di test utilizzati ai fini di prove in fase di sviluppo. Descrizione dell'annuncio inserito tramite dati di test utilizzati ai fini di prove in fase di sviluppo."
+                },
+                new db_ReqGoodTransportOptions {
+                    OptKey = "fragile", OptValue = "true"
+                },
+                new db_ReqGoodTransportOptions {
+                    OptKey = "frigoCell", OptValue = "true"
+                }
+            };
         }
 
         public void InsertReqGoodTransferOption(ReqGoodTransportOptions reqGoodTransferOptionItem)

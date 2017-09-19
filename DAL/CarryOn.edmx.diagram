@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="000b17b765994d4ba1620823c0d042d4" Name="Diagram1">
+      <Diagram DiagramId="000b17b765994d4ba1620823c0d042d4" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="CarryOnModel.Addresses" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarryOnModel.ReqGoodTransfer" Width="2.125" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_Addresses" />
@@ -21,6 +21,13 @@
         <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses" />
         <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses1" />
         <AssociationConnector Association="CarryOnModel.FK_TransportAv_CO01UT" />
+        <EntityTypeShape EntityType="CarryOnModel.GeoCodeAddress" Width="1.5" PointX="9.375" PointY="10" />
+        <EntityTypeShape EntityType="CarryOnModel.RqgtWithGeoCodeAddresses" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CarryOnModel.TransportAvWithGeoCodeAddresses" Width="1.5" PointX="12.375" PointY="0.75" />
+        <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_Addresses2" />
+        <AssociationConnector Association="CarryOnModel.FK_ReqGoodTransfer_Addresses11" />
+        <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses2" />
+        <AssociationConnector Association="CarryOnModel.FK_TransportAv_Addresses11" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

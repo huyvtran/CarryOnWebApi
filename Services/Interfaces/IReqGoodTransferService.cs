@@ -15,6 +15,6 @@ namespace Services.Interfaces
         BaseResultModel UpdateReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user);
         BaseResultModel DeleteReqGoodTransfer(Guid rgtId, UserModel user);
 
-        
+        List<ReqGoodTransportOptions> GetOptionsList(Guid? reqId);
     }
 }

@@ -27,5 +27,7 @@ namespace DAL
         public virtual Addresses Addresses { get; set; }
         public virtual Addresses Addresses1 { get; set; }
         public virtual CO01UT CO01UT { get; set; }
+        public virtual GeoCodeAddress GeoCodeAddress { get; set; }
+        public virtual GeoCodeAddress GeoCodeAddress1 { get; set; }
     }
 }

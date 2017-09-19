@@ -18,46 +18,25 @@ namespace DAL.Helper
                     DateTransportFixed = null,
                     DateTransportInfo = "Prima possibile",
                     DateTransportType = 1,
-                    DestCountry = "Italia",
-                    DestCounty = "Pesaro",
-                    DestCreationDate = null,
-                    DestDistrict = "Pesaro",
-                    DestHouseName = "",
-                    DestHouseNumber = "43",
-                    DestPostCode = "43105",
-                    DestStreet1 = "Via Giadi",
-                    DestStreet2 = "testTo",
-                    DestTown = "Budrio",
-                    DestType = 0,
-                    FromCountry = "Italia",
-                    FromCounty = "Milano",
-                    FromCreationDate = null,
-                    FromDistrict = "Milano",
-                    FromHouseName = "",
-                    FromHouseNumber = "2",
-                    FromPostCode = "20103",
-                    FromStreet1 = "Via Gaudi",
-                    FromStreet2 = "",
-                    FromTown = "Monza",
-                    FromType = 0,
+                    dest_formatted_address = "Via Giadi 43, Budrio (BO)",
+                    dest_location_type = "",
+                    dest_lat = "4,459",
+                    dest_lng = "15,7854",
+                    from_formatted_address = "Via Gaudi 2, Milano (MI)",
+                    from_location_type = "15,784",
+                    from_lat = "25,4578",
+                    from_lng = "",
+                    user_formatted_address = "Via Franceschi 8, Carrara (CR)",
+                    user_location_type = "",
+                    user_lat = "8,7452",
+                    user_lng = "12,4575",
                     Id = new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"),
                     RequestState = 0,
-                    UserCountry = "TestUser",
-                    UserCounty = "TestUser",
-                    UserCreationDate = null,
-                    UserDistrict = "TestUser",
-                    UserEmail = "mario.fornaroli@yahoo.it",
-                    UserHouseName = "TestUser",
-                    UserHouseNumber = "5",
+                    UserEmail = "luca.liguori@yahoo.it",
                     UserLang = null,
-                    UserName = null,
-                    UserPostCode = "TestUser",
-                    UserStreet1 = "TestUser",
-                    UserStreet2 = "TestUser",
+                    UserName = "Luca Liguori",
                     UserTEL2 = null,
-                    UserTELE = null,
-                    UserTown = "TestUser",
-                    UserType = 0,
+                    UserTELE = "3325784589",
                     VolRequired = "10"
                 }
             };
@@ -67,59 +46,44 @@ namespace DAL.Helper
 
         public static List<db_TransportAvWithAddress> getTransportAvList()
         {
-            var db_ReqGoodTransferList = new List<db_TransportAvWithAddress> {
-                new db_TransportAvWithAddress
-                {
-                    AddreessDest = new Guid("d56c8abe-d3f7-44bd-8087-1f2c8fde36c1"),
-                    AddressFrom = new Guid("46d26fb9-6643-4e97-a10d-8f8e0a51ad3c"),
-                    DateTransportFixed = null,
-                    DateTransportInfo = "Prima possibile",
-                    DateTransportType = 1,
-                    DestCountry = "Italia",
-                    DestCounty = "Pesaro",
-                    DestCreationDate = null,
-                    DestDistrict = "Pesaro",
-                    DestHouseName = "",
-                    DestHouseNumber = "43",
-                    DestPostCode = "43105",
-                    DestStreet1 = "Via Giadi",
-                    DestStreet2 = "testTo",
-                    DestTown = "Budrio",
-                    DestType = 0,
-                    FromCountry = "Italia",
-                    FromCounty = "Milano",
-                    FromCreationDate = null,
-                    FromDistrict = "Milano",
-                    FromHouseName = "",
-                    FromHouseNumber = "2",
-                    FromPostCode = "20103",
-                    FromStreet1 = "Via Gaudi",
-                    FromStreet2 = "",
-                    FromTown = "Monza",
-                    FromType = 0,
-                    Id = new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"),
-                    RequestState = 0,
-                    UserCountry = "TestUser",
-                    UserCounty = "TestUser",
-                    UserCreationDate = null,
-                    UserDistrict = "TestUser",
-                    UserEmail = "mario.fornaroli@yahoo.it",
-                    UserHouseName = "TestUser",
-                    UserHouseNumber = "5",
-                    UserLang = null,
-                    UserName = null,
-                    UserPostCode = "TestUser",
-                    UserStreet1 = "TestUser",
-                    UserStreet2 = "TestUser",
-                    UserTEL2 = null,
-                    UserTELE = null,
-                    UserTown = "TestUser",
-                    UserType = 0,
-                    VolAvailable = "200"
-                }
+            var rqgtItem = new db_TransportAvWithAddress
+            {
+                AddreessDest = new Guid("d56c8abe-d3f7-44bd-8087-1f2c8fde36c1"),
+                AddressFrom = new Guid("46d26fb9-6643-4e97-a10d-8f8e0a51ad3c"),
+                DateTransportFixed = null,
+                DateTransportInfo = "Prima possibile",
+                DateTransportType = 1,
+                dest_formatted_address = "Via Giadi 43, Budrio (BO)",
+                dest_location_type = "",
+                dest_lat = "4,459",
+                dest_lng = "15,7854",
+                from_formatted_address = "Via Gaudi 2, Milano (MI)",
+                from_location_type = "15,784",
+                from_lat = "25,4578",
+                from_lng = "5,877",
+                user_formatted_address = "Via Franceschi 8, Carrara (CR)",
+                user_location_type = "",
+                user_lat = "8,7452",
+                user_lng = "12,4575",
+                Id = new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"),
+                RequestState = 0,
+                UserEmail = "luca.liguori@yahoo.it",
+                UserLang = null,
+                UserName = "Luca Liguori",
+                UserTEL2 = null,
+                UserTELE = "3325784589",
+                VolAvailable = "200"
             };
+            
+            /* create list to return */
+            var db_ReqGoodTransferList = new List<db_TransportAvWithAddress> { rqgtItem };
 
             return db_ReqGoodTransferList;
-        }        
+        }
+
+        public static object getRqgtOptions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

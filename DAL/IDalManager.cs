@@ -114,13 +114,13 @@ namespace DAL
         /// Add address
         /// </summary>
         /// <param name="adr">address to add</param>
-        void InsertAddress(AddressModel adr);
+        void InsertAddress(db_GeoCodeAddress adr);
 
         /// <summary>
         /// Add address
         /// </summary>
         /// <param name="adr">address to add</param>
-        void UpdateAddress(AddressModel adr);
+        void UpdateAddress(db_GeoCodeAddress adr);
 
         /// <summary>
         /// Delete address
