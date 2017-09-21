@@ -43,7 +43,8 @@ namespace Entities.enums
         LOGIN_INVALID_MODEL,
         LOGIN_USER_PSWD_WRONG,
         DEVICE_OFFLINE,
-        ADDRESS_ADD_ERROR
+        ADDRESS_ADD_ERROR,
+        USER_NOT_PRESENT
     };
 
     public enum ActionEnum

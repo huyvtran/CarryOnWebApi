@@ -110,17 +110,17 @@ namespace DAL
 
         public void InsertAddress(db_GeoCodeAddress adr)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void UpdateAddress(db_GeoCodeAddress adr)
         {
-            throw new NotImplementedException();
+            return ;
         }
 
         public void DeleteAddress(Guid adrId)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         #endregion

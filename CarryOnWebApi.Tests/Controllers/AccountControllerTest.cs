@@ -66,9 +66,9 @@ namespace CarryOnWebApi.Tests.Controllers
             var user = MockUserHelper.getUser_feModel();
 
             /* set random data */
-            user.ID = Guid.NewGuid();
-            user.NOME = "test data";
-            user.UTEN = "test_data_" + new Random().Next(1, int.MaxValue).ToString();
+            user.UserId = Guid.NewGuid();
+            user.UserName = "test data";
+            user.UserEmail = "test_data_" + new Random().Next(1, int.MaxValue).ToString();
 
             // Act
             var result = accountController.CreateUser(user);
@@ -87,10 +87,10 @@ namespace CarryOnWebApi.Tests.Controllers
 
             /* set random data */
             string randValue = new Random().Next(1, int.MaxValue).ToString();
-            user.ID = Guid.NewGuid();
-            user.NOME = "test data";
-            user.UTEN = "test_data_" + randValue;
-            user.EMAI = randValue + user.EMAI;
+            user.UserId = Guid.NewGuid();
+            user.UserName = "test data";
+            user.UserEmail = "test_data_" + randValue;
+            user.UserEmail = randValue + user.UserEmail;
             
             // first create user
             var result = accountController.CreateUser(user);
@@ -98,14 +98,14 @@ namespace CarryOnWebApi.Tests.Controllers
 
             // then update create user
             var userToUpdate = result.ResultData;
-            userToUpdate.TELE = "55779911";
+            userToUpdate.UserTELE = "55779911";
             result = accountController.UpdateUser(user);
             Assert.IsNotNull(result);
 
             // then get user to have password
-            result = accountController.Login(new Models.LoginViewModel {Username = user.UTEN, Password=user.PASS });
+            result = accountController.Login(new Models.LoginViewModel {Username = user.UserEmail, Password=user.UserPassw });
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ResultData.TELE = "55779911");
+            Assert.IsNotNull(result.ResultData.UserPassw = "55779911");
             
             // then delete create user
             //result = accountController.DeleteUser(user);

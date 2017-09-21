@@ -140,7 +140,7 @@ namespace Services
             {
                 // check if password is corect for the current user
                 var encryptedOldPassword = PasswordGenerator.GetEncryptedPassword(oldPassword);
-                var dbUser = dbManager.GetUserByUsernameAndPassword(user.UTEN, encryptedOldPassword);
+                var dbUser = dbManager.GetUserByUsernameAndPassword(user.UserEmail, encryptedOldPassword);
                 if (dbUser == null)
                 {
                     opResult.OperationResult = false;
@@ -150,14 +150,14 @@ namespace Services
                 {
                     // update password
                     var encryptedNewPassword = PasswordGenerator.GetEncryptedPassword(newPassword);
-                    dbManager.UpdateUserPassword(user.UTEN, encryptedNewPassword);
+                    dbManager.UpdateUserPassword(user.UserEmail, encryptedNewPassword);
                 }
 
             }
             catch (Exception e)
             {
                 StringBuilder parameterStringBuilder = new StringBuilder();
-                parameterStringBuilder.Append(" username=" + user.UTEN);
+                parameterStringBuilder.Append(" username=" + user.UserEmail);
 
                 logger.Log(parameterStringBuilder.ToString(), e);
 
@@ -317,7 +317,7 @@ namespace Services
             try
             {
                 //check if username is already registerd
-                var existingUser = dbManager.GetUserByUsername(user.UTEN);
+                var existingUser = dbManager.GetUserByUsername(user.UserEmail);
                 if (existingUser != null)
                 {
                     resultModel.OperationResult = false;
@@ -326,9 +326,9 @@ namespace Services
                 }
 
                 //check if email is already registerd
-                if (!string.IsNullOrWhiteSpace(user.EMAI))
+                if (!string.IsNullOrWhiteSpace(user.UserEmail))
                 {
-                    var existingUserWithEmail = dbManager.GetUserByEmail(user.EMAI);
+                    var existingUserWithEmail = dbManager.GetUserByEmail(user.UserEmail);
                     if (existingUserWithEmail != null)
                     {
                         resultModel.OperationResult = false;
@@ -345,7 +345,7 @@ namespace Services
                 dbManager.InsertUser(userDb);
                 
                 //return inserted user
-                var newUserDb = dbManager.GetUserByUsername(user.UTEN);
+                var newUserDb = dbManager.GetUserByUsername(user.UserEmail);
                 var newUser = UserMapper.UserMapper_DbToModel(newUserDb);
                 resultModel.ResultData = newUser;
             }
@@ -365,10 +365,10 @@ namespace Services
             try
             {
                 //check if email is already registerd
-                if (!string.IsNullOrWhiteSpace(user.EMAI))
+                if (!string.IsNullOrWhiteSpace(user.UserEmail))
                 {
-                    var existingUser = dbManager.GetUserByEmail(user.EMAI);
-                    if (existingUser != null && user.EMAI.Trim() != existingUser.UTEN.Trim())
+                    var existingUser = dbManager.GetUserByEmail(user.UserEmail);
+                    if (existingUser != null && user.UserEmail.Trim() != existingUser.UTEN.Trim())
                     {
                         resultModel.OperationResult = false;
                         resultModel.ResultMessage = ErrorsEnum.EMAIL_ALREADY_PRESENT;
@@ -377,11 +377,11 @@ namespace Services
 
                 }
 
-                var userDB = dbManager.GetUserByUsername(user.UTEN);
+                var userDB = dbManager.GetUserByUsername(user.UserEmail);
                 dbManager.UpdateUser(userDB);
 
                 /* Get updated user from db */
-                var updatedUserDB = dbManager.GetUserByUsername(user.UTEN);
+                var updatedUserDB = dbManager.GetUserByUsername(user.UserEmail);
                 var updatedUser = UserMapper.UserMapper_DbToModel(updatedUserDB);
                 /* Return result */
                 resultModel.ResultData = updatedUser;

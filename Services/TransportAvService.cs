@@ -55,12 +55,12 @@ namespace Services
 
             try
             {
-                //check if username is already registerd
-                var existingUser = _dbManager.GetUserByUsername(user.UTEN);
-                if (existingUser != null)
+                //check if username exists
+                var existingUser = _dbManager.GetUserByUsername(user.UserEmail);
+                if (existingUser == null)
                 {
                     resultModel.OperationResult = false;
-                    resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
+                    resultModel.ResultMessage = ErrorsEnum.USER_NOT_PRESENT;
                     return resultModel;
                 }
 
@@ -85,12 +85,15 @@ namespace Services
                 db_TransportAvModel.AddreessDest = addressDestId;
                 /* Add to db */
                 _dbManager.InsertTransportAv(db_TransportAvModel);
-                
+
                 /* Add TransportAv options items */
-                foreach (var optItem in rqtModel.ReqGoodTransportOpt)
+                if (rqtModel.ReqGoodTransportOpt != null)
                 {
-                    optItem.TransportId = reqGoodTransportId;
-                    _dbManager.InsertReqGoodTransferOption(optItem);
+                    foreach (var optItem in rqtModel.ReqGoodTransportOpt)
+                    {
+                        optItem.TransportId = reqGoodTransportId;
+                        _dbManager.InsertReqGoodTransferOption(optItem);
+                    }
                 }
 
                 return resultModel;
@@ -113,7 +116,7 @@ namespace Services
             {
                 /* Check if item exists on db for that user */
                 var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rqtModel.Id, null, null, null
-                    , null, null, null, user.ID, null).FirstOrDefault();
+                    , null, null, null, user.UserId, null).FirstOrDefault();
                 if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;
@@ -160,7 +163,7 @@ namespace Services
             {
                 /* Check if item exists on db for the current user*/
                 var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rgtId, null, null, null
-                    , null, null, null, user.ID, null).FirstOrDefault();
+                    , null, null, null, user.UserId, null).FirstOrDefault();
                 if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;

@@ -34,7 +34,8 @@ namespace Services
         private static IConfigurationProvider CurrentConfiguration;
         private string path = "";
         private string serverPath = "";
-        private UserModel _userInfo;
+
+        //private UserModel _userInfo;
 
         public Configuration()
         {
@@ -56,17 +57,17 @@ namespace Services
         /// <summary>
         ///  Get or set user info
         /// </summary>
-        public UserModel UserInfo
-        {
-            get
-            {
-                return _userInfo;
-            }
-            set
-            {
-                _userInfo = value;
-            }
-        }
+        //public UserModel UserInfo
+        //{
+        //    get
+        //    {
+        //        return _userInfo;
+        //    }
+        //    set
+        //    {
+        //        _userInfo = value;
+        //    }
+        //}
 
         /// <summary>
         /// Gets the current.

@@ -10,7 +10,7 @@ namespace Services.Interfaces
         /// <summary>
         ///  Get or set user info
         /// </summary>
-        UserModel UserInfo { get; set; }
+        //UserModel UserInfo { get; set; }
 
         /// <summary>
         /// Gets the document folder.

@@ -48,12 +48,12 @@ namespace Services
 
             try
             {
-                //check if username is already registerd
-                var existingUser = _dbManager.GetUserByUsername(user.UTEN);
-                if (existingUser != null)
+                //check if username is existing
+                var existingUser = _dbManager.GetUserByUsername(user.UserEmail);
+                if (existingUser == null)
                 {
                     resultModel.OperationResult = false;
-                    resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
+                    resultModel.ResultMessage = ErrorsEnum.USER_NOT_PRESENT;
                     return resultModel;
                 }
 
@@ -80,15 +80,18 @@ namespace Services
                 _dbManager.InsertReqGoodTransfer(db_ReqGoodTransferModel);
 
                 /* Add ReqGoodTransfer options items */
-                foreach (var optItem in rqtModel.ReqGoodTransportOpt)
+                if (rqtModel.ReqGoodTransportOpt != null)
                 {
-                    ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
+                    foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                     {
-                        TransportId = reqGoodTransportId,
-                        OptKey = optItem.Key,
-                        OptValue = optItem.Value
-                    };
-                    _dbManager.InsertReqGoodTransferOption(optToAdd);
+                        ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
+                        {
+                            TransportId = reqGoodTransportId,
+                            OptKey = optItem.Key,
+                            OptValue = optItem.Value
+                        };
+                        _dbManager.InsertReqGoodTransferOption(optToAdd);
+                    }
                 }
 
                 return resultModel;
@@ -111,7 +114,7 @@ namespace Services
             {
                 /* Check if item exists on db for that user */
                 var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rqtModel.Id, null, null, null
-                    , null, null, null, user.ID, null).FirstOrDefault();
+                    , null, null, null, user.UserId, null).FirstOrDefault();
                 if (existing_ReqGoodTransfer == null)
                 {
                     resultModel.OperationResult = false;
@@ -164,7 +167,7 @@ namespace Services
             {
                 /* Check if item exists on db for the current user*/
                 var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rgtId, null, null, null
-                    , null, null, null, user.ID, null).FirstOrDefault();
+                    , null, null, null, user.UserId, null).FirstOrDefault();
                 if (existing_ReqGoodTransfer == null)
                 {
                     resultModel.OperationResult = false;
