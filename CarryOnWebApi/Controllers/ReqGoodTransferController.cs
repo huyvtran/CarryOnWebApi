@@ -81,9 +81,9 @@ namespace CarryOnWebApi.Controllers
         public BaseResultModel Post(ReqGoodTransferModel rqtModel)
         {
             //var user = RouteData.Values["user"] as UserModel;
-            var user = configuration.UserInfo;
+            var user = SharedConfig.UserInfo;
 
-            logger.LogApi(() => Post(rqtModel), user.UTEN);
+            logger.LogApi(() => Post(rqtModel), user.UserEmail);
 
             var resultModel = _reqGoodTransferService.InsertReqGoodTransfer(rqtModel, user);
 
@@ -96,8 +96,8 @@ namespace CarryOnWebApi.Controllers
         [HttpPut]
         public BaseResultModel Put(ReqGoodTransferModel rqtModel)
         {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => Put(rqtModel), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => Put(rqtModel), user.UserEmail);
 
             var resultModel = _reqGoodTransferService.UpdateReqGoodTransfer(rqtModel, user);
 
@@ -110,8 +110,8 @@ namespace CarryOnWebApi.Controllers
         [HttpDelete]
         public BaseResultModel Delete(Guid rgtId)
         {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => Delete(rgtId), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => Delete(rgtId), user.UserEmail);
 
             var resultModel = _reqGoodTransferService.DeleteReqGoodTransfer(rgtId, user);
 

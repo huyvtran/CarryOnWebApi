@@ -108,10 +108,10 @@ namespace CarryOnWebApi.Controllers
                 error = true;
             }
 
-            var user = configuration.UserInfo;
+            var user = SharedConfig.UserInfo;
             var token = user.Token;
 
-            logger.LogApi(() => Logout(), accountService.GetUserByToken(token).UTEN);
+            logger.LogApi(() => Logout(), accountService.GetUserByToken(token).UserEmail);
 
             accountService.UserLogout(token);
 
@@ -147,8 +147,8 @@ namespace CarryOnWebApi.Controllers
         public BaseResultModel ChangePassword(string oldPassword, string newPassword)
         {
             //var user = RouteData.Values["user"] as UserModel;
-            var user = configuration.UserInfo;
-            logger.LogApi(() => ChangePassword("**********", "**********"), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => ChangePassword("**********", "**********"), user.UserEmail);
 
             var result = new BaseResultModel();
             bool error = false;
@@ -222,8 +222,8 @@ namespace CarryOnWebApi.Controllers
         [Route("api/Account/UpdateUser")]
         public ResultModel<UserModel> UpdateUser(UserModel userModel)
         {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => UpdateUser(userModel), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => UpdateUser(userModel), user.UserEmail);
 
             // check if all required fields are filled in
             if (!ModelState.IsValid)

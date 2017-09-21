@@ -63,12 +63,13 @@ namespace CarryOnWebApi.Controllers
         // POST: api/TransportAv
         [AuthorizeUser]
         [HttpPost]
-        public BaseResultModel Post(TransportAvModel rqtModel)
+        [Route("api/TransportAv/PublishItem")]
+        public BaseResultModel PublishItem(TransportAvModel rqtModel)
         {
             //var user = RouteData.Values["user"] as UserModel;
-            var user = configuration.UserInfo;
+            var user = SharedConfig.UserInfo;
 
-            logger.LogApi(() => Post(rqtModel), user.UTEN);
+            logger.LogApi(() => PublishItem(rqtModel), user.UserEmail);
 
             var resultModel = _transportAvService.InsertTransportAv(rqtModel, user);
 
@@ -81,8 +82,8 @@ namespace CarryOnWebApi.Controllers
         [HttpPut]
         public BaseResultModel Put(TransportAvModel rqtModel)
         {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => Put(rqtModel), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => Put(rqtModel), user.UserEmail);
 
             var resultModel = _transportAvService.UpdateTransportAv(rqtModel, user);
 
@@ -95,8 +96,8 @@ namespace CarryOnWebApi.Controllers
         [HttpDelete]
         public BaseResultModel Delete(Guid rgtId)
         {
-            var user = configuration.UserInfo;
-            logger.LogApi(() => Delete(rgtId), user.UTEN);
+            var user = SharedConfig.UserInfo;
+            logger.LogApi(() => Delete(rgtId), user.UserEmail);
 
             var resultModel = _transportAvService.DeleteTransportAv(rgtId, user);
 

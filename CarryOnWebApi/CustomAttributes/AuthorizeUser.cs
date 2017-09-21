@@ -13,10 +13,10 @@ namespace CarryOnWebApi.CustomAttributes
 {
     public class AuthorizeUser : AuthorizeAttribute
     {
-
         public AuthorizeUser()
         {
         }
+     
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             try
@@ -31,7 +31,7 @@ namespace CarryOnWebApi.CustomAttributes
                 if (userInfo == null)
                     return false;
 
-                var userId = userInfo.ID;
+                var userId = userInfo.UserId;
                                 
                 var accountService = GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAccountService)) as AccountService;
                 var configurator = GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IConfigurationProvider)) as Configuration;
@@ -46,7 +46,7 @@ namespace CarryOnWebApi.CustomAttributes
                 }
                 else
                 {
-                    configurator.UserInfo = userInfo;
+                    SharedConfig.UserInfo = userInfo;
                     return true;
                 }
             }
