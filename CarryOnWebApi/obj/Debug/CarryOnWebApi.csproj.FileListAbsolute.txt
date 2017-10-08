@@ -188,3 +188,6 @@ E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\bin\AutoMapper
 E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\obj\Debug\CarryOnWebApi.csprojResolveAssemblyReference.cache
 E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\obj\Debug\CarryOnWebApi.dll
 E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\obj\Debug\CarryOnWebApi.pdb
+C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\System.Web.Cors.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\System.Web.Http.Cors.dll
+C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\bin\System.Web.Http.Cors.xml
