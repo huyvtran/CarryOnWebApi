@@ -29,16 +29,31 @@ namespace CarryOnWebApi.Controllers
         
         [Route("api/ReqGoodTransfer/Get")]
         //[AuthorizeUser]
-        public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id, Guid? userId)
+        //public ResultModel<List<ReqGoodTransferModel>> Get(Guid? id, Guid? userId)
+        //{
+        //    logger.LogApi(() => Get(id, userId), null);
+
+        //    var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
+        //    resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(id, userId);
+
+        //    /* Return data */
+        //    resultModel.OperationResult = true;
+        //    return resultModel;
+        //}
+        public List<UserTestModel> Get(Guid? id, Guid? userId)
         {
-            logger.LogApi(() => Get(id, userId), null);
-
-            var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
-            resultModel.ResultData = _reqGoodTransferService.GetReqGoodTransfer(id, userId);
-
-            /* Return data */
-            resultModel.OperationResult = true;
-            return resultModel;
+            return new List<UserTestModel> {
+                new UserTestModel {
+                    Name = "Mario",
+                    Surename = "Rossi",
+                    Telephone = "0514578965",
+                },
+                new UserTestModel {
+                    Name = "Marco",
+                    Surename = "Lolli",
+                    Telephone = "875489632",
+                }
+            };
         }
 
         //[AuthorizeUser]
@@ -60,6 +75,24 @@ namespace CarryOnWebApi.Controllers
             resultModel.OperationResult = true;
             return resultModel;
         }
+
+        //[Route("api/ReqGoodTransfer/UserTestModel")]
+        //[HttpPost]
+        //public IEnumerable<UserTestModel> ObtainUserTestModel()
+        //{
+        //    return new List<UserTestModel> {
+        //        new UserTestModel {
+        //            Name = "Mario",
+        //            Surename = "Rossi",
+        //            Telephone = "0514578965",
+        //        },
+        //        new UserTestModel {
+        //            Name = "Marco",
+        //            Surename = "Lolli",
+        //            Telephone = "875489632",
+        //        }
+        //    };
+        //}
 
         [Route("api/ReqGoodTransfer/GetOptionsList")]
         //[AuthorizeUser]

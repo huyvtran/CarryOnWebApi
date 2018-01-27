@@ -9,13 +9,14 @@ namespace Entities
     public class UserModel
     {
         public string UserName { get; set; }
+        public string UserPassw { get; set; }
+        public string UserLongName { get; set; }
         public string UserEmail { get; set; }
         public string UserTELE { get; set; }
         public string UserTEL2 { get; set; }
         public string UserLang { get; set; }
         public System.Guid UserId { get; set; }
         public string Token { get; set; }
-        public string UserPassw { get; set; }
         
         //public System.Guid ID { get; set; }
         //public string UTEN { get; set; }

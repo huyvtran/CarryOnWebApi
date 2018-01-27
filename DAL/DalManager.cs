@@ -56,6 +56,11 @@ namespace DAL
             }
         }
 
+        public void DeleteUserById(Guid userId)
+        {
+            entities.f_DeleteFromCO01UT_ByKeyFields(userId);
+        }
+
         /// <summary>
         /// Insert a new User
         /// </summary>

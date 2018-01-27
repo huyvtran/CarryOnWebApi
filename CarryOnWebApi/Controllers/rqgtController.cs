@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarryOnWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,12 +8,23 @@ using System.Web.Http;
 
 namespace CarryOnWebApi.Controllers
 {
-    public class rqgtController : ApiController
+    public class RqgtController : ApiController
     {
         // GET: api/rqgt
-        public IEnumerable<string> Get()
+        public IEnumerable<UserTestModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new List<UserTestModel> {
+                new UserTestModel {
+                    Name = "Mario",
+                    Surename = "Rossi",
+                    Telephone = "0514578965",
+                },
+                new UserTestModel {
+                    Name = "Marco",
+                    Surename = "Lolli",
+                    Telephone = "875489632",
+                }
+            };
         }
 
         // GET: api/rqgt/5

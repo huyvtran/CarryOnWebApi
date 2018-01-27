@@ -69,8 +69,11 @@ namespace Services
             }
             else
             {
-                //No valid token
-                return "";
+                //No valid token, then create it
+                var newToken = Guid.NewGuid().ToString();
+                var tokenDuration = GetTokenDuration();
+                dbManager.InsertToken(newToken, DateTime.Now, DateTime.Now.AddHours(GetTokenDuration()), username);
+                return newToken;
             }
         }
 

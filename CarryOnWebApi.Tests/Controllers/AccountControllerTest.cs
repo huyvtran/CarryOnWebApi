@@ -67,8 +67,9 @@ namespace CarryOnWebApi.Tests.Controllers
 
             /* set random data */
             user.UserId = Guid.NewGuid();
-            user.UserName = "test data";
-            user.UserEmail = "test_data_" + new Random().Next(1, int.MaxValue).ToString();
+            user.UserPassw = "test";
+            user.UserEmail = "liguari@gmail.com" + new Random().Next(1, int.MaxValue).ToString();
+            user.UserName = "Luca Liguori";
 
             // Act
             var result = accountController.CreateUser(user);
@@ -84,14 +85,13 @@ namespace CarryOnWebApi.Tests.Controllers
             AccountController accountController = new AccountController(accountService, logger, configuration);
 
             var user = MockUserHelper.getUser_feModel();
-
-            /* set random data */
-            string randValue = new Random().Next(1, int.MaxValue).ToString();
-            user.UserId = Guid.NewGuid();
-            user.UserName = "test data";
-            user.UserEmail = "test_data_" + randValue;
-            user.UserEmail = randValue + user.UserEmail;
             
+            /* set random data */
+            user.UserId = Guid.NewGuid();
+            user.UserPassw = "test";
+            user.UserEmail = "lig@gmail.com" + new Random().Next(1, int.MaxValue).ToString().Substring(0, 5);
+            user.UserName = "Luca Liguori";
+
             // first create user
             var result = accountController.CreateUser(user);
             Assert.IsNotNull(result);
@@ -99,16 +99,44 @@ namespace CarryOnWebApi.Tests.Controllers
             // then update create user
             var userToUpdate = result.ResultData;
             userToUpdate.UserTELE = "55779911";
-            result = accountController.UpdateUser(user);
+            result = accountController.UpdateUser(userToUpdate);
             Assert.IsNotNull(result);
 
             // then get user to have password
-            result = accountController.Login(new Models.LoginViewModel {Username = user.UserEmail, Password=user.UserPassw });
+            result = accountController.Login(new Models.LoginViewModel {Username = result.ResultData.UserEmail, Password= user.UserPassw });
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.ResultData.UserPassw = "55779911");
             
             // then delete create user
             //result = accountController.DeleteUser(user);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void DeleteUser()
+        {
+            // Arrange
+            AccountController accountController = new AccountController(accountService, logger, configuration);
+
+            var user = MockUserHelper.getUser_feModel();
+
+            /* set random data */
+            user.UserId = Guid.NewGuid();
+            user.UserPassw = "test";
+            user.UserEmail = "lig@gmail.com" + new Random().Next(1, int.MaxValue).ToString().Substring(0, 5);
+            user.UserName = user.UserEmail;
+
+            // first create user
+            var result = accountController.CreateUser(user);
+            Assert.IsNotNull(result);
+
+            // then update create user
+            var userToUpdate = result.ResultData;
+            userToUpdate.UserTELE = "55779911";
+            var delResult = accountController.DeleteUser(userToUpdate.UserName);
+            Assert.IsTrue(delResult.OperationResult);
 
             // Assert
             Assert.IsNotNull(result);

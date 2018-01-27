@@ -70,6 +70,13 @@ namespace DAL
         /// <param name="email">user email</param>
         void UpdateUserEmail(string username, string email);
 
+        /// <summary>
+        /// Delete User by Email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        void DeleteUserById(Guid userId);
+
         #endregion
 
 

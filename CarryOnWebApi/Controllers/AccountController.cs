@@ -48,37 +48,38 @@ namespace CarryOnWebApi.Controllers
         public ResultModel<UserModel> Login(LoginViewModel model)
         {
             logger.LogApi(() => Login(model), null);
-            ErrorsEnum retMsg = ErrorsEnum.GENERIC_ERROR;
             var res = new ResultModel<UserModel>();
             res.ResultData = new UserModel();
+            res.OperationResult = true;
 
             try
             {
-                bool error = false;
                 if (!ModelState.IsValid)
                 {
-                    error = true;
-                    retMsg = ErrorsEnum.LOGIN_INVALID_MODEL;
+                    res.OperationResult = false;
+                    res.ResultMessage = ErrorsEnum.LOGIN_INVALID_MODEL;
+                return res;
                 }
 
                 var user = accountService.UserLogin(model.Username, model.Password, model.Token);
                 if (user == null || string.IsNullOrEmpty(user.Token))
                 {
-                    error = true;
-                    retMsg = ErrorsEnum.LOGIN_USER_PSWD_WRONG;
+                    res.OperationResult = false;
+                    res.ResultMessage = ErrorsEnum.LOGIN_USER_PSWD_WRONG;
+                    return res;
                 }
 
                 // create token if ok !
                 res.OperationResult = true;
-                res.ResultMessage = retMsg;
                 res.ResultData = user;
                 return res;
             }
             catch (System.Exception e)
             {
-
                 logger.Log("", e);
                 res.OperationResult = false;
+                res.ResultMessage = ErrorsEnum.GENERIC_ERROR;
+                res.InfoLog = e.Message;
                 return res;
             }
         }
@@ -86,12 +87,11 @@ namespace CarryOnWebApi.Controllers
         [AuthorizeByToken]
         public BaseResultModel ResetPassword(string uten)
         {
-            bool error = false;
+            logger.LogApi(() => ResetPassword(uten), uten);
+
             var result = accountService.ResetPassword(uten);
-            if (!result.OperationResult)
-            {
-                error = true;
-            }
+
+            // send mail 
             return result;
         }
 
@@ -217,13 +217,32 @@ namespace CarryOnWebApi.Controllers
             return accountService.CreateUser(userModel);
         }
 
+        [HttpPost]
+        [Route("api/Account/DeleteUser")]
+        public BaseResultModel DeleteUser(string userName)
+        {
+            logger.LogApi(() => DeleteUser(userName), null);
+
+            // check if all required fields are filled in
+            if (!ModelState.IsValid)
+            {
+                return new ResultModel<UserModel>()
+                {
+                    ResultData = new UserModel(),
+                    OperationResult = false,
+                    ResultMessage = ErrorsEnum.GENERIC_ERROR
+                };
+            }
+            return accountService.DeleteUser(userName);
+        }
+
         [AuthorizeByToken]
         [HttpPost]
         [Route("api/Account/UpdateUser")]
         public ResultModel<UserModel> UpdateUser(UserModel userModel)
         {
-            var user = SharedConfig.UserInfo;
-            logger.LogApi(() => UpdateUser(userModel), user.UserEmail);
+            //var user = SharedConfig.UserInfo;
+            logger.LogApi(() => UpdateUser(userModel), userModel.UserEmail);
 
             // check if all required fields are filled in
             if (!ModelState.IsValid)

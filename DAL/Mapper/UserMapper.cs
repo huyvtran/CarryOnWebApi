@@ -33,7 +33,9 @@ namespace DAL.Mapper
         {
             return new UserModel {
                 UserId = db_rqtItem.ID,
-                UserName = db_rqtItem.NOME,
+                UserName = db_rqtItem.UTEN,
+                UserPassw = db_rqtItem.PASS,
+                UserLongName = db_rqtItem.NOME,
                 UserEmail = db_rqtItem.EMAI,
                 UserTELE = db_rqtItem.TELE,
                 UserTEL2 = db_rqtItem.TELE2,
@@ -47,7 +49,9 @@ namespace DAL.Mapper
             return new db_CO01UT
             {
                 ID = model_rqtItem.UserId,
-                NOME = model_rqtItem.UserName,
+                UTEN = model_rqtItem.UserEmail,
+                PASS = model_rqtItem.UserPassw,
+                NOME = model_rqtItem.UserLongName,
                 EMAI = model_rqtItem.UserEmail,
                 TELE = model_rqtItem.UserTELE,
                 TELE2 = model_rqtItem.UserTEL2,

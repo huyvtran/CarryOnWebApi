@@ -255,12 +255,12 @@ namespace Services
             try
             {
                 /*  1 ---- Get the user from the mail */
-                /* SUBSTITUTE MOCK */
                 var dbUser = dbManager.GetUserByEmail(email);
                 if (dbUser == null)
                 {
                     opResult.OperationResult = false;
-                    opResult.ResultMessage = ErrorsEnum.GENERIC_ERROR;
+                    opResult.InfoLog = "User Not Found";
+                    opResult.ResultMessage = ErrorsEnum.USER_NOT_PRESENT;
                     return opResult;
                 }
 
@@ -310,6 +310,36 @@ namespace Services
             return opResult;
         }
 
+        public BaseResultModel DeleteUser(string userName)
+        {
+            logger.Log(() => DeleteUser(userName));
+
+            var opResult = new BaseResultModel();
+            opResult.OperationResult = true;
+
+            try
+            {
+                /*  1 ---- Get the user from the mail */
+                var dbUser = dbManager.GetUserByEmail(userName);
+                if (dbUser == null)
+                {
+                    opResult.OperationResult = false;
+                    opResult.InfoLog = "User Not Found";
+                    opResult.ResultMessage = ErrorsEnum.USER_NOT_PRESENT;
+                    return opResult;
+                }
+                
+                dbManager.DeleteUserById(dbUser.ID);
+            }
+            catch (Exception e)
+            {
+                logger.Log(() => DeleteUser(userName), e);
+                opResult.OperationResult = false;
+                opResult.ResultMessage = ErrorsEnum.GENERIC_ERROR;
+            }
+            return opResult;
+        }
+
         public ResultModel<UserModel> CreateUser(UserModel user)
         {
             logger.Log(() => CreateUser(user));
@@ -338,6 +368,7 @@ namespace Services
                 }
 
                 var userDb = UserMapper.UserMapper_ModelToDb(user);
+                userDb.PASS = PasswordGenerator.GetEncryptedPassword(userDb.PASS);
                 /* First insert Address */
                 /* TO BE DEVELOPED IF NEEDED */
 
@@ -358,37 +389,37 @@ namespace Services
             return resultModel;
         }
 
-        public ResultModel<UserModel> UpdateUser(UserModel user)
+        public ResultModel<UserModel> UpdateUser(UserModel userToUpdate)
         {
-            logger.Log(() => UpdateUser(user));
+            logger.Log(() => UpdateUser(userToUpdate));
             var resultModel = new ResultModel<UserModel>() { OperationResult = true };
             try
             {
                 //check if email is already registerd
-                if (!string.IsNullOrWhiteSpace(user.UserEmail))
+                if (!string.IsNullOrWhiteSpace(userToUpdate.UserEmail))
                 {
-                    var existingUser = dbManager.GetUserByEmail(user.UserEmail);
-                    if (existingUser != null && user.UserEmail.Trim() != existingUser.UTEN.Trim())
+                    var existingUser = dbManager.GetUserByEmail(userToUpdate.UserEmail);
+                    if (existingUser != null && userToUpdate.UserEmail.Trim() != existingUser.UTEN.Trim())
                     {
                         resultModel.OperationResult = false;
                         resultModel.ResultMessage = ErrorsEnum.EMAIL_ALREADY_PRESENT;
                         return resultModel;
                     }
-
                 }
 
-                var userDB = dbManager.GetUserByUsername(user.UserEmail);
-                dbManager.UpdateUser(userDB);
+                //var userDB = dbManager.GetUserByUsername(user.UserEmail);
+                var userToUpdateDb = UserMapper.UserMapper_ModelToDb(userToUpdate);
+                dbManager.UpdateUser(userToUpdateDb);
 
                 /* Get updated user from db */
-                var updatedUserDB = dbManager.GetUserByUsername(user.UserEmail);
+                var updatedUserDB = dbManager.GetUserByUsername(userToUpdateDb.UTEN);
                 var updatedUser = UserMapper.UserMapper_DbToModel(updatedUserDB);
                 /* Return result */
                 resultModel.ResultData = updatedUser;
             }
             catch (Exception e)
             {
-                logger.Log(() => UpdateUser(user), e);
+                logger.Log(() => UpdateUser(userToUpdate), e);
                 resultModel.OperationResult = false;
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }

@@ -93,5 +93,12 @@ namespace Services.Interfaces
         /// <param name="user">user.</param>
         /// <returns></returns>
         ResultModel<UserModel> UpdateUser(UserModel user);
+
+        /// <summary>
+        /// Udate User.
+        /// </summary>
+        /// <param name="userName">userName</param>
+        /// <returns></returns>
+        BaseResultModel DeleteUser(string userName);
     }
 }

@@ -215,6 +215,11 @@ namespace DAL
             return;
         }
 
+        public void DeleteUserById(Guid userId)
+        {
+            return;
+        }
+
         #endregion
     }
 }
