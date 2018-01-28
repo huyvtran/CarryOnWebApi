@@ -8,6 +8,12 @@ namespace Entities
 {
     public class SearchRtFilter
     {
+        public SearchRtFilter() {
+            RqgtFilter = new ReqGoodTransferModel();
+            TranspAvFilter = new TransportAvModel();
+            FilterParams = new FilterParams();
+        }
+
         public ReqGoodTransferModel RqgtFilter { get; set; }
         public TransportAvModel TranspAvFilter { get; set; }
         public FilterParams FilterParams { get; set; }

@@ -14,8 +14,8 @@ namespace DAL.Helper
         {
             return new db_CO01UT
             {
-                UTEN = "luca.liguori@gmail3.com",
-                EMAI = "luca.liguori@gmail3.com",
+                UTEN = "luca.liguori@gmail.com",
+                EMAI = "luca.liguori@gmail.com",
                 LANG = "IT-it",
                 PASS = "ÏÞÈÏ",
                 TELE = "3325784589",

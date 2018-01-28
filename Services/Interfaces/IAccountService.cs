@@ -30,6 +30,12 @@ namespace Services.Interfaces
         /// <returns></returns>
         UserModel GetUserByToken(string token);
         /// <summary>
+        /// get user object by email
+        /// </summary>
+        /// <param name="userEmail">email</param>
+        /// <returns></returns>
+        UserModel GetUserByEmail(string userEmail);
+        /// <summary>
         /// delete the token to log out a user
         /// </summary>
         /// <param name="token">token</param>

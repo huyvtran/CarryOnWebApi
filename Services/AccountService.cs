@@ -389,6 +389,26 @@ namespace Services
             return resultModel;
         }
 
+        public UserModel GetUserByEmail(string userEmail)
+        {
+            logger.Log(() => GetUserByEmail(userEmail));
+            //var resultModel = new ResultModel<UserModel>() { OperationResult = true };
+            UserModel userModel = null;
+            try
+            {
+                var userModelDb = dbManager.GetUserByUsername(userEmail);
+                if (userModelDb != null)
+                 {
+                    userModel = UserMapper.UserMapper_DbToModel(userModelDb);
+                }
+            }
+            catch (Exception e)
+            {
+                return userModel;
+            }
+            return userModel;
+        }
+
         public ResultModel<UserModel> UpdateUser(UserModel userToUpdate)
         {
             logger.Log(() => UpdateUser(userToUpdate));

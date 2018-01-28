@@ -41,6 +41,37 @@ namespace Services
             return retList;
         }
 
+        public List<ReqGoodTransferModel> GetReqGoodTransferList(SearchRtFilter filterparams)
+        {
+            logger.Log(() => GetReqGoodTransferList(filterparams));
+            var retList = new List<ReqGoodTransferModel>();
+
+            /* Get items from db */
+            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
+            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(null, null, null, null, null
+                , null, null, null, null);
+
+            /* Convert them to model */
+            foreach (var dbItem in db_ReqGoodTransfer)
+            {
+                retList.Add(ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
+            }
+
+            return retList;
+        }
+
+        public ReqGoodTransferModel GetReqGoodTransferDetails(Guid? reqId)
+        {
+            logger.Log(() => GetReqGoodTransferDetails(reqId));
+
+            /* Get items from db */
+            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId).FirstOrDefault();
+            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
+            //     , null, null, null, null).FirstOrDefault();
+
+            return (db_ReqGoodTransfer != null) ? null : ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(db_ReqGoodTransfer);
+        }
+
         public BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user)
         {
             logger.Log(() => InsertReqGoodTransfer(rqtModel, user));
@@ -49,7 +80,7 @@ namespace Services
             try
             {
                 //check if username is existing
-                var existingUser = _dbManager.GetUserByUsername(user.UserEmail);
+                var existingUser = _dbManager.GetUserByUsername(rqtModel.UserEmail);
                 if (existingUser == null)
                 {
                     resultModel.OperationResult = false;
@@ -58,9 +89,11 @@ namespace Services
                 }
 
                 /* Add addresses from */
-                var addressFromId = Guid.NewGuid();
-                var addressDestId = Guid.NewGuid();
-                var reqGoodTransportId = Guid.NewGuid();
+                rqtModel.fromAddress.Id = Guid.NewGuid();
+                rqtModel.AddressFrom = rqtModel.fromAddress.Id;
+                rqtModel.destAddress.Id = Guid.NewGuid();
+                rqtModel.AddreessDest = rqtModel.destAddress.Id;
+                rqtModel.Id = Guid.NewGuid();
 
                 /* Add addresses destination */
                 var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
@@ -72,10 +105,10 @@ namespace Services
 
                 /* Add ReqGoodTransfer item */
                 var db_ReqGoodTransferModel = ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
-                /* Add guid */
-                db_ReqGoodTransferModel.Id = reqGoodTransportId;
-                db_ReqGoodTransferModel.AddressFrom = addressFromId;
-                db_ReqGoodTransferModel.AddreessDest = addressDestId;
+                ///* Add guid */
+                //db_ReqGoodTransferModel.Id = reqGoodTransportId;
+                //db_ReqGoodTransferModel.AddressFrom = addressFromId;
+                //db_ReqGoodTransferModel.AddreessDest = addressDestId;
                 /* Add to db */
                 _dbManager.InsertReqGoodTransfer(db_ReqGoodTransferModel);
 
@@ -86,7 +119,7 @@ namespace Services
                     {
                         ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
                         {
-                            TransportId = reqGoodTransportId,
+                            TransportId = rqtModel.Id,
                             OptKey = optItem.Key,
                             OptValue = optItem.Value
                         };

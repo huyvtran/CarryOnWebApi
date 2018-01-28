@@ -30,7 +30,7 @@ namespace DAL.Helper
                     user_location_type = "",
                     user_lat = "8,7452",
                     user_lng = "12,4575",
-                    Id = new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"),
+                    Id = Guid.NewGuid(),
                     RequestState = 0,
                     UserEmail = "luca.liguori@yahoo.it",
                     UserLang = null,
@@ -65,7 +65,7 @@ namespace DAL.Helper
                 user_location_type = "",
                 user_lat = "8,7452",
                 user_lng = "12,4575",
-                Id = new Guid("d67cf6fb-7469-448c-9d4e-00ad01efb8da"),
+                Id = Guid.NewGuid(),
                 RequestState = 0,
                 UserEmail = "luca.liguori@yahoo.it",
                 UserLang = null,
@@ -74,7 +74,7 @@ namespace DAL.Helper
                 UserTELE = "3325784589",
                 VolAvailable = "200"
             };
-            
+
             /* create list to return */
             var db_ReqGoodTransferList = new List<db_TransportAvWithAddress> { rqgtItem };
 
