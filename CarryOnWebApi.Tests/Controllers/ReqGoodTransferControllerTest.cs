@@ -43,6 +43,8 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
+        #region Get Filtered and not filtered list
+
         [TestMethod]
         public void GetAllNoFilters()
         {
@@ -58,6 +60,10 @@ namespace CarryOnWebApi.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        #endregion
+
+        #region Get Rqgt
 
         [TestMethod]
         public void GetRqgtDetails()
@@ -123,5 +129,53 @@ namespace CarryOnWebApi.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        #endregion
+
+        #region Delete Rqgt
+
+        [TestMethod]
+        public void DeleteRqgt()
+        {
+            // Arrange
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
+
+            // First Add user if not existing
+            AccountController accountController = new AccountController(accountService, logger, configuration);
+            var userToAdd = MockUserHelper.getUser_feModel();
+            userToAdd.UserName = userToAdd.UserEmail;
+            var userAddResult = accountController.CreateUser(userToAdd);
+            /* Check if the user is already existing */
+            if (userAddResult.OperationResult == false && userAddResult.ResultMessage == Entities.enums.ErrorsEnum.USERNAME_ALREADY_PRESENT)
+            {
+                userToAdd = accountService.GetUserByEmail(userToAdd.UserEmail);
+            }
+            Assert.IsNotNull(userAddResult);
+
+            // First Insert Rqgt
+            var rqgtToAddDb = MockHelper.getRqgtList().FirstOrDefault();
+            rqgtToAddDb.UserId = userToAdd.UserId;
+            rqgtToAddDb.UserName = userToAdd.UserName;
+            rqgtToAddDb.UserEmail = userToAdd.UserEmail;
+            if (rqgtToAddDb == null)
+            {
+                return;
+            }
+            var rqgtToAddModel = ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(rqgtToAddDb);
+            var addResult = reqGoodTransferController.Post(rqgtToAddModel);
+            // Assert
+            Assert.IsNotNull(addResult);
+            Assert.IsTrue(addResult.OperationResult);
+
+            // Delete Rqgt
+            var detailsResult = reqGoodTransferController.Delete(rqgtToAddModel.Id);
+
+            // Assert
+            Assert.IsNotNull(detailsResult);
+            Assert.IsTrue(detailsResult.OperationResult);
+        }
+
+        #endregion
+
     }
 }

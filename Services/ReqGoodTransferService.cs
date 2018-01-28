@@ -200,13 +200,16 @@ namespace Services
             {
                 /* Check if item exists on db for the current user*/
                 var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rgtId, null, null, null
-                    , null, null, null, user.UserId, null).FirstOrDefault();
+                    , null, null, null, null, null).FirstOrDefault();
                 if (existing_ReqGoodTransfer == null)
                 {
                     resultModel.OperationResult = false;
-                    resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
+                    resultModel.ResultMessage = ErrorsEnum.ITEM_NOT_PRESENT;
                     return resultModel;
                 }
+
+                /* Delete ReqGoodTransfer item */
+                _dbManager.DeleteReqGoodTransfer(existing_ReqGoodTransfer.Id);
 
                 /* Delete addresses from */
                 _dbManager.DeleteAddress((Guid)existing_ReqGoodTransfer.AddressFrom);
@@ -219,8 +222,7 @@ namespace Services
                     OptKey = null,
                     OptValue = null
                 });
-                /* Delete ReqGoodTransfer item */
-                _dbManager.DeleteReqGoodTransfer(existing_ReqGoodTransfer.Id);
+                
                 return resultModel;
             }
             catch (Exception e)

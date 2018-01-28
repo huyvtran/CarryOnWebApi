@@ -164,7 +164,7 @@ namespace DAL
 
         public void DeleteAddress(Guid adrId)
         {
-            entities.f_DeleteFromAddresses_ByKeyFields(adrId);
+            entities.f_DeleteFromGeoCodeAddress_ByKeyFields(adrId);
         }
 
         #endregion

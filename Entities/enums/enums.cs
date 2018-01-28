@@ -44,7 +44,8 @@ namespace Entities.enums
         LOGIN_USER_PSWD_WRONG,
         DEVICE_OFFLINE,
         ADDRESS_ADD_ERROR,
-        USER_NOT_PRESENT
+        USER_NOT_PRESENT,
+        ITEM_NOT_PRESENT
     };
 
     public enum ActionEnum
