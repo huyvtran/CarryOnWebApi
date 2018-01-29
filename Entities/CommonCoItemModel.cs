@@ -8,7 +8,29 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class CommonCoItemModel
+    public interface ICommonCoItemModel {
+        System.Guid Id { get; set; }
+        Nullable<System.Guid> AddressFrom { get; set; }
+        Nullable<System.Guid> AddreessDest { get; set; }
+        Nullable<System.DateTime> DateTransportFixed { get; set; }
+        int DateTransportType { get; set; }
+        string DateTransportInfo { get; set; }
+        int RequestState { get; set; }
+        string UserName { get; set; }
+        string UserEmail { get; set; }
+        string UserTELE { get; set; }
+        string UserTEL2 { get; set; }
+        string UserLang { get; set; }
+        System.Guid UserId { get; set; }
+        GeoCodeResult fromAddress { get; set; }
+        GeoCodeResult destAddress { get; set; }
+        GeoCodeResult userAddress { get; set; }
+
+        List<ReqGoodTransportOptions> ReqGoodTransportOpt { get; set; }
+    }
+
+
+    public class CommonCoItemModel : ICommonCoItemModel
     {
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> AddressFrom { get; set; }

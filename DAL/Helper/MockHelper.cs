@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -81,9 +82,30 @@ namespace DAL.Helper
             return db_ReqGoodTransferList;
         }
 
+        public static List<ReqGoodTransportOptions> getTransportOpt()
+        {
+            var optList = new List<ReqGoodTransportOptions>() {
+             new ReqGoodTransportOptions() {
+                 OptKey = "fragile",
+                 OptValue = "false"
+             },
+             new ReqGoodTransportOptions() {
+                 OptKey = "frigoCell",
+                 OptValue = "true"
+             },
+                new ReqGoodTransportOptions() {
+                 OptKey = "longDesc",
+                 OptValue = "Descrizione di test"
+             },
+            };
+            return optList;
+        }
+
         public static object getRqgtOptions()
         {
             throw new NotImplementedException();
         }
     }
 }
+
+

@@ -66,10 +66,18 @@ namespace Services
 
             /* Get items from db */
             var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId).FirstOrDefault();
-            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
-            //     , null, null, null, null).FirstOrDefault();
-            
-            return (db_ReqGoodTransfer == null) ? null : ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(db_ReqGoodTransfer);
+
+            if (db_ReqGoodTransfer == null) {
+                return null;
+            }
+
+            var retModel = ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(db_ReqGoodTransfer);
+
+            // Get transfer options
+            var options = _dbManager.GetReqGoodTransportOptionsByTransportId((Guid)reqId);
+            retModel.ReqGoodTransportOpt = options.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList();
+
+            return retModel;
         }
 
         public BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user)

@@ -65,7 +65,8 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #region Utility Function
 
-        private UserModel AddUser_ForTest() {
+        private UserModel AddUser_ForTest()
+        {
             AccountController accountController = new AccountController(accountService, logger, configuration);
             var userToAdd = MockUserHelper.getUser_feModel();
             userToAdd.UserName = userToAdd.UserEmail;
@@ -93,6 +94,7 @@ namespace CarryOnWebApi.Tests.Controllers
                 return null;
             }
             var rqgtToAddModel = ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(rqgtToAddDb);
+            rqgtToAddModel.ReqGoodTransportOpt = MockHelper.getTransportOpt();
             var addResult = reqGoodTransferController.Post(rqgtToAddModel);
             // Assert
             Assert.IsNotNull(addResult);
@@ -103,7 +105,34 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
-            #region Get Rqgt
+        #region Add-Create User
+
+        [TestMethod]
+        public void AddRqgt()
+        {
+            // Arrange
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
+
+            // First Add user if not existing
+            var userToAdd = AddUser_ForTest();
+
+            var rqgtToAddDb = MockHelper.getRqgtList().FirstOrDefault();
+            rqgtToAddDb.UserId = userToAdd.UserId;
+            rqgtToAddDb.UserName = userToAdd.UserName + new Random().Next(1, int.MaxValue).ToString().Substring(0, 5);
+            rqgtToAddDb.UserEmail = userToAdd.UserName;
+            Assert.IsNotNull(rqgtToAddDb);
+
+            var rqgtToAddModel = ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(rqgtToAddDb);
+            rqgtToAddModel.ReqGoodTransportOpt = MockHelper.getTransportOpt();
+            var addResult = reqGoodTransferController.Post(rqgtToAddModel);
+            // Assert
+            Assert.IsNotNull(addResult);
+            Assert.IsTrue(addResult.OperationResult);
+        }
+
+        #endregion
+
+        #region Get Rqgt
 
         [TestMethod]
         public void GetRqgtDetails()
@@ -153,7 +182,7 @@ namespace CarryOnWebApi.Tests.Controllers
 
             // First Insert Rqgt
             var rqgtToAddModel = AddRqgt_ForTest(userToAdd);
-            
+
             // Delete Rqgt
             var detailsResult = reqGoodTransferController.Delete(rqgtToAddModel.Id);
 
@@ -183,7 +212,7 @@ namespace CarryOnWebApi.Tests.Controllers
             // Assert
             Assert.IsNotNull(detailsResult);
             Assert.IsTrue(detailsResult.OperationResult);
-                        
+
             // Update Rqgt
             var rqgtToUpdateModel = detailsResult.ResultData;
             rqgtToUpdateModel.DateTransportFixed = DateTime.Today.AddYears(1);
