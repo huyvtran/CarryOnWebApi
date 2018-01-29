@@ -25,7 +25,7 @@ namespace DAL.Helper
                     from_formatted_address = "Via Gaudi 2, Milano (MI)",
                     from_location_type = "15,784",
                     from_lat = "25,4578",
-                    from_lng = "",
+                    from_lng = "32,7854",
                     user_formatted_address = "Via Franceschi 8, Carrara (CR)",
                     user_location_type = "",
                     user_lat = "8,7452",

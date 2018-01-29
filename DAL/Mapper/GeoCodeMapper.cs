@@ -71,23 +71,23 @@ namespace DAL.Mapper
             /* Address FROM */
             retModel.fromAddress = GeoCodeAddress_FieldsToModel(
                 (Guid)db_rqtItem.AddressFrom,
-                db_rqtItem.from_formatted_address,
-                db_rqtItem.from_lat,
-                db_rqtItem.from_lng);
+                db_rqtItem.from_formatted_address?.Trim(),
+                db_rqtItem.from_lat?.Trim(),
+                db_rqtItem.from_lng?.Trim());
 
             /* Address DEST */
             retModel.destAddress = GeoCodeAddress_FieldsToModel(
                 (Guid)db_rqtItem.AddreessDest,
-                db_rqtItem.dest_formatted_address,
-                db_rqtItem.dest_lat,
-                db_rqtItem.dest_lng);
+                db_rqtItem.dest_formatted_address?.Trim(),
+                db_rqtItem.dest_lat?.Trim(),
+                db_rqtItem.dest_lng?.Trim());
 
             /* Address USER */
             retModel.userAddress = GeoCodeAddress_FieldsToModel(
                 new Guid(),
-                db_rqtItem.user_formatted_address,
-                db_rqtItem.user_lat,
-                db_rqtItem.user_lng);
+                db_rqtItem.user_formatted_address?.Trim(),
+                db_rqtItem.user_lat?.Trim(),
+                db_rqtItem.user_lng?.Trim());
         }
 
         public static void fillModelAddressesFromDb(TransportAvModel retModel, db_TransportAvWithAddress db_trAvItem)
@@ -114,40 +114,29 @@ namespace DAL.Mapper
                 db_trAvItem.user_lng);
         }
 
+        // Change here
         public static void fillDbFieldsAddressesFromModel(db_ReqGoodTransferWithAddresses db_item, ReqGoodTransferModel model)
         {
             /* Address FROM */
-            model.fromAddress = new GeoCodeResult
-            {
-                Id = db_item.AddressFrom,
-                formatted_address = db_item.from_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.from_lat, lng = db_item.from_lng }
-                }
-            };
+            db_item.AddressFrom = model.AddressFrom;
+            db_item.from_formatted_address = model.fromAddress?.formatted_address;
+            db_item.from_lat = model.fromAddress?.geometry?.location?.lat;
+            db_item.from_lng = model.fromAddress?.geometry?.location?.lng;
+            db_item.from_location_type = model.fromAddress?.geometry?.location_type;
 
             /* Address DEST */
-            model.destAddress = new GeoCodeResult
-            {
-                Id = db_item.AddreessDest,
-                formatted_address = db_item.dest_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.dest_lat, lng = db_item.dest_lng }
-                }
-            };
+            db_item.AddreessDest = model.AddreessDest;
+            db_item.dest_formatted_address = model.destAddress?.formatted_address;
+            db_item.dest_lat = model.destAddress?.geometry?.location?.lat;
+            db_item.dest_lng = model.destAddress?.geometry?.location?.lng;
+            db_item.dest_location_type = model.destAddress?.geometry?.location_type;
 
             /* Address USER */
-            model.userAddress = new GeoCodeResult
-            {
-                Id = new Guid(),
-                formatted_address = db_item.user_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.user_lat, lng = db_item.user_lng }
-                }
-            };
+            //db_item.AddressUser = model.userAddress.Id;
+            db_item.user_formatted_address = model.userAddress?.formatted_address;
+            db_item.user_lat = model.userAddress?.geometry?.location?.lat;
+            db_item.user_lng = model.userAddress?.geometry?.location?.lng;
+            db_item.user_location_type = model.userAddress?.geometry?.location_type;
         }
 
         public static void fillDbFieldsAddressesFromModel(db_TransportAvWithAddress db_item, TransportAvModel model)

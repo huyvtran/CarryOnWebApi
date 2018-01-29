@@ -68,8 +68,8 @@ namespace Services
             var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId).FirstOrDefault();
             //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
             //     , null, null, null, null).FirstOrDefault();
-
-            return (db_ReqGoodTransfer != null) ? null : ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(db_ReqGoodTransfer);
+            
+            return (db_ReqGoodTransfer == null) ? null : ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(db_ReqGoodTransfer);
         }
 
         public BaseResultModel InsertReqGoodTransfer(ReqGoodTransferModel rqtModel, UserModel user)
@@ -120,8 +120,8 @@ namespace Services
                         ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
                         {
                             TransportId = rqtModel.Id,
-                            OptKey = optItem.Key,
-                            OptValue = optItem.Value
+                            OptKey = optItem.OptKey,
+                            OptValue = optItem.OptValue
                         };
                         _dbManager.InsertReqGoodTransferOption(optToAdd);
                     }
@@ -147,14 +147,18 @@ namespace Services
             {
                 /* Check if item exists on db for that user */
                 var existing_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(rqtModel.Id, null, null, null
-                    , null, null, null, user.UserId, null).FirstOrDefault();
+                    , null, null, null, null, null).FirstOrDefault();
                 if (existing_ReqGoodTransfer == null)
                 {
                     resultModel.OperationResult = false;
-                    resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
+                    resultModel.ResultMessage = ErrorsEnum.ITEM_NOT_PRESENT;
                     return resultModel;
                 }
 
+                /* Add ReqGoodTransfer item */
+                var db_ReqGoodTransferModel = ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
+
+                _dbManager.UpdateReqGoodTransfer(db_ReqGoodTransferModel);
                 /* Add addresses from */
                 var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
                 _dbManager.UpdateAddress(addressFrom);
@@ -163,21 +167,19 @@ namespace Services
                 var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
                 _dbManager.UpdateAddress(addressDest);
 
-                /* Add ReqGoodTransfer item */
-                var db_ReqGoodTransferModel = ReqGoodTransferMapper.ReqGoodTransfer_ModelToDb(rqtModel);
-
-                _dbManager.UpdateReqGoodTransfer(db_ReqGoodTransferModel);
-
-                /* Add ReqGoodTransfer options items */
-                foreach (var optItem in rqtModel.ReqGoodTransportOpt)
+                if (rqtModel.ReqGoodTransportOpt != null)
                 {
-                    ReqGoodTransportOptions optToUpd = new ReqGoodTransportOptions
+                    /* Add ReqGoodTransfer options items */
+                    foreach (var optItem in rqtModel.ReqGoodTransportOpt)
                     {
-                        TransportId = rqtModel.Id,
-                        OptKey = optItem.Key,
-                        OptValue = optItem.Value
-                    };
-                    _dbManager.UpdateReqGoodTransferOption(optToUpd);
+                        ReqGoodTransportOptions optToUpd = new ReqGoodTransportOptions
+                        {
+                            TransportId = rqtModel.Id,
+                            OptKey = optItem.OptKey,
+                            OptValue = optItem.OptValue
+                        };
+                        _dbManager.UpdateReqGoodTransferOption(optToUpd);
+                    }
                 }
 
                 return resultModel;
@@ -222,7 +224,7 @@ namespace Services
                     OptKey = null,
                     OptValue = null
                 });
-                
+
                 return resultModel;
             }
             catch (Exception e)
