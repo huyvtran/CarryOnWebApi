@@ -60,6 +60,22 @@ namespace CarryOnWebApi.Controllers
             return resultModel;
         }
 
+        [AuthorizeUser]
+        //[HttpPost]
+        [Route("api/ReqGoodTransfer/GetTrAvDetails")]
+        public ResultModel<TransportAvModel> GetTrAvDetails(Guid _id)
+        {
+            logger.LogApi(() => GetTrAvDetails(_id), null);
+
+            var resultModel = new ResultModel<TransportAvModel>();
+
+            resultModel.ResultData = _transportAvService.GetTrAvDetails(_id);
+
+            /* Return data */
+            resultModel.OperationResult = true;
+            return resultModel;
+        }
+
         // POST: api/TransportAv
         [AuthorizeUser]
         [HttpPost]

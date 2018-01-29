@@ -43,26 +43,6 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
-        #region Get Filtered and not filtered list
-
-        [TestMethod]
-        public void GetAllNoFilters()
-        {
-            // Arrange
-            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
-
-            // filter params
-            var filterParams = new SearchRtFilter();
-
-            // Act
-            var result = reqGoodTransferController.FilteredRqgtList(filterParams);
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        #endregion
-
         #region Utility Function
 
         private UserModel AddUser_ForTest()
@@ -105,6 +85,26 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
+        #region Get Filtered and not filtered list
+
+        [TestMethod]
+        public void GetAllNoFilters()
+        {
+            // Arrange
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
+
+            // filter params
+            var filterParams = new SearchRtFilter();
+
+            // Act
+            var result = reqGoodTransferController.FilteredRqgtList(filterParams);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        #endregion
+        
         #region Add-Create User
 
         [TestMethod]

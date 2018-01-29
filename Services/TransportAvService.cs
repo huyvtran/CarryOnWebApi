@@ -48,6 +48,27 @@ namespace Services
             return retList;
         }
 
+        public TransportAvModel GetTrAvDetails(Guid? reqId)
+        {
+            logger.Log(() => GetTrAvDetails(reqId));
+
+            /* Get items from db */
+            var db_ReqGoodTransfer = _dbManager.GetTransportAv_ByKeyFields(reqId).FirstOrDefault();
+
+            if (db_ReqGoodTransfer == null)
+            {
+                return null;
+            }
+
+            var retModel = TransportAvMapper.TransportAv_DbToModel(db_ReqGoodTransfer);
+
+            // Get transfer options
+            var options = _dbManager.GetReqGoodTransportOptionsByTransportId((Guid)reqId);
+            retModel.ReqGoodTransportOpt = options.Select(x => ReqGoodTransferMapper.ReqGoodTransferOption_DbToModel(x)).ToList();
+
+            return retModel;
+        }
+
         public BaseResultModel InsertTransportAv(TransportAvModel rqtModel, UserModel user)
         {
             logger.Log(() => InsertTransportAv(rqtModel, user));
