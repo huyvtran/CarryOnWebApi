@@ -34,10 +34,10 @@ namespace DAL
         public string dest_location_type { get; set; }
         public string dest_lat { get; set; }
         public string dest_lng { get; set; }
+        public string VolAvailable { get; set; }
         public string user_formatted_address { get; set; }
         public string user_location_type { get; set; }
         public string user_lat { get; set; }
         public string user_lng { get; set; }
-        public string VolAvailable { get; set; }
     }
 }

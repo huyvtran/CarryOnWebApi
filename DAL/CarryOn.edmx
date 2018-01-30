@@ -1812,11 +1812,11 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="GeoCodeAddress">
           <Key>
@@ -2388,11 +2388,11 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
                 <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
                 <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
                 <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
                 <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
                 <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
                 <ScalarProperty Name="user_lat" ColumnName="user_lat" />
                 <ScalarProperty Name="user_lng" ColumnName="user_lng" />
-                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2420,11 +2420,11 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
                 <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
                 <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
                 <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
                 <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
                 <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
                 <ScalarProperty Name="user_lat" ColumnName="user_lat" />
                 <ScalarProperty Name="user_lng" ColumnName="user_lng" />
-                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

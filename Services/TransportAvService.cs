@@ -28,8 +28,10 @@ namespace Services
             var retList = new List<TransportAvModel>();
 
             /* Get items from db */
-            var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(reqId, null, null, null, 
-                null, null, null, userId, null);
+            //var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(reqId, null, null, null, 
+            //    null, null, null, userId, null);
+            var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(null, null, null, null,
+                null, null, null, null, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_TransportAv)
@@ -69,15 +71,15 @@ namespace Services
             return retModel;
         }
 
-        public BaseResultModel InsertTransportAv(TransportAvModel rqtModel, UserModel user)
+        public BaseResultModel InsertTransportAv(TransportAvModel travModel, UserModel user)
         {
-            logger.Log(() => InsertTransportAv(rqtModel, user));
+            logger.Log(() => InsertTransportAv(travModel, user));
             var resultModel = new BaseResultModel() { OperationResult = true };
 
             try
             {
                 //check if username exists
-                var existingUser = _dbManager.GetUserByUsername(user.UserEmail);
+                var existingUser = _dbManager.GetUserByUsername(travModel.UserEmail);
                 if (existingUser == null)
                 {
                     resultModel.OperationResult = false;
@@ -86,34 +88,97 @@ namespace Services
                 }
 
                 /* Add addresses from */
-                var addressFromId = Guid.NewGuid();
-                var addressDestId = Guid.NewGuid();
-                var reqGoodTransportId = Guid.NewGuid();
+                travModel.fromAddress.Id = Guid.NewGuid();
+                travModel.AddressFrom = travModel.fromAddress.Id;
+                travModel.destAddress.Id = Guid.NewGuid();
+                travModel.AddreessDest = travModel.destAddress.Id;
+                travModel.Id = Guid.NewGuid();
 
                 /* Add addresses from */
-                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(travModel.fromAddress);
                 _dbManager.InsertAddress(addressFrom);
 
                 /* Add addresses destination */
-                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(travModel.destAddress);
                 _dbManager.InsertAddress(addressDest);
 
                 /* Add TransportAv item */
-                var db_TransportAvModel = TransportAvMapper.TransportAv_ModelToDb(rqtModel);
+                var db_TransportAvModel = TransportAvMapper.TransportAv_ModelToDb(travModel);
                 /* Add guid */
-                db_TransportAvModel.Id = reqGoodTransportId;
-                db_TransportAvModel.AddressFrom = addressFromId;
-                db_TransportAvModel.AddreessDest = addressDestId;
+                //db_TransportAvModel.Id = reqGoodTransportId;
+                //db_TransportAvModel.AddressFrom = addressFromId;
+                //db_TransportAvModel.AddreessDest = addressDestId;
                 /* Add to db */
                 _dbManager.InsertTransportAv(db_TransportAvModel);
 
                 /* Add TransportAv options items */
-                if (rqtModel.ReqGoodTransportOpt != null)
+                if (travModel.ReqGoodTransportOpt != null)
                 {
-                    foreach (var optItem in rqtModel.ReqGoodTransportOpt)
+                    foreach (var optItem in travModel.ReqGoodTransportOpt)
                     {
-                        optItem.TransportId = reqGoodTransportId;
-                        _dbManager.InsertReqGoodTransferOption(optItem);
+                        ReqGoodTransportOptions optToAdd = new ReqGoodTransportOptions
+                        {
+                            TransportId = travModel.Id,
+                            OptKey = optItem.OptKey,
+                            OptValue = optItem.OptValue
+                        };
+                        _dbManager.InsertReqGoodTransferOption(optToAdd);
+                    }
+                }
+                return resultModel;
+            }
+            catch (Exception e)
+            {
+                logger.Log(() => InsertTransportAv(travModel, user), e);
+                resultModel.OperationResult = false;
+                resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
+            }
+            return resultModel;
+        }
+
+        public BaseResultModel UpdateTransportAv(TransportAvModel travModel, UserModel user)
+        {
+            logger.Log(() => UpdateTransportAv(travModel, user));
+            var resultModel = new BaseResultModel() { OperationResult = true };
+
+            try
+            {
+                /* Check if item exists on db for that user */
+                var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(travModel.Id, null, null, null
+                    , null, null, null, user.UserId, null).FirstOrDefault();
+                if (existing_TransportAv == null)
+                {
+                    resultModel.OperationResult = false;
+                    resultModel.ResultMessage = ErrorsEnum.ITEM_NOT_PRESENT;
+                    return resultModel;
+                }
+
+                /* Add TransportAv item */
+                var db_TransportAvModel = TransportAvMapper.TransportAv_ModelToDb(travModel);
+
+                _dbManager.UpdateTransportAv(db_TransportAvModel);
+
+                /* Add addresses from */
+                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(travModel.fromAddress);
+                _dbManager.UpdateAddress(addressFrom);
+
+                /* Add addresses destination */
+                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(travModel.destAddress);
+                _dbManager.UpdateAddress(addressDest);
+
+                /* Add TransportAv options items */
+                if (travModel.ReqGoodTransportOpt != null)
+                {
+                    /* Add ReqGoodTransfer options items */
+                    foreach (var optItem in travModel.ReqGoodTransportOpt)
+                    {
+                        ReqGoodTransportOptions optToUpd = new ReqGoodTransportOptions
+                        {
+                            TransportId = travModel.Id,
+                            OptKey = optItem.OptKey,
+                            OptValue = optItem.OptValue
+                        };
+                        _dbManager.UpdateReqGoodTransferOption(optToUpd);
                     }
                 }
 
@@ -121,54 +186,7 @@ namespace Services
             }
             catch (Exception e)
             {
-                logger.Log(() => InsertTransportAv(rqtModel, user), e);
-                resultModel.OperationResult = false;
-                resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
-            }
-            return resultModel;
-        }
-
-        public BaseResultModel UpdateTransportAv(TransportAvModel rqtModel, UserModel user)
-        {
-            logger.Log(() => UpdateTransportAv(rqtModel, user));
-            var resultModel = new BaseResultModel() { OperationResult = true };
-
-            try
-            {
-                /* Check if item exists on db for that user */
-                var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rqtModel.Id, null, null, null
-                    , null, null, null, user.UserId, null).FirstOrDefault();
-                if (existing_TransportAv == null)
-                {
-                    resultModel.OperationResult = false;
-                    resultModel.ResultMessage = ErrorsEnum.USERNAME_ALREADY_PRESENT;
-                    return resultModel;
-                }
-
-                /* Add addresses from */
-                var addressFrom = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.fromAddress);
-                _dbManager.UpdateAddress(addressFrom);
-
-                /* Add addresses destination */
-                var addressDest = GeoCodeMapper.GeoCodeAddress_ModelToDb(rqtModel.destAddress);
-                _dbManager.UpdateAddress(addressDest);
-
-                /* Add TransportAv item */
-                var db_TransportAvModel = TransportAvMapper.TransportAv_ModelToDb(rqtModel);
-
-                _dbManager.UpdateTransportAv(db_TransportAvModel);
-
-                /* Add TransportAv options items */
-                foreach (var optItem in rqtModel.ReqGoodTransportOpt)
-                {
-                    _dbManager.UpdateReqGoodTransferOption(optItem);
-                }
-
-                return resultModel;
-            }
-            catch (Exception e)
-            {
-                logger.Log(() => UpdateTransportAv(rqtModel, user), e);
+                logger.Log(() => UpdateTransportAv(travModel, user), e);
                 resultModel.OperationResult = false;
                 resultModel.ResultMessage = ErrorsEnum.GENERIC_ERROR;
             }
@@ -184,7 +202,7 @@ namespace Services
             {
                 /* Check if item exists on db for the current user*/
                 var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(rgtId, null, null, null
-                    , null, null, null, user.UserId, null).FirstOrDefault();
+                    , null, null, null, null, null).FirstOrDefault();
                 if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;
@@ -192,6 +210,8 @@ namespace Services
                     return resultModel;
                 }
 
+                /* Delete TransportAv item */
+                _dbManager.DeleteTransportAv(existing_TransportAv.Id);
                 /* Delete addresses from */
                 _dbManager.DeleteAddress((Guid)existing_TransportAv.AddressFrom);
                 /* Delete addresses dest */
@@ -202,8 +222,7 @@ namespace Services
                     OptKey = null,
                     OptValue = null
                 });
-                /* Delete TransportAv item */
-                _dbManager.DeleteTransportAv(existing_TransportAv.Id);                
+                            
                 return resultModel;
             }
             catch (Exception e)

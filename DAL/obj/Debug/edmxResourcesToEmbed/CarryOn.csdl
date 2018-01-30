@@ -950,11 +950,11 @@
     <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
   </ComplexType>
   <EntityType Name="GeoCodeAddress">
     <Key>

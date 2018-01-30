@@ -1,4 +1,5 @@
 ﻿using CarryOnWebApi.CustomAttributes;
+using CarryOnWebApi.Utility;
 using Entities;
 using Services;
 using Services.Interfaces;
@@ -83,7 +84,7 @@ namespace CarryOnWebApi.Controllers
         public BaseResultModel PublishItem(TransportAvModel rqtModel)
         {
             //var user = RouteData.Values["user"] as UserModel;
-            var user = SharedConfig.UserInfo;
+            var user = SharedConfig.UserInfo ?? UtilityHelper.getStandardUser();
 
             logger.LogApi(() => PublishItem(rqtModel), user.UserEmail);
 
@@ -98,7 +99,7 @@ namespace CarryOnWebApi.Controllers
         [HttpPut]
         public BaseResultModel Put(TransportAvModel rqtModel)
         {
-            var user = SharedConfig.UserInfo;
+            var user = SharedConfig.UserInfo ?? UtilityHelper.getStandardUser();
             logger.LogApi(() => Put(rqtModel), user.UserEmail);
 
             var resultModel = _transportAvService.UpdateTransportAv(rqtModel, user);
@@ -112,7 +113,7 @@ namespace CarryOnWebApi.Controllers
         [HttpDelete]
         public BaseResultModel Delete(Guid rgtId)
         {
-            var user = SharedConfig.UserInfo;
+            var user = SharedConfig.UserInfo ?? UtilityHelper.getStandardUser();
             logger.LogApi(() => Delete(rgtId), user.UserEmail);
 
             var resultModel = _transportAvService.DeleteTransportAv(rgtId, user);

@@ -110,7 +110,7 @@ namespace CarryOnWebApi.Tests.Controllers
         #region Add-Create User
 
         [TestMethod]
-        public void AddRqgt()
+        public void AddTrAv()
         {
             // Arrange
             TransportAvController trAvController = new TransportAvController(transportAvService, logger, configuration);
@@ -134,10 +134,10 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
-        #region Get Rqgt
+        #region Get TrAv
 
         [TestMethod]
-        public void GetRqgtDetails()
+        public void GetTrAvDetails()
         {
             // Arrange
             TransportAvController trAvController = new TransportAvController(transportAvService, logger, configuration);
@@ -145,10 +145,10 @@ namespace CarryOnWebApi.Tests.Controllers
             // First Add user if not existing
             var userToAdd = AddUser_ForTest();
 
-            // First Insert Rqgt
+            // First Insert TrAv
             var trAvToAddModel = AddTrAv_ForTest(userToAdd);
 
-            // Get Rqgt Details
+            // Get TrAv Details
             var detailsResult = trAvController.GetTrAvDetails(trAvToAddModel.Id);
 
             // Assert
@@ -158,10 +158,10 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
-        #region Delete Rqgt
+        #region Delete TrAv
 
         [TestMethod]
-        public void DeleteRqgt()
+        public void DeleteTrAv()
         {
             // Arrange
             TransportAvController trAvController = new TransportAvController(transportAvService, logger, configuration);
@@ -169,10 +169,10 @@ namespace CarryOnWebApi.Tests.Controllers
             // First Add user if not existing
             var userToAdd = AddUser_ForTest();
 
-            // First Insert Rqgt
+            // First Insert TrAv
             var trAvToAddModel = AddTrAv_ForTest(userToAdd);
 
-            // Delete Rqgt
+            // Delete TrAv
             var detailsResult = trAvController.Delete(trAvToAddModel.Id);
 
             // Assert
@@ -182,10 +182,10 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
-        #region Update Rqgt
+        #region Update TrAv
 
         [TestMethod]
-        public void UpdateRqgt()
+        public void UpdateTrAv()
         {
             // Arrange
             TransportAvController trAvController = new TransportAvController(transportAvService, logger, configuration);
@@ -193,16 +193,16 @@ namespace CarryOnWebApi.Tests.Controllers
             // First Add user if not existing
             var userToAdd = AddUser_ForTest();
 
-            // First Insert Rqgt
+            // First Insert TrAv
             var trAvToAddModel = AddTrAv_ForTest(userToAdd);
 
-            // Get Rqgt Details
+            // Get TrAv Details
             var detailsResult = trAvController.GetTrAvDetails(trAvToAddModel.Id);
             // Assert
             Assert.IsNotNull(detailsResult);
             Assert.IsTrue(detailsResult.OperationResult);
 
-            // Update Rqgt
+            // Update TrAv
             var trAvToUpdateModel = detailsResult.ResultData;
             trAvToUpdateModel.DateTransportFixed = DateTime.Today.AddYears(1);
             trAvToUpdateModel.DateTransportInfo = "UPDATED";
