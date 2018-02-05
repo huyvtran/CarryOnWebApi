@@ -107,7 +107,7 @@ namespace CarryOnWebApi.Tests.Controllers
             filterParams.TranspAvFilter.UserId = userToAdd.UserId;
 
             // Act
-            var result = trAvController.FilteredTrAv(filterParams);
+            var result = trAvController.MyFilteredTrAv(filterParams);
 
             // Assert
             Assert.IsNotNull(result);

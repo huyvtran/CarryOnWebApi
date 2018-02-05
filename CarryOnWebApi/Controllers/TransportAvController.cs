@@ -65,8 +65,7 @@ namespace CarryOnWebApi.Controllers
             logger.LogApi(() => FilteredTrAv(filterparams), null);
 
             var resultModel = new ResultModel<List<TransportAvModel>>();
-
-            /* TO BE DEVELOPED */
+            
             Guid? _userId = (filterparams != null && filterparams.TranspAvFilter != null && (filterparams.TranspAvFilter.UserId != Guid.Empty)) ? (Guid?)filterparams.TranspAvFilter.UserId : null;
             resultModel.ResultData = _transportAvService.MyGetTransportAv(_userId);
 

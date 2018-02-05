@@ -46,22 +46,7 @@
     <FunctionImportMapping FunctionImportName="f_DeleteFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_DeleteFromReqGoodTransfer_ByKeyFields" />
     <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-          <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-          <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-          <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-          <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-          <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-          <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </ComplexTypeMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses" />
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="f_InsertIntoReqGoodTransfer" FunctionName="CarryOnModel.Store.f_InsertIntoReqGoodTransfer" />
@@ -393,38 +378,16 @@
     <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_ByKeyFields">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-          <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-          <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-          <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-          <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-          <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
-          <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
           <ScalarProperty Name="from_lat" ColumnName="from_lat" />
           <ScalarProperty Name="from_lng" ColumnName="from_lng" />
-          <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
-          <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
-          <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
-          <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
-          <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
-          <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
-          <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
-          <ScalarProperty Name="user_lat" ColumnName="user_lat" />
-          <ScalarProperty Name="user_lng" ColumnName="user_lng" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_BySomeEqualFields">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
+          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
           <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
@@ -432,25 +395,23 @@
           <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
           <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
           <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+          <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
+          <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
+          <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
+          <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
+          <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
+          <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
+          <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+          <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
+          <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
+          <ScalarProperty Name="user_lat" ColumnName="user_lat" />
+          <ScalarProperty Name="user_lng" ColumnName="user_lng" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
           <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
           <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
           <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
-          <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
-          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
-          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
-          <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
-          <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
-          <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
-          <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
-          <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
-          <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
-          <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
-          <ScalarProperty Name="user_lat" ColumnName="user_lat" />
-          <ScalarProperty Name="user_lng" ColumnName="user_lng" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -459,6 +420,8 @@
     <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
           <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
@@ -466,17 +429,9 @@
           <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
           <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
           <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
           <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
           <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
-          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
-          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
           <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
           <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
           <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
@@ -485,6 +440,12 @@
           <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
           <ScalarProperty Name="user_lat" ColumnName="user_lat" />
           <ScalarProperty Name="user_lng" ColumnName="user_lng" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -588,5 +549,45 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="f_InsertIntoGeoCodeAddress" FunctionName="CarryOnModel.Store.f_InsertIntoGeoCodeAddress" />
     <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields" />
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromRqgt_ByLatAndLng" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromRqgt_ByLatAndLng">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+          <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+          <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+          <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+          <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+          <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+          <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
+          <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
+          <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
+          <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
+          <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
+          <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
+          <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+          <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
+          <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
+          <ScalarProperty Name="user_lat" ColumnName="user_lat" />
+          <ScalarProperty Name="user_lng" ColumnName="user_lng" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+          <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+          <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_ByLatAndLng" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_ByLatAndLng">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
+          <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+          <ScalarProperty Name="from_lng" ColumnName="from_lng" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -27,11 +27,16 @@ namespace Services
             logger.Log(() => GetTransportAv(filterparams));
             var retList = new List<TransportAvModel>();
 
+            /* Select latitude and longitude in the filter parameters */
+            var _lat = filterparams?.TranspAvFilter?.fromAddress?.geometry?.location?.lat;
+            var _lng = filterparams?.TranspAvFilter?.fromAddress?.geometry?.location?.lng;
+
             /* Get items from db */
-            //var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(reqId, null, null, null, 
-            //    null, null, null, userId, null);
-            var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(null, null, null, null,
-                null, null, null, null, null);
+            var db_TransportAv = _dbManager.GetTransportAv_ByLatAndLng(_lat, _lng);
+            
+            ///* Get items from db */
+            //var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(null, null, null, null,
+            //    null, null, null, null, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_TransportAv)

@@ -46,9 +46,16 @@ namespace Services
             logger.Log(() => GetReqGoodTransferList(filterparams));
             var retList = new List<ReqGoodTransferModel>();
 
+            /* Select latitude and longitude in the filter parameters */
+            var _lat = filterparams?.RqgtFilter?.fromAddress?.geometry?.location?.lat;
+            var _lng = filterparams?.RqgtFilter?.fromAddress?.geometry?.location?.lng;
+
             /* Get items from db */
-            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(null, null, null, null, null
-                , null, null, null, null);
+            var db_ReqGoodTransfer = _dbManager.GetRqgt_ByLatAndLng(_lat, _lng);
+            
+            ///* Get items from db */
+            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(null, null, null, null, null
+            //    , null, null, null, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)

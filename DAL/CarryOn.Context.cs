@@ -1029,5 +1029,31 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields", idParameter, formatted_addressParameter, location_typeParameter, latParameter, lngParameter);
         }
+    
+        public virtual ObjectResult<db_ReqGoodTransferWithAddresses> f_GetAllFieldsFromRqgt_ByLatAndLng(string input_lat, string input_lng)
+        {
+            var input_latParameter = input_lat != null ?
+                new ObjectParameter("input_lat", input_lat) :
+                new ObjectParameter("input_lat", typeof(string));
+    
+            var input_lngParameter = input_lng != null ?
+                new ObjectParameter("input_lng", input_lng) :
+                new ObjectParameter("input_lng", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_ReqGoodTransferWithAddresses>("f_GetAllFieldsFromRqgt_ByLatAndLng", input_latParameter, input_lngParameter);
+        }
+    
+        public virtual ObjectResult<db_TransportAvWithAddress> f_GetAllFieldsFromTransportAv_ByLatAndLng(string input_lat, string input_lng)
+        {
+            var input_latParameter = input_lat != null ?
+                new ObjectParameter("input_lat", input_lat) :
+                new ObjectParameter("input_lat", typeof(string));
+    
+            var input_lngParameter = input_lng != null ?
+                new ObjectParameter("input_lng", input_lng) :
+                new ObjectParameter("input_lng", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<db_TransportAvWithAddress>("f_GetAllFieldsFromTransportAv_ByLatAndLng", input_latParameter, input_lngParameter);
+        }
     }
 }

@@ -163,6 +163,14 @@ namespace DAL
         List<db_ReqGoodTransferWithAddresses> GetReqGoodTransfer_ByKeySomeEqualFields(Nullable<System.Guid> id, Nullable<System.Guid> addressFrom, Nullable<System.Guid> addreessDest, Nullable<System.DateTime> dateTransportFixed, Nullable<int> dateTransportType, string dateTransportInfo, Nullable<int> requestState, Nullable<System.Guid> userId, string volRequired);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <returns></returns>
+        List<db_ReqGoodTransferWithAddresses> GetRqgt_ByLatAndLng(string lat, string lng);
+
+        /// <summary>
         /// Add transfer good request
         /// </summary>
         /// <param name="reqGoodTransferItem">Transfer good request</param>
@@ -191,6 +199,14 @@ namespace DAL
         /// <param name="reqId"></param>
         /// <returns></returns>
         List<db_TransportAvWithAddress> GetTransportAv_ByKeyFields(Guid? reqId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <returns></returns>
+        List<db_TransportAvWithAddress> GetTransportAv_ByLatAndLng(string lat, string lng);
 
         /// <summary>
         /// 

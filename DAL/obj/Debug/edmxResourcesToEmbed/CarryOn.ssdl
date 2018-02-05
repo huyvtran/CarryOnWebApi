@@ -32,7 +32,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="UTEN" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="TIPU" Type="varchar" MaxLength="1" />
     <Property Name="PASS" Type="varchar" MaxLength="20" />
     <Property Name="PWGG" Type="smallint" />
@@ -107,7 +107,7 @@ warning 6002: The table/view 'CarryOn.dbo.CO_VW_USER_TOKEN' does not have a prim
       <PropertyRef Name="USERNAME" />
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="UTEN" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="TIPU" Type="varchar" MaxLength="1" />
     <Property Name="PASS" Type="varchar" MaxLength="20" />
     <Property Name="PWGG" Type="smallint" />
@@ -478,8 +478,16 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
     <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="f_GetAllFieldsFromRqgt_ByLatAndLng" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromRqgt_ByLatAndLng">
+    <Parameter Name="input_lat" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="input_lng" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="f_GetAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByKeyFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="f_GetAllFieldsFromTransportAv_ByLatAndLng" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByLatAndLng">
+    <Parameter Name="input_lat" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="input_lng" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="f_GetAllFieldsFromTransportAv_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_BySomeEqualFields">
     <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />

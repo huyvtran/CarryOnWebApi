@@ -183,6 +183,11 @@ namespace DAL
                 dateTransportFixed, dateTransportType, dateTransportInfo, requestState, userId, volRequired).ToList();
         }
 
+        public List<db_ReqGoodTransferWithAddresses> GetRqgt_ByLatAndLng(string lat, string lng)
+        {
+            return entities.f_GetAllFieldsFromRqgt_ByLatAndLng(lat, lng).ToList();
+        }
+
         public void InsertReqGoodTransfer(db_ReqGoodTransferWithAddresses rgtItem)
         {
             entities.f_InsertIntoReqGoodTransfer(rgtItem.Id, rgtItem.AddressFrom, rgtItem.AddreessDest,
@@ -213,6 +218,10 @@ namespace DAL
         {
             return entities.f_GetAllFieldsFromTransportAv_BySomeEqualFields(id, addressFrom, addreessDest,
                 dateTransportFixed, dateTransportType, dateTransportInfo, requestState, userId, volAvailable).ToList();
+        }
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByLatAndLng(string lat, string lng) {
+            return entities.f_GetAllFieldsFromTransportAv_ByLatAndLng(lat, lng).ToList();
         }
 
         public void InsertTransportAv(db_TransportAvWithAddress transportAvItem)

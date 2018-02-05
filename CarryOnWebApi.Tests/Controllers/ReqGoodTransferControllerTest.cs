@@ -85,6 +85,35 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
+        #region Get My RQGT
+
+        [TestMethod]
+        public void GetOnlyMyRqgt()
+        {
+            // Arrange
+            ReqGoodTransferController reqGoodTransferController = new ReqGoodTransferController(reqGoodTransferService, logger, configuration);
+
+            // First Add user if not existing
+            var userToAdd = AddUser_ForTest();
+
+            // First Insert TrAv
+            var trAvToAddModel = AddRqgt_ForTest(userToAdd);
+
+            // filter params
+            var filterParams = new SearchRtFilter();
+            filterParams.RqgtFilter = new ReqGoodTransferModel();
+            filterParams.RqgtFilter.UserId = userToAdd.UserId;
+
+            // Act
+            var result = reqGoodTransferController.MyFilteredRqgtList(filterParams);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ResultData.Count > 0);
+        }
+
+        #endregion
+
         #region Get Filtered and not filtered list
 
         [TestMethod]

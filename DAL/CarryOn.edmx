@@ -37,7 +37,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UTEN" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="TIPU" Type="varchar" MaxLength="1" />
           <Property Name="PASS" Type="varchar" MaxLength="20" />
           <Property Name="PWGG" Type="smallint" />
@@ -112,7 +112,7 @@ warning 6002: The table/view 'CarryOn.dbo.CO_VW_USER_TOKEN' does not have a prim
             <PropertyRef Name="USERNAME" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UTEN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UTEN" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="TIPU" Type="varchar" MaxLength="1" />
           <Property Name="PASS" Type="varchar" MaxLength="20" />
           <Property Name="PWGG" Type="smallint" />
@@ -483,8 +483,16 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="VolRequired" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="f_GetAllFieldsFromRqgt_ByLatAndLng" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromRqgt_ByLatAndLng">
+          <Parameter Name="input_lat" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="input_lng" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f_GetAllFieldsFromTransportAv_ByKeyFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByKeyFields">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllFieldsFromTransportAv_ByLatAndLng" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_ByLatAndLng">
+          <Parameter Name="input_lat" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="input_lng" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f_GetAllFieldsFromTransportAv_BySomeEqualFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_GetAllFieldsFromTransportAv_BySomeEqualFields">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -1236,6 +1244,14 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
             <Parameter Name="lat" Mode="In" Type="String" />
             <Parameter Name="lng" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromRqgt_ByLatAndLng" ReturnType="Collection(CarryOnModel.db_ReqGoodTransferWithAddresses)">
+            <Parameter Name="input_lat" Mode="In" Type="String" />
+            <Parameter Name="input_lng" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetAllFieldsFromTransportAv_ByLatAndLng" ReturnType="Collection(CarryOnModel.db_TransportAvWithAddress)">
+            <Parameter Name="input_lat" Mode="In" Type="String" />
+            <Parameter Name="input_lng" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_ReqGoodTransfer_Addresses">
           <End Type="CarryOnModel.Addresses" Role="Addresses" Multiplicity="0..1" />
@@ -1303,6 +1319,8 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="Int32" Name="RequestState" Nullable="false" />
         </ComplexType>
         <ComplexType Name="db_ReqGoodTransferWithAddresses">
+          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="AddressFrom" Nullable="true" />
           <Property Type="Guid" Name="AddreessDest" Nullable="true" />
@@ -1310,17 +1328,9 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="Int32" Name="DateTransportType" Nullable="false" />
           <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="RequestState" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
           <Property Type="String" Name="VolRequired" Nullable="true" MaxLength="50" />
-          <Property Type="Guid" Name="UserId" Nullable="false" />
           <Property Type="String" Name="from_formatted_address" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="from_location_type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="dest_formatted_address" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
@@ -1329,13 +1339,19 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
-        </ComplexType>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
+          </ComplexType>
         <EntityType Name="CO01UT">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TIPU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PWGG" Type="Int16" />
@@ -1510,7 +1526,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
             <PropertyRef Name="USERNAME" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UTEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TIPU" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PWGG" Type="Int16" />
@@ -1791,6 +1807,8 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="db_TransportAvWithAddress">
+          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="AddressFrom" Nullable="true" />
           <Property Type="Guid" Name="AddreessDest" Nullable="true" />
@@ -1798,26 +1816,24 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="Int32" Name="DateTransportType" Nullable="false" />
           <Property Type="String" Name="DateTransportInfo" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="RequestState" Nullable="false" />
+          <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="from_formatted_address" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="from_location_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dest_formatted_address" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="UserTELE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="UserTEL2" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="UserLang" Nullable="true" MaxLength="3" />
-          <Property Type="Guid" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="from_formatted_address" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="from_location_type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="dest_formatted_address" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="dest_location_type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="dest_lat" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="dest_lng" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="VolAvailable" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="user_formatted_address" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="user_location_type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="user_lat" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="user_lng" Nullable="true" MaxLength="20" />
-        </ComplexType>
+          </ComplexType>
         <EntityType Name="GeoCodeAddress">
           <Key>
             <PropertyRef Name="Id" />
@@ -1969,6 +1985,14 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <Property Type="String" Name="lat" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="lng" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromRqgt_ByLatAndLng_Result">
+          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="f_GetAllFieldsFromTransportAv_ByLatAndLng_Result">
+          <Property Type="String" Name="from_lat" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="from_lng" Nullable="true" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2021,21 +2045,7 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_ByKeyFields">
           <ResultMapping>
               <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-                <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </ComplexTypeMapping>
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f_InsertIntoReqGoodTransfer" FunctionName="CarryOnModel.Store.f_InsertIntoReqGoodTransfer" />
@@ -2367,38 +2377,16 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_ByKeyFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_ByKeyFields">
           <ResultMapping>
               <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
-                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
-                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
-                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
-                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
-                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
-                <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
                 <ScalarProperty Name="from_lat" ColumnName="from_lat" />
                 <ScalarProperty Name="from_lng" ColumnName="from_lng" />
-                <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
-                <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
-                <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
-                <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
-                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
-                <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
-                <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
-                <ScalarProperty Name="user_lat" ColumnName="user_lat" />
-                <ScalarProperty Name="user_lng" ColumnName="user_lng" />
-              </ComplexTypeMapping>
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_BySomeEqualFields">
           <ResultMapping>
               <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
+                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
                 <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
@@ -2406,26 +2394,24 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
                 <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
                 <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
                 <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
+                <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
+                <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
+                <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
+                <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
+                <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
+                <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+                <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
+                <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
+                <ScalarProperty Name="user_lat" ColumnName="user_lat" />
+                <ScalarProperty Name="user_lng" ColumnName="user_lng" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
                 <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
                 <ScalarProperty Name="UserLang" ColumnName="UserLang" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
-                <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
-                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
-                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
-                <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
-                <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
-                <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
-                <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
-                <ScalarProperty Name="VolAvailable" ColumnName="VolAvailable" />
-                <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
-                <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
-                <ScalarProperty Name="user_lat" ColumnName="user_lat" />
-                <ScalarProperty Name="user_lng" ColumnName="user_lng" />
-              </ComplexTypeMapping>
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f_InsertIntoTransportAv" FunctionName="CarryOnModel.Store.f_InsertIntoTransportAv" />
@@ -2433,6 +2419,8 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
                 <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
@@ -2440,17 +2428,9 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
                 <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
                 <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
                 <ScalarProperty Name="RequestState" ColumnName="RequestState" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
-                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
-                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
                 <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
                 <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
-                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
-                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
                 <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
                 <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
                 <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
@@ -2459,7 +2439,13 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
                 <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
                 <ScalarProperty Name="user_lat" ColumnName="user_lat" />
                 <ScalarProperty Name="user_lng" ColumnName="user_lng" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="GeoCodeAddress">
@@ -2562,6 +2548,46 @@ warning 6002: The table/view 'CarryOn.dbo.TransportAvWithGeoCodeAddresses' does 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f_InsertIntoGeoCodeAddress" FunctionName="CarryOnModel.Store.f_InsertIntoGeoCodeAddress" />
           <FunctionImportMapping FunctionImportName="f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields" FunctionName="CarryOnModel.Store.f_UpdateAllFieldsFromGeoCodeAddress_ByKeyFields" />
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromRqgt_ByLatAndLng" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromRqgt_ByLatAndLng">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_ReqGoodTransferWithAddresses">
+                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddressFrom" ColumnName="AddressFrom" />
+                <ScalarProperty Name="AddreessDest" ColumnName="AddreessDest" />
+                <ScalarProperty Name="DateTransportFixed" ColumnName="DateTransportFixed" />
+                <ScalarProperty Name="DateTransportType" ColumnName="DateTransportType" />
+                <ScalarProperty Name="DateTransportInfo" ColumnName="DateTransportInfo" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="VolRequired" ColumnName="VolRequired" />
+                <ScalarProperty Name="from_formatted_address" ColumnName="from_formatted_address" />
+                <ScalarProperty Name="from_location_type" ColumnName="from_location_type" />
+                <ScalarProperty Name="dest_formatted_address" ColumnName="dest_formatted_address" />
+                <ScalarProperty Name="dest_location_type" ColumnName="dest_location_type" />
+                <ScalarProperty Name="dest_lat" ColumnName="dest_lat" />
+                <ScalarProperty Name="dest_lng" ColumnName="dest_lng" />
+                <ScalarProperty Name="user_formatted_address" ColumnName="user_formatted_address" />
+                <ScalarProperty Name="user_location_type" ColumnName="user_location_type" />
+                <ScalarProperty Name="user_lat" ColumnName="user_lat" />
+                <ScalarProperty Name="user_lng" ColumnName="user_lng" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserTELE" ColumnName="UserTELE" />
+                <ScalarProperty Name="UserTEL2" ColumnName="UserTEL2" />
+                <ScalarProperty Name="UserLang" ColumnName="UserLang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f_GetAllFieldsFromTransportAv_ByLatAndLng" FunctionName="CarryOnModel.Store.f_GetAllFieldsFromTransportAv_ByLatAndLng">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CarryOnModel.db_TransportAvWithAddress">
+                <ScalarProperty Name="from_lat" ColumnName="from_lat" />
+                <ScalarProperty Name="from_lng" ColumnName="from_lng" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -144,7 +144,13 @@
     <Compile Include="f_GetAllFieldsFromReqGoodTransfer_BySomeEqualFields_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
+    <Compile Include="f_GetAllFieldsFromRqgt_ByLatAndLng_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
     <Compile Include="f_GetAllFieldsFromTransportAv_ByKeyFields_Result.cs">
+      <DependentUpon>CarryOn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="f_GetAllFieldsFromTransportAv_ByLatAndLng_Result.cs">
       <DependentUpon>CarryOn.tt</DependentUpon>
     </Compile>
     <Compile Include="f_GetAllFieldsFromTransportAv_BySomeEqualFields_Result.cs">

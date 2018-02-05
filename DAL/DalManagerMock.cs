@@ -220,6 +220,16 @@ namespace DAL
             return;
         }
 
+        public List<db_ReqGoodTransferWithAddresses> GetRqgt_ByLatAndLng(string lat, string lng)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<db_TransportAvWithAddress> GetTransportAv_ByLatAndLng(string lat, string lng)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
