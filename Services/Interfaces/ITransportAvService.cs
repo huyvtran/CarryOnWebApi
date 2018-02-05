@@ -9,8 +9,10 @@ namespace Services.Interfaces
 {
     public interface ITransportAvService
     {
-        List<TransportAvModel> GetTransportAv(Guid? reqId, Guid? userId);
+        List<TransportAvModel> GetTransportAv(SearchRtFilter filterparams);
         TransportAvModel GetTrAvDetails(Guid? reqId);
+        List<TransportAvModel> MyGetTransportAv(Guid? userId);
+        
 
         BaseResultModel InsertTransportAv(TransportAvModel rqtModel, UserModel user); 
         BaseResultModel UpdateTransportAv(TransportAvModel rqtModel, UserModel user);

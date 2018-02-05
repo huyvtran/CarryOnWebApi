@@ -44,6 +44,23 @@ namespace CarryOnWebApi.Controllers
             return resultModel;
         }
 
+        [HttpPost]
+        //[AuthorizeUser]
+        [Route("api/ReqGoodTransfer/FilteredRqgtList")]
+        public ResultModel<List<ReqGoodTransferModel>> MyFilteredRqgtList(SearchRtFilter filterparams)
+        {
+            logger.LogApi(() => FilteredRqgtList(filterparams), null);
+
+            var resultModel = new ResultModel<List<ReqGoodTransferModel>>();
+
+            Guid? _userId = (filterparams != null && filterparams.RqgtFilter != null && (filterparams.RqgtFilter.UserId != Guid.Empty)) ? (Guid?)filterparams.RqgtFilter.UserId : null;
+            resultModel.ResultData = _reqGoodTransferService.MyGetReqGoodTransferList(_userId);
+
+            /* Return data */
+            resultModel.OperationResult = true;
+            return resultModel;
+        }
+
         [AuthorizeUser]
         //[HttpPost]
         [Route("api/ReqGoodTransfer/GetRqgtDetails")]

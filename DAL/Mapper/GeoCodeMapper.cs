@@ -19,8 +19,8 @@ namespace DAL.Mapper
             {
                 addressModel.Id = db_geocodeItem.Id;
                 addressModel.formatted_address = db_geocodeItem.formatted_address;
-                addressModel.geometry.location.lat = db_geocodeItem.lat;
-                addressModel.geometry.location.lng = db_geocodeItem.lng;
+                addressModel.geometry.location.lat = db_geocodeItem.lat?.Trim();
+                addressModel.geometry.location.lng = db_geocodeItem.lng?.Trim();
             }
             return addressModel;
         }
@@ -34,8 +34,8 @@ namespace DAL.Mapper
                 db_geocodeItem.formatted_address = addressModel.formatted_address;
                 if (addressModel.geometry != null && addressModel.geometry.location != null)
                 {
-                    db_geocodeItem.lat = addressModel.geometry.location.lat;
-                    db_geocodeItem.lng = addressModel.geometry.location.lng;
+                    db_geocodeItem.lat = addressModel.geometry.location.lat?.Trim();
+                    db_geocodeItem.lng = addressModel.geometry.location.lng?.Trim();
                 }
             }
             return db_geocodeItem;
@@ -47,8 +47,8 @@ namespace DAL.Mapper
             var addressModel = new GeoCodeResult() { geometry = new Geometry { location = new Location() } };
             addressModel.Id = _id;
             addressModel.formatted_address = _formatted_address;
-            addressModel.geometry.location.lat = _lat;
-            addressModel.geometry.location.lng = _lng;
+            addressModel.geometry.location.lat = _lat?.Trim();
+            addressModel.geometry.location.lng = _lng?.Trim();
 
             return addressModel;
         }
@@ -59,8 +59,8 @@ namespace DAL.Mapper
             var addressModel = new GeoCodeResult() { geometry = new Geometry { location = new Location() } };
             addressModel.Id = _id;
             addressModel.formatted_address = _formatted_address;
-            addressModel.geometry.location.lat = _lat;
-            addressModel.geometry.location.lng = _lng;
+            addressModel.geometry.location.lat = _lat?.Trim();
+            addressModel.geometry.location.lng = _lng?.Trim();
 
             return addressModel;
         }
@@ -96,22 +96,22 @@ namespace DAL.Mapper
             retModel.fromAddress = GeoCodeAddress_FieldsToModel(
                 (Guid)db_trAvItem.AddressFrom,
                 db_trAvItem.from_formatted_address,
-                db_trAvItem.from_lat,
-                db_trAvItem.from_lng);
+                db_trAvItem.from_lat?.Trim(),
+                db_trAvItem.from_lng?.Trim());
 
             /* Address DEST */
             retModel.destAddress = GeoCodeAddress_FieldsToModel(
                 (Guid)db_trAvItem.AddreessDest,
                 db_trAvItem.dest_formatted_address,
-                db_trAvItem.dest_lat,
-                db_trAvItem.dest_lng);
+                db_trAvItem.dest_lat?.Trim(),
+                db_trAvItem.dest_lng?.Trim());
 
             /* Address USER */
             retModel.userAddress = GeoCodeAddress_FieldsToModel(
                 new Guid(),
                 db_trAvItem.user_formatted_address,
-                db_trAvItem.user_lat,
-                db_trAvItem.user_lng);
+                db_trAvItem.user_lat?.Trim(),
+                db_trAvItem.user_lng?.Trim());
         }
 
         // Change here
@@ -120,59 +120,47 @@ namespace DAL.Mapper
             /* Address FROM */
             db_item.AddressFrom = model.AddressFrom;
             db_item.from_formatted_address = model.fromAddress?.formatted_address;
-            db_item.from_lat = model.fromAddress?.geometry?.location?.lat;
-            db_item.from_lng = model.fromAddress?.geometry?.location?.lng;
+            db_item.from_lat = model.fromAddress?.geometry?.location?.lat?.Trim();
+            db_item.from_lng = model.fromAddress?.geometry?.location?.lng?.Trim();
             db_item.from_location_type = model.fromAddress?.geometry?.location_type;
 
             /* Address DEST */
             db_item.AddreessDest = model.AddreessDest;
             db_item.dest_formatted_address = model.destAddress?.formatted_address;
-            db_item.dest_lat = model.destAddress?.geometry?.location?.lat;
-            db_item.dest_lng = model.destAddress?.geometry?.location?.lng;
+            db_item.dest_lat = model.destAddress?.geometry?.location?.lat?.Trim();
+            db_item.dest_lng = model.destAddress?.geometry?.location?.lng?.Trim();
             db_item.dest_location_type = model.destAddress?.geometry?.location_type;
 
             /* Address USER */
             //db_item.AddressUser = model.userAddress.Id;
             db_item.user_formatted_address = model.userAddress?.formatted_address;
-            db_item.user_lat = model.userAddress?.geometry?.location?.lat;
-            db_item.user_lng = model.userAddress?.geometry?.location?.lng;
+            db_item.user_lat = model.userAddress?.geometry?.location?.lat?.Trim();
+            db_item.user_lng = model.userAddress?.geometry?.location?.lng?.Trim();
             db_item.user_location_type = model.userAddress?.geometry?.location_type;
         }
 
         public static void fillDbFieldsAddressesFromModel(db_TransportAvWithAddress db_item, TransportAvModel model)
         {
             /* Address FROM */
-            model.fromAddress = new GeoCodeResult
-            {
-                Id = db_item.AddressFrom,
-                formatted_address = db_item.from_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.from_lat, lng = db_item.from_lng }
-                }
-            };
+            db_item.AddressFrom = model.AddressFrom;
+            db_item.from_formatted_address = model.fromAddress?.formatted_address;
+            db_item.from_lat = model.fromAddress?.geometry?.location?.lat?.Trim();
+            db_item.from_lng = model.fromAddress?.geometry?.location?.lng?.Trim();
+            db_item.from_location_type = model.fromAddress?.geometry?.location_type;
 
             /* Address DEST */
-            model.destAddress = new GeoCodeResult
-            {
-                Id = db_item.AddreessDest,
-                formatted_address = db_item.dest_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.dest_lat, lng = db_item.dest_lng }
-                }
-            };
+            db_item.AddreessDest = model.AddreessDest;
+            db_item.dest_formatted_address = model.destAddress?.formatted_address;
+            db_item.dest_lat = model.destAddress?.geometry?.location?.lat?.Trim();
+            db_item.dest_lng = model.destAddress?.geometry?.location?.lng?.Trim();
+            db_item.dest_location_type = model.destAddress?.geometry?.location_type;
 
             /* Address USER */
-            model.userAddress = new GeoCodeResult
-            {
-                Id = new Guid(),
-                formatted_address = db_item.user_formatted_address,
-                geometry = new Geometry
-                {
-                    location = new Location { lat = db_item.user_lat, lng = db_item.user_lng }
-                }
-            };
+            //db_item.AddressUser = model.userAddress.Id;
+            db_item.user_formatted_address = model.userAddress?.formatted_address;
+            db_item.user_lat = model.userAddress?.geometry?.location?.lat?.Trim();
+            db_item.user_lng = model.userAddress?.geometry?.location?.lng?.Trim();
+            db_item.user_location_type = model.userAddress?.geometry?.location_type;
         }
     }
 }

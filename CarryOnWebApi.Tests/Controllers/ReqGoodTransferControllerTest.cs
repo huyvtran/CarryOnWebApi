@@ -223,12 +223,45 @@ namespace CarryOnWebApi.Tests.Controllers
             rqgtToUpdateModel.UserEmail = "UPDATED";
             rqgtToUpdateModel.UserLang = "UPDATED";
             rqgtToUpdateModel.fromAddress.formatted_address = "UPDATED";
-            rqgtToAddModel.destAddress.formatted_address = "UPDATED";
+            rqgtToUpdateModel.fromAddress.geometry.location.lat = "UPDATED";
+            rqgtToUpdateModel.fromAddress.geometry.location.lng = "UPDATED";
+            rqgtToUpdateModel.destAddress.formatted_address = "UPDATED";
+            rqgtToUpdateModel.destAddress.geometry.location.lat = "UPDATED";
+            rqgtToUpdateModel.destAddress.geometry.location.lng = "UPDATED";
+            if (rqgtToUpdateModel.ReqGoodTransportOpt != null)
+            {
+                /* Add ReqGoodTransfer options items */
+                foreach (var optItem in rqgtToUpdateModel.ReqGoodTransportOpt)
+                {
+                    optItem.OptValue = "UPDATED";
+                }
+            }
+
             var updatedResult = reqGoodTransferController.Put(rqgtToUpdateModel);
 
             // Assert
             Assert.IsNotNull(updatedResult);
             Assert.IsTrue(updatedResult.OperationResult);
+
+            // Get TrAv Details after upload
+            var afterUpdateResult = reqGoodTransferController.GetRqgtDetails(rqgtToUpdateModel.Id);
+            // Assert
+            Assert.IsNotNull(afterUpdateResult);
+            Assert.IsTrue(afterUpdateResult.OperationResult);
+            var updatedData = afterUpdateResult.ResultData;
+            Assert.AreEqual(updatedData.DateTransportInfo, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.formatted_address, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.geometry.location.lat, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.geometry.location.lng, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.formatted_address, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.geometry.location.lat, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.geometry.location.lng, "UPDATED");
+            Assert.IsNotNull(updatedData.ReqGoodTransportOpt);
+            Assert.IsTrue(updatedData.ReqGoodTransportOpt.Count > 0);
+            foreach (var optItem in updatedData.ReqGoodTransportOpt)
+            {
+                Assert.AreEqual(optItem.OptValue, "UPDATED");
+            }
         }
 
         #endregion

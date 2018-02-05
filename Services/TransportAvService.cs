@@ -22,9 +22,9 @@ namespace Services
             this.logger = logger;
         }
 
-        public List<TransportAvModel> GetTransportAv(Guid? reqId, Guid? userId)
+        public List<TransportAvModel> GetTransportAv(SearchRtFilter filterparams)
         {
-            logger.Log(() => GetTransportAv(reqId, userId));
+            logger.Log(() => GetTransportAv(filterparams));
             var retList = new List<TransportAvModel>();
 
             /* Get items from db */
@@ -32,6 +32,34 @@ namespace Services
             //    null, null, null, userId, null);
             var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(null, null, null, null,
                 null, null, null, null, null);
+
+            /* Convert them to model */
+            foreach (var dbItem in db_TransportAv)
+            {
+                retList.Add(TransportAvMapper.TransportAv_DbToModel(dbItem));
+            }
+
+            ///* Foreach item, get transport options */
+            //foreach (var retItem in retList)
+            //{
+            //    retItem.ReqGoodTransportOpt = new List<ReqGoodTransportOptions>();
+            //    var transportGoodOpt = _dbManager.GetReqGoodTransportOptionsByTransportId(retItem.Id);
+            //    retItem.ReqGoodTransportOpt.AddRange(transportGoodOpt.Select(x => TransportAvMapper.TransportAvOption_DbToModel(x)).ToList());
+            //}
+
+            return retList;
+        }
+
+        public List<TransportAvModel> MyGetTransportAv(Guid? userId)
+        {
+            logger.Log(() => MyGetTransportAv(userId));
+            var retList = new List<TransportAvModel>();
+
+            /* Get items from db */
+            //var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(reqId, null, null, null, 
+            //    null, null, null, userId, null);
+            var db_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(null, null, null, null,
+                null, null, null, userId, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_TransportAv)
@@ -145,7 +173,7 @@ namespace Services
             {
                 /* Check if item exists on db for that user */
                 var existing_TransportAv = _dbManager.GetTransportAv_ByKeySomeEqualFields(travModel.Id, null, null, null
-                    , null, null, null, user.UserId, null).FirstOrDefault();
+                    , null, null, null, null, null).FirstOrDefault();
                 if (existing_TransportAv == null)
                 {
                     resultModel.OperationResult = false;

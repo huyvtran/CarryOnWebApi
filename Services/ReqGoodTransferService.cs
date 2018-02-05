@@ -22,15 +22,33 @@ namespace Services
             this.logger = logger;
         }
 
-        public List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId, Guid? userId)
+        //public List<ReqGoodTransferModel> GetReqGoodTransfer(Guid? reqId, Guid? userId)
+        //{
+        //    logger.Log(() => GetReqGoodTransfer(reqId, userId));
+        //    var retList = new List<ReqGoodTransferModel>();
+
+        //    /* Get items from db */
+        //    //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
+        //    var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
+        //        , null, null, userId, null);
+
+        //    /* Convert them to model */
+        //    foreach (var dbItem in db_ReqGoodTransfer)
+        //    {
+        //        retList.Add(ReqGoodTransferMapper.ReqGoodTransfer_DbToModel(dbItem));
+        //    }
+
+        //    return retList;
+        //}
+
+        public List<ReqGoodTransferModel> GetReqGoodTransferList(SearchRtFilter filterparams)
         {
-            logger.Log(() => GetReqGoodTransfer(reqId, userId));
+            logger.Log(() => GetReqGoodTransferList(filterparams));
             var retList = new List<ReqGoodTransferModel>();
 
             /* Get items from db */
-            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
-            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(reqId, null, null, null, null
-                , null, null, userId, null);
+            var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(null, null, null, null, null
+                , null, null, null, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)
@@ -41,15 +59,14 @@ namespace Services
             return retList;
         }
 
-        public List<ReqGoodTransferModel> GetReqGoodTransferList(SearchRtFilter filterparams)
+        public List<ReqGoodTransferModel> MyGetReqGoodTransferList(Guid? userId)
         {
-            logger.Log(() => GetReqGoodTransferList(filterparams));
+            logger.Log(() => MyGetReqGoodTransferList(userId));
             var retList = new List<ReqGoodTransferModel>();
 
             /* Get items from db */
-            //var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeyFields(reqId);
             var db_ReqGoodTransfer = _dbManager.GetReqGoodTransfer_ByKeySomeEqualFields(null, null, null, null, null
-                , null, null, null, null);
+                , null, null, userId, null);
 
             /* Convert them to model */
             foreach (var dbItem in db_ReqGoodTransfer)

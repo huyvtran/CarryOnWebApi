@@ -28,18 +28,18 @@ namespace CarryOnWebApi.Controllers
         }
         
         //[AuthorizeUser]
-        [Route("api/TransportAv/Get")]
-        public ResultModel<List<TransportAvModel>> Get(Guid? id, Guid? userId)
-        {
-            logger.LogApi(() => Get(id, userId), null);
+        //[Route("api/TransportAv/Get")]
+        //public ResultModel<List<TransportAvModel>> Get(Guid? id, Guid? userId)
+        //{
+        //    logger.LogApi(() => Get(id, userId), null);
 
-            var resultModel = new ResultModel<List<TransportAvModel>>();
-            resultModel.ResultData = _transportAvService.GetTransportAv(id, userId);
+        //    var resultModel = new ResultModel<List<TransportAvModel>>();
+        //    resultModel.ResultData = _transportAvService.GetTransportAv(id, userId);
 
-            /* Return data */
-            resultModel.OperationResult = true;
-            return resultModel;
-        }
+        //    /* Return data */
+        //    resultModel.OperationResult = true;
+        //    return resultModel;
+        //}
 
         [AuthorizeUser]
         [HttpPost]
@@ -52,9 +52,23 @@ namespace CarryOnWebApi.Controllers
             var resultModel = new ResultModel<List<TransportAvModel>>();
 
             /* TO BE DEVELOPED */
-            Guid? _id = (filterparams != null && filterparams.TranspAvFilter != null) ? (Guid?)filterparams.TranspAvFilter.Id : null;
-            Guid? _userId = (filterparams != null && filterparams.TranspAvFilter != null) ? (Guid?)filterparams.TranspAvFilter.UserId : null;
-            resultModel.ResultData = _transportAvService.GetTransportAv(_id, _userId);
+            resultModel.ResultData = _transportAvService.GetTransportAv(filterparams);
+
+            /* Return data */
+            resultModel.OperationResult = true;
+            return resultModel;
+        }
+
+        [Route("api/TransportAv/FilteredTrAv")]
+        public ResultModel<List<TransportAvModel>> MyFilteredTrAv(SearchRtFilter filterparams)
+        {
+            logger.LogApi(() => FilteredTrAv(filterparams), null);
+
+            var resultModel = new ResultModel<List<TransportAvModel>>();
+
+            /* TO BE DEVELOPED */
+            Guid? _userId = (filterparams != null && filterparams.TranspAvFilter != null && (filterparams.TranspAvFilter.UserId != Guid.Empty)) ? (Guid?)filterparams.TranspAvFilter.UserId : null;
+            resultModel.ResultData = _transportAvService.MyGetTransportAv(_userId);
 
             /* Return data */
             resultModel.OperationResult = true;

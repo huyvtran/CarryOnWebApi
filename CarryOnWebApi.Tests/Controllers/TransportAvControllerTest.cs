@@ -87,6 +87,35 @@ namespace CarryOnWebApi.Tests.Controllers
 
         #endregion
 
+        #region Get My Transport Availabilities
+
+        [TestMethod]
+        public void GetOnlyMyTrAv()
+        {
+            // Arrange
+            TransportAvController trAvController = new TransportAvController(transportAvService, logger, configuration);
+
+            // First Add user if not existing
+            var userToAdd = AddUser_ForTest();
+
+            // First Insert TrAv
+            var trAvToAddModel = AddTrAv_ForTest(userToAdd);
+
+            // filter params
+            var filterParams = new SearchRtFilter();
+            filterParams.TranspAvFilter = new TransportAvModel();
+            filterParams.TranspAvFilter.UserId = userToAdd.UserId;
+
+            // Act
+            var result = trAvController.FilteredTrAv(filterParams);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ResultData.Count >0);
+        }
+
+        #endregion
+
         #region Get Filtered and not filtered list
 
         [TestMethod]
@@ -212,12 +241,45 @@ namespace CarryOnWebApi.Tests.Controllers
             trAvToUpdateModel.UserEmail = "UPDATED";
             trAvToUpdateModel.UserLang = "UPDATED";
             trAvToUpdateModel.fromAddress.formatted_address = "UPDATED";
-            trAvToAddModel.destAddress.formatted_address = "UPDATED";
-            var updatedResult = trAvController.Put(trAvToUpdateModel);
+            trAvToUpdateModel.fromAddress.geometry.location.lat = "UPDATED";
+            trAvToUpdateModel.fromAddress.geometry.location.lng = "UPDATED";
+            trAvToUpdateModel.destAddress.formatted_address = "UPDATED";
+            trAvToUpdateModel.destAddress.geometry.location.lat = "UPDATED";
+            trAvToUpdateModel.destAddress.geometry.location.lng = "UPDATED";
+            if (trAvToUpdateModel.ReqGoodTransportOpt != null)
+            {
+                /* Add ReqGoodTransfer options items */
+                foreach (var optItem in trAvToUpdateModel.ReqGoodTransportOpt)
+                {
+                    optItem.OptValue = "UPDATED";
+                }
+            }
 
+            var updatedResult = trAvController.Put(trAvToUpdateModel);
+                        
             // Assert
             Assert.IsNotNull(updatedResult);
             Assert.IsTrue(updatedResult.OperationResult);
+
+            // Get TrAv Details after upload
+            var afterUpdateResult = trAvController.GetTrAvDetails(trAvToUpdateModel.Id);
+            // Assert
+            Assert.IsNotNull(afterUpdateResult);
+            Assert.IsTrue(afterUpdateResult.OperationResult);
+            var updatedData = afterUpdateResult.ResultData;
+            Assert.AreEqual(updatedData.DateTransportInfo, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.formatted_address, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.geometry.location.lat, "UPDATED");
+            Assert.AreEqual(updatedData.fromAddress.geometry.location.lng, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.formatted_address, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.geometry.location.lat, "UPDATED");
+            Assert.AreEqual(updatedData.destAddress.geometry.location.lng, "UPDATED");
+            Assert.IsNotNull(updatedData.ReqGoodTransportOpt);
+            Assert.IsTrue(updatedData.ReqGoodTransportOpt.Count>0);
+            foreach (var optItem in updatedData.ReqGoodTransportOpt)
+            {
+                Assert.AreEqual(optItem.OptValue, "UPDATED");
+            }
         }
 
         #endregion
