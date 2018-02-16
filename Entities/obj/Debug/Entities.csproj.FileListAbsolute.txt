@@ -4,3 +4,9 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Debug\Entities.csprojResolveAss
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Debug\Entities.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Debug\Entities.pdb
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\bin\Debug\Entities.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\bin\Debug\Entities.pdb
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Debug\Entities.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Debug\Entities.pdb

@@ -193,3 +193,8 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Debug\CarryOnWebApi.csproj
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Debug\CarryOnWebApi.csproj.CoreCompileInputs.cache
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Debug\CarryOnWebApi.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\CarryOnWebApi\obj\Debug\CarryOnWebApi.pdb
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\bin\System.Web.Cors.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\bin\System.Web.Http.Cors.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\bin\DAL.dll.config
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\bin\System.Web.Http.Cors.xml
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\CarryOnWebApi\obj\Debug\CarryOnWebApi.csproj.CoreCompileInputs.cache
