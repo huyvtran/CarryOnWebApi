@@ -56,6 +56,7 @@
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\MailSenderHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
+    <Compile Include="Helpers\UtilityCheck.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\ILogService.cs" />

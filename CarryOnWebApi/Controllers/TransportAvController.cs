@@ -59,7 +59,7 @@ namespace CarryOnWebApi.Controllers
             return resultModel;
         }
 
-        [Route("api/TransportAv/FilteredTrAv")]
+        [Route("api/TransportAv/MyFilteredRqgtList")]
         public ResultModel<List<TransportAvModel>> MyFilteredTrAv(SearchRtFilter filterparams)
         {
             logger.LogApi(() => FilteredTrAv(filterparams), null);
