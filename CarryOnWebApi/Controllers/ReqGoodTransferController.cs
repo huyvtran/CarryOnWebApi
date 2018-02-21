@@ -46,7 +46,7 @@ namespace CarryOnWebApi.Controllers
 
         [HttpPost]
         //[AuthorizeUser]
-        [Route("api/ReqGoodTransfer/MyFilteredRqgtList")]
+        [Route("api/ReqGoodTransfer/FilteredRqgtList")]
         public ResultModel<List<ReqGoodTransferModel>> MyFilteredRqgtList(SearchRtFilter filterparams)
         {
             logger.LogApi(() => FilteredRqgtList(filterparams), null);

@@ -40,7 +40,8 @@ namespace CarryOnWebApi.Controllers
         //    resultModel.OperationResult = true;
         //    return resultModel;
         //}
-        
+
+        [AuthorizeUser]
         [HttpPost]
 
         [Route("api/TransportAv/FilteredTrAv")]
@@ -58,7 +59,7 @@ namespace CarryOnWebApi.Controllers
             return resultModel;
         }
 
-        [Route("api/TransportAv/MyFilteredTrAv")]
+        [Route("api/TransportAv/FilteredTrAv")]
         public ResultModel<List<TransportAvModel>> MyFilteredTrAv(SearchRtFilter filterparams)
         {
             logger.LogApi(() => FilteredTrAv(filterparams), null);
