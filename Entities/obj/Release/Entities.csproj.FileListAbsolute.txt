@@ -2,3 +2,9 @@ C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\bin\Release\Entities.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\bin\Release\Entities.pdb
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Release\Entities.dll
 C:\mfo\Projects\CarryOn\Code\WebAPI\Entities\obj\Release\Entities.pdb
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\bin\Release\Entities.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\bin\Release\Entities.pdb
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Release\Entities.csprojResolveAssemblyReference.cache
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Release\Entities.csproj.CoreCompileInputs.cache
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Release\Entities.dll
+E:\Mario\Projects\CarryOn\Code\WebApi\CarryOnWebApi\Entities\obj\Release\Entities.pdb
