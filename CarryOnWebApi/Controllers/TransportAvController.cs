@@ -41,7 +41,6 @@ namespace CarryOnWebApi.Controllers
         //    return resultModel;
         //}
 
-        [AuthorizeUser]
         [HttpPost]
 
         [Route("api/TransportAv/FilteredTrAv")]
