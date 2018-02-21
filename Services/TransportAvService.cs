@@ -8,6 +8,7 @@ using DAL;
 using Services.Interfaces;
 using Entities.enums;
 using DAL.Mapper;
+using Services.Helpers;
 
 namespace Services
 {
@@ -30,6 +31,9 @@ namespace Services
             /* Select latitude and longitude in the filter parameters */
             var _lat = filterparams?.TranspAvFilter?.fromAddress?.geometry?.location?.lat;
             var _lng = filterparams?.TranspAvFilter?.fromAddress?.geometry?.location?.lng;
+
+            _lat = UtilityCheck.GetStringIfDecimalElseNull(_lat);
+            _lng = UtilityCheck.GetStringIfDecimalElseNull(_lng);
 
             /* Get items from db */
             var db_TransportAv = _dbManager.GetTransportAv_ByLatAndLng(_lat, _lng);
